@@ -5,16 +5,30 @@ const cors = require('cors');
 const app = express();
 const PORT = 5000;
 
+
+
 app.use(cors());
 app.use(bodyParser.json());
 
 // Tymczasowa baza danych
-let applications = [];
+let applications = [
+    { id: 1732658639030, link: "a" },
+    { id: 1732658639031, link: "b" }
+  ];
 
 // Endpoint do pobrania aplikacji
 app.get('/applications', (req, res) => {
     res.json(applications);
 });
+app.get('/applications/:id', (req, res) => {
+    const application = applications.find(app => app.id === parseInt(req.params.id));
+    
+    if (application) {
+      res.json(application);
+    } else {
+      res.status(404).json({ message: "Application not found" });
+    }
+  });
 
 // Endpoint do dodania aplikacji
 app.post('/applications', (req, res) => {
@@ -26,6 +40,19 @@ app.post('/applications', (req, res) => {
         res.status(400).json({ message: 'Link is required!' });
     }
 });
+
+app.delete('/applications/:id', (req, res) => {
+    const { id } = req.params; // id przychodzi jako string
+    const application = applications.find(app => app.id === parseInt(id)); // Zamiana na liczbę
+    
+    if (application) {
+        applications = applications.filter(app => app.id !== parseInt(id));
+        res.status(200).json({ message: 'Application deleted successfully' });
+    } else {
+        res.status(404).json({ message: 'Application not found' });
+    }
+});
+
 
 // Start serwera
 app.listen(PORT, () => {

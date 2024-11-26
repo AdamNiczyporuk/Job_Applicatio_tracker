@@ -1,25 +1,70 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const App = () => {
+    const [links, setLinks] = useState([]);
+    const [newLink, setNewLink] = useState('');
+
+    // Pobierz istniejące linki
+    useEffect(() => {
+        axios.get('http://localhost:5000/applications')
+            .then(response => setLinks(response.data))
+            .catch(error => console.error('Error fetching data:', error));
+    }, []);
+
+    // Dodaj nowy link
+    const addLink = () => {
+        if (newLink.trim()) {
+            axios.post('http://localhost:5000/applications', { link: newLink })
+                .then(response => {
+                    setLinks([...links, { id: Date.now(), link: newLink }]);
+                    setNewLink('');
+                })
+                .catch(error => console.error('Error adding link:', error));
+        }
+    };
+    
+
+    const deleteLink = (id) => {
+      axios.delete(`http://localhost:5000/applications/${id}`)
+          .then(() => {
+              setLinks(links.filter((item) => item.id !== id)); // Zaktualizowanie lokalnego stanu
+          })
+          .catch(error => {
+              console.error('Error deleting application:', error);
+              alert('Failed to delete the application!');
+          });
+  };
+  
+
+    return (
+        <div style={{ textAlign: 'center', marginTop: '50px' }}>
+            <h1>Job Application Tracker</h1>
+            <h2>Total Applications: {links.length}</h2>
+            <input
+                type="text"
+                placeholder="Enter application link"
+                value={newLink}
+                onChange={(e) => setNewLink(e.target.value)}
+                style={{ padding: '10px', width: '300px' }}
+            />
+            <button onClick={addLink} style={{ marginLeft: '10px', padding: '10px' }}>
+                Add Link
+            </button>
+            <ul style={{ marginTop: '20px', listStyle: 'none' }}>
+                {links.map((item) => (
+                    <li key={item.id}>
+                        <a href={item.link} target="_blank" rel="noopener noreferrer">
+                            {item.link}
+                        </a>
+                        <button onClick={() => deleteLink(item.id)} style={{ marginLeft: '10px' }}>
+                            Delete</button>
+                    </li>
+                ))}
+            </ul>
+        </div>
+    );
+
+};
 
 export default App;
