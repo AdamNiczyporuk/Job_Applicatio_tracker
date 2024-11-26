@@ -38,7 +38,7 @@ const App = () => {
   
 
     return (
-        <div style={{ textAlign: 'center', marginTop: '50px' }}>
+        <div style={{ textAlign: 'center',justifyContent:"center",alignItems:"center", margin: '50px', height: '100vh',   }}>
             <h1>Job Application Tracker</h1>
             <h2>Total Applications: {links.length}</h2>
             <input
