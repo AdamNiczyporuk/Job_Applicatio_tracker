@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-
+const fs = require('fs');
 const app = express();
 const PORT = 5000;
 
@@ -16,6 +16,20 @@ let applications = [
     { id: 1732658639031, link: "b" }
   ];
 
+
+const FILE_NAME = 'applications.json';
+
+const loadApplications = () => {
+    try { 
+        const data = fs.readFileSync(FILE_NAME,'utf8');
+        return JSON.parse(data);
+
+
+    }catch(error)
+    { 
+        console.erorr("Error with loadinf data")
+    }
+} 
 // Endpoint do pobrania aplikacji
 app.get('/applications', (req, res) => {
     res.json(applications);
