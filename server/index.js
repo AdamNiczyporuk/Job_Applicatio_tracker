@@ -28,8 +28,20 @@ const loadApplications = () => {
     }catch(error)
     { 
         console.erorr("Error with loadinf data")
+        return [];
     }
 } 
+
+const saveApplications = (data) => {
+
+    try {
+        fs.writeFileSync(FILE_PATH, JSON.stringify(data, null, 2)); 
+    }catch(error)
+    {
+        console.error("Error with saving data")
+    }
+} 
+
 // Endpoint do pobrania aplikacji
 app.get('/applications', (req, res) => {
     res.json(applications);
