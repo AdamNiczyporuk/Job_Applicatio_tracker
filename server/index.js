@@ -62,8 +62,9 @@ app.get('/applications/:id', (req, res) => {
 // Endpoint do dodania aplikacji
 app.post('/applications', (req, res) => {
     const { link } = req.body;
+    const { name } = req.body;
     if (link) {
-        applications.push({ id: Date.now(), link });
+        applications.push({ id: Date.now(), link,name });
         saveApplications(applications);
         res.status(201).json({ message: 'Application added!' });
     } else {
