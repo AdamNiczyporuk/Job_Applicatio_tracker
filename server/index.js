@@ -11,10 +11,7 @@ app.use(cors());
 app.use(bodyParser.json());
 
 // Tymczasowa baza danych
-let applications = [
-    { id: 1732658639030, link: "a" },
-    { id: 1732658639031, link: "b" }
-  ];
+
 
 
 const FILE_NAME = 'applications.json';
@@ -41,6 +38,8 @@ const saveApplications = (data) => {
         console.error("Error with saving data")
     }
 } 
+
+let applications = loadApplications();
 
 // Endpoint do pobrania aplikacji
 app.get('/applications', (req, res) => {
