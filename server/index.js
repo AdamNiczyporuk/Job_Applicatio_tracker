@@ -24,7 +24,7 @@ const loadApplications = () => {
 
     }catch(error)
     { 
-        console.erorr("Error with loadinf data")
+        console.error("Error with loading data")
         return [];
     }
 } 
