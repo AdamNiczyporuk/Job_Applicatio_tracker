@@ -2,6 +2,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const fs = require('fs');
+const path = require('path');
+
 const app = express();
 const PORT = 5000;
 
@@ -14,25 +16,27 @@ app.use(bodyParser.json());
 
 
 
-const FILE_NAME = 'applications.json';
+const FILE_NAME = path.resolve(__dirname, 'applications.json');
 
 const loadApplications = () => {
-    try { 
-        const data = fs.readFileSync(FILE_NAME,'utf8');
+    try {
+        if (!fs.existsSync(FILE_NAME)) {
+            // Jeśli plik nie istnieje, utwórz pusty plik
+            fs.writeFileSync(FILE_NAME, JSON.stringify([], null, 2), 'utf8');
+        }
+        const data = fs.readFileSync(FILE_NAME, 'utf8');
         return JSON.parse(data);
-
-
-    }catch(error)
-    { 
-        console.error("Error with loading data")
+    } catch (error) {
+        console.error("Error with loading data:", error.message);
         return [];
     }
-} 
+};
+
 
 const saveApplications = (data) => {
 
     try {
-        fs.writeFileSync(FILE_PATH, JSON.stringify(data, null, 2)); 
+        fs.writeFileSync(FILE_NAME, JSON.stringify(data, null, 2));
     }catch(error)
     {
         console.error("Error with saving data")

@@ -16,25 +16,32 @@ const App = () => {
     const addLink = () => {
         if (newLink.trim()) {
             axios.post('http://localhost:5000/applications', { link: newLink })
-                .then(response => {
-                    setLinks([...links, { id: Date.now(), link: newLink }]);
+                .then(() => {
+                    // Pobranie zaktualizowanych danych z backendu po dodaniu
+                    axios.get('http://localhost:5000/applications')
+                        .then(response => setLinks(response.data))
+                        .catch(error => console.error('Error fetching updated data:', error));
                     setNewLink('');
                 })
                 .catch(error => console.error('Error adding link:', error));
         }
     };
     
+    
 
     const deleteLink = (id) => {
-      axios.delete(`http://localhost:5000/applications/${id}`)
-          .then(() => {
-              setLinks(links.filter((item) => item.id !== id)); // Zaktualizowanie lokalnego stanu
-          })
-          .catch(error => {
-              console.error('Error deleting application:', error);
-              alert('Failed to delete the application!');
-          });
-  };
+        axios.delete(`http://localhost:5000/applications/${id}`)
+            .then(() => {
+                // Pobranie zaktualizowanych danych z backendu po usunięciu
+                axios.get('http://localhost:5000/applications')
+                    .then(response => setLinks(response.data))
+                    .catch(error => console.error('Error fetching updated data:', error));
+            })
+            .catch(error => {
+                console.error('Error deleting application:', error);
+                alert('Failed to delete the application!');
+            });
+    };
   
 
     return (
