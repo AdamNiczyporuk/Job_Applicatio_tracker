@@ -60,6 +60,7 @@ app.post('/applications', (req, res) => {
     const { link } = req.body;
     if (link) {
         applications.push({ id: Date.now(), link });
+        saveApplications(applications);
         res.status(201).json({ message: 'Application added!' });
     } else {
         res.status(400).json({ message: 'Link is required!' });
@@ -72,6 +73,7 @@ app.delete('/applications/:id', (req, res) => {
     
     if (application) {
         applications = applications.filter(app => app.id !== parseInt(id));
+        saveApplications(applications);
         res.status(200).json({ message: 'Application deleted successfully' });
     } else {
         res.status(404).json({ message: 'Application not found' });
