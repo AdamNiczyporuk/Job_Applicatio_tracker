@@ -6,7 +6,7 @@ function App() {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:5000/users')
+    axios.get('http://localhost:5000/users')  // Upewnij się, że adres jest poprawny
       .then(response => {
         setUsers(response.data);
       })
@@ -20,7 +20,7 @@ function App() {
       <h1>User List</h1>
       <ul>
         {users.map(user => (
-          <li key={user.id}>{user.mail}</li>
+          <li key={user.id}>{user.name}</li>  /* Możesz zmienić na user.email, jeżeli ma to sens */
         ))}
       </ul>
     </div>
