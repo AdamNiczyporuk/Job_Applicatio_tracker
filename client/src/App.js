@@ -1,19 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import * as api from './Api';
+
+
+
 const Home = () => {
     const [links, setLinks] = useState([]);
     const [newLink, setNewLink] = useState('');
     const [name, setName] = useState('');
     useEffect(() => {
-        axios.get('http://localhost:5000/applications')
+        api.fetchAppplications()
             .then(response => setLinks(response.data))
             .catch(error => console.error('Error fetching data:', error));
     }, []);
     const addLink = () => {
         if (newLink.trim()) {
-            axios.post('http://localhost:5000/applications', { link: newLink, name: name })
+            api.addApplication(name, newLink)
                 .then(() => {
-                    axios.get('http://localhost:5000/applications')
+                 api.fetchAppplications()
                         .then(response => setLinks(response.data))
                         .catch(error => console.error('Error fetching updated data:', error));
                     setNewLink('');
@@ -22,9 +26,9 @@ const Home = () => {
         }
     };
     const deleteLink = (id) => {
-        axios.delete(`http://localhost:5000/applications/${id}`)
+      api.deleteApplication(id)
             .then(() => {
-                axios.get('http://localhost:5000/applications')
+                api.fetchAppplications()
                     .then(response => setLinks(response.data))
                     .catch(error => console.error('Error fetching updated data:', error));
             })
