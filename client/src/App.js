@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Home from './vies/home'; // Główna część aplikacji (Twój obecny kod)
+import Home from './views/home'; // Główna część aplikacji (Twój obecny kod)
 import Login from './views/login'; // Widok logowania
 import Registration from './views/register'; // Widok rejestracji
 
