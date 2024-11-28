@@ -14,7 +14,8 @@ app.use(bodyParser.json());
 
 // Tymczasowa baza danych
 
-
+app.use('/auth',authRoutes); 
+app.use('/applications',appRoutes);
 
 const FILE_NAME = path.resolve(__dirname, 'applications.json');
 
