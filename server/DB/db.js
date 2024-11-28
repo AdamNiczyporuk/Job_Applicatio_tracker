@@ -16,9 +16,9 @@ db.serialize(() => {
         CREATE TABLE IF NOT EXISTS users (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             mail TEXT NOT NULL UNIQUE,
-            password TEXT NOT ,
-            githublink TEXT NOT NULL,
-            linkedinlink TEXT NOT NULL
+            password TEXT NOT NULL,
+            githublink TEXT,
+            linkedinlink TEXT
         )
     `);
 
