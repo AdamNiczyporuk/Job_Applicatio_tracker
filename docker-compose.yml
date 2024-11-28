@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  db:
+    image: mariadb:latest
+    container_name: mariadb_container
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: my_database
+      MYSQL_USER: my_user
+      MYSQL_PASSWORD: my_password
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./data:/var/lib/mysql
+    restart: always
+
+  server:
+    build: ./server
+    container_name: app_server
+    depends_on:
+      - db
+    environment:
+      - DATABASE_URL=mysql://my_user:my_password@db:3306/my_database
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./server:/app
+    restart: always
+
+  client:
+    build: ./client
+    container_name: app_client
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./client:/app
+    restart: always
