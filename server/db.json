@@ -10,8 +10,8 @@
     },
     {
       "id": 2,
-      "name": "Marta",
-      "email": "marta@example.com",
+      "name": "Martha",
+      "email": "martha@example.com",
       "password": "password",
       "github": "example.com",
       "linkedin": "example.com"
