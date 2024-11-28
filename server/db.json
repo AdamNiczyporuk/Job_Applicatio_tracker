@@ -1,36 +1,28 @@
 {
-    "users": [
-      {
-        "id": 1,
-        "name": "Adam",
-        "email": "adam@example.com",
-        "password": "password",
-        "github": "example.com",
-        "linkedin": "example.com"
-      },
-      {
-        "id": 2,
-        "name": "Marta",
-        "email": "marta@example.com",
-        "password": "password",
-        "github": "example.com",
-        "linkedin": "example.com"
-      }
-    ],
-    "applications": [
-      {
-        "id": 1,
-        "userId": 1,
-        "link": "https://example.com",
-        "name": "Frontend Developer"
-
-      },
-      {
-        "id": 2,
-        "userId": 2,
-        "link": "https://example.com",
-        "name": "Backend Developer"
-      }
-    ]
-  }
-  
+  "users": [
+    {
+      "id": 1,
+      "name": "Adam",
+      "email": "adam@example.com",
+      "password": "password",
+      "github": "example.com",
+      "linkedin": "example.com"
+    },
+    {
+      "id": 2,
+      "name": "Marta",
+      "email": "marta@example.com",
+      "password": "password",
+      "github": "example.com",
+      "linkedin": "example.com"
+    }
+  ],
+  "applications": [
+    {
+      "id": 2,
+      "userId": 2,
+      "link": "https://example.com",
+      "name": "Backend Developer"
+    }
+  ]
+}

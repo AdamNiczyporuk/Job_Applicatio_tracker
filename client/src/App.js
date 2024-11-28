@@ -1,30 +1,72 @@
-// client/src/App.js
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-
-function App() {
-  const [users, setUsers] = useState([]);
-
-  useEffect(() => {
-    axios.get('http://localhost:5000/users')  // Upewnij się, że adres jest poprawny
-      .then(response => {
-        setUsers(response.data);
-      })
-      .catch(error => {
-        console.error("There was an error fetching users:", error);
-      });
-  }, []);
-
-  return (
-    <div className="App">
-      <h1>User List</h1>
-      <ul>
-        {users.map(user => (
-          <li key={user.id}>{user.name}</li>  /* Możesz zmienić na user.email, jeżeli ma to sens */
-        ))}
-      </ul>
-    </div>
-  );
-}
-
-export default App;
+const Home = () => {
+    const [links, setLinks] = useState([]);
+    const [newLink, setNewLink] = useState('');
+    const [name, setName] = useState('');
+    useEffect(() => {
+        axios.get('http://localhost:5000/applications')
+            .then(response => setLinks(response.data))
+            .catch(error => console.error('Error fetching data:', error));
+    }, []);
+    const addLink = () => {
+        if (newLink.trim()) {
+            axios.post('http://localhost:5000/applications', { link: newLink, name: name })
+                .then(() => {
+                    axios.get('http://localhost:5000/applications')
+                        .then(response => setLinks(response.data))
+                        .catch(error => console.error('Error fetching updated data:', error));
+                    setNewLink('');
+                })
+                .catch(error => console.error('Error adding link:', error));
+        }
+    };
+    const deleteLink = (id) => {
+        axios.delete(`http://localhost:5000/applications/${id}`)
+            .then(() => {
+                axios.get('http://localhost:5000/applications')
+                    .then(response => setLinks(response.data))
+                    .catch(error => console.error('Error fetching updated data:', error));
+            })
+            .catch(error => {
+                console.error('Error deleting application:', error);
+                alert('Failed to delete the application!');
+            });
+    };
+    return (
+        <div style={{ textAlign: 'center', margin: '50px', height: '100vh' }}>
+            <h1>Job Application Tracker</h1>
+            <h2>Total Applications: {links.length}</h2>
+            <input
+                type="text"
+                placeholder="Name of application"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                style={{ padding: '10px', width: '200px', marginRight: '2px' }}
+            />
+            <input
+                type="text"
+                placeholder="Enter application link"
+                value={newLink}
+                onChange={(e) => setNewLink(e.target.value)}
+                style={{ padding: '10px', width: '300px' }}
+            />
+            <button onClick={addLink} style={{ marginLeft: '10px', padding: '10px' }}>
+                Add Link
+            </button>
+            <ul style={{ marginTop: '20px', listStyle: 'none' }}>
+                {links.map((item) => (
+                    <li key={item.id}>
+                        <a href={item.link} target="_blank" rel="noopener noreferrer">
+                            {item.name}
+                        </a>
+                        <button onClick={() => deleteLink(item.id)} style={{ marginLeft: '10px' }}>
+                            Delete
+                        </button>
+                    </li>
+                ))}
+            </ul>
+        </div>
+    );
+};
+export default Home;
