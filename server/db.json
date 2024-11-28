@@ -2,7 +2,7 @@
   "users": [
     {
       "id": 1,
-      "name": "Adam",
+      "name": "Franek",
       "email": "adam@example.com",
       "password": "password",
       "github": "example.com",
