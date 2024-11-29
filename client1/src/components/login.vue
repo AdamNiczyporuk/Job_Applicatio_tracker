@@ -14,7 +14,10 @@
       const handleLogin = async () => {
         try {
           const response = await api.loginUser(email.value, password.value);
+          console.log(response.data);
           const { token } = response.data;
+          const { userId } = response.data;
+          localStorage.setItem('userId', userId); 
           localStorage.setItem('token', token); // Zapisz token w localStorage
           alert('Login successful!');
           error.value = ''; // Zresetuj ewentualny błąd

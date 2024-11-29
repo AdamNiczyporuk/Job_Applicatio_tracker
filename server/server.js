@@ -18,7 +18,7 @@ server.post('/login', (req, res) => {
   const user = users.find(u => u.email === email && u.password === password);
 
   if (user) {
-      res.status(200).json({ token: 'fake-jwt-token' });
+      res.status(200).json({ token: 'fake-jwt-token',userId:user.id });
   } else {
       res.status(401).json({ message: 'Invalid email or password' });
   }
