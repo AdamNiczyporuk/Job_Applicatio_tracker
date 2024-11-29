@@ -1,18 +1,15 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div id="app">
+    <router-view></router-view>  <!-- Renderuje odpowiedni komponent w zależności od trasy -->
+  </div>
 </template>
 
 <script>
-
-import login from './components/login.vue';
 export default {
   name: 'App',
-  components: {
-    login
-  }
 }
 </script>
+
 
 <style>
 #app {
