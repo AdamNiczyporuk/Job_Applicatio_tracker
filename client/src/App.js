@@ -21,10 +21,13 @@ const App = () => {
   
 <Router> 
     <Routes>
-    if (!isAuthenticated) {
-       <Route path="/login" element={<Login />} />
-    }
-    <Route path="/home" element={<Home />} />
+    {!isAuthenticated && <Route path="/login" element={<Login/>} />} 
+    {isAuthenticated && <Route path="/home" element={<Home/>} />}
+
+    <Route
+    path="*"
+    element={<Navigate to={isAuthenticated ? "/home" : "/login"} />}/>
+    
     </Routes>
 </Router>;
 };
