@@ -1,6 +1,6 @@
 <script>
   import { ref } from 'vue';
-  import { useRouter } from 'vue-router'; // Do obsługi nawigacji
+   import { useRouter } from 'vue-router'; // Do obsługi nawigacji
   import * as api from "../API/Api.js";
 
   export default {
@@ -9,23 +9,35 @@
       const email = ref('');
       const password = ref('');
       const error = ref('');
-      const router = useRouter(); 
-  
-      const handleLogin = async () => {
-        try {
-          const response = await api.loginUser(email.value, password.value);
-          console.log(response.data);
-          const { token } = response.data;
-          const { userId } = response.data;
-          localStorage.setItem('userId', userId); 
-          localStorage.setItem('token', token); // Zapisz token w localStorage
-          alert('Login successful!');
-          error.value = ''; // Zresetuj ewentualny błąd
-          router.push('/home'); // Przenieś użytkownika do strony głównej
-        } catch (err) {
-          error.value = 'Login failed. Please try again.'; // Ustaw błąd, jeśli coś poszło nie tak
-        }
-      };
+       const router = useRouter(); 
+
+      
+      const handleLogin = async () => 
+    {
+      api.loginUser(email.value,password.value)
+      .then(response => {
+        const token = response.data.token;
+        localStorage.setItem('token', token); // Zapisz token JWT w localStorage
+        router.push('/home'); // Przekieruj na stronę główną
+      })
+      
+    }
+
+      // const handleLogin = async () => {
+      //   try {
+      //     const response = await api.loginUser(email.value, password.value);
+      //     console.log(response.data);
+      //     const { token } = response.data;
+      //     const { userId } = response.data;
+      //     localStorage.setItem('userId', userId); 
+      //     localStorage.setItem('token', token); // Zapisz token w localStorage
+      //     alert('Login successful!');
+      //     error.value = ''; // Zresetuj ewentualny błąd
+      //     router.push('/home'); // Przenieś użytkownika do strony głównej
+      //   } catch (err) {
+      //     error.value = 'Login failed. Please try again.'; // Ustaw błąd, jeśli coś poszło nie tak
+      //   }
+      // };
   
       return {
         email,

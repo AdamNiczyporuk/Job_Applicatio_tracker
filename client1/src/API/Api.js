@@ -2,10 +2,18 @@ import axios from "axios";
 
 
 
-export const fetchAppplications = () =>
-{
-    return axios.get('http://localhost:5000/applications'); 
-};
+// export const fetchAppplications = () =>
+// {
+//     return axios.get('http://localhost:5000/applications'); 
+// };
+
+export const fetchApplications = (token) => {
+    return axios.get('http://localhost:5000/applications', {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+  };
 
 export const fetchApplicationById = (id) =>
 {

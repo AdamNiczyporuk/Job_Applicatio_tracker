@@ -12,13 +12,23 @@ export default {
     const userId = localStorage.getItem('userId');
 
     //Fetch applications when component mounts
-    onMounted(() => {
+    // onMounted(() => {
      
-      api.fetchAplllicationsByUserId(userId)
-        .then(response => {
-          links.value = response.data;
-        })
-        .catch(error => console.error("Error fetching data:", error));
+    //   api.fetchAplllicationsByUserId(userId)
+    //     .then(response => {
+    //       links.value = response.data;
+    //     })
+    //     .catch(error => console.error("Error fetching data:", error));
+    // });
+    onMounted(() => {
+      const token = localStorage.getItem('token');
+      if (token) {
+        api.fetchApplications(token)
+          .then(response => {
+            links.value = response.data;
+          })
+          .catch(error => console.error("Error fetching data:", error));
+      }
     });
 
     // Add a new application
