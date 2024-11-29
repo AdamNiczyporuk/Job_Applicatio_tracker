@@ -9,7 +9,7 @@
       const email = ref('');
       const password = ref('');
       const error = ref('');
-      const router = useRouter(); // Używamy Vue Router do nawigacji
+      const router = useRouter(); 
   
       const handleLogin = async () => {
         try {
@@ -37,36 +37,38 @@
 
 
 <template>
-    <v-container class="d-flex justify-center align-center" style="height: 100vh;">
-      <v-card class="pa-5" max-width="400px" elevation="2">
-        <v-card-title class="text-h5" style="text-align: center;">Login</v-card-title>
-        <v-form @submit.prevent="handleLogin">
-          <v-text-field
-            v-model="email"
-            label="Email"
-            type="email"
-            class="mb-4"
-          />
-          <v-text-field
-            v-model="password"
-            label="Password"
-            type="password"
-            class="mb-4"
-          />
-          <v-btn type="submit" color="primary" block>Login</v-btn>
-        </v-form>
-        <v-alert v-if="error" type="error" class="mt-4" dense>
-          {{ error }}
-        </v-alert>
-      </v-card>
-    </v-container>
-  </template>
+  <v-container class="d-flex justify-center align-center">
+    <v-card class="pa-5 rounded-lg" width="300" elevation="5" color="grey-lighten-4">
+      <v-card-title class="text-h5" style="text-align: center;">Login</v-card-title>
+      <v-form @submit.prevent="handleLogin">
+        <v-text-field
+          v-model="email"
+          label="Email"
+          type="email"
+          class="mb-4 no-underline"
+          variant="outlined"
+          rounded
+          
+        />
+        <v-text-field
+          v-model="password"
+          label="Password"
+          type="password"
+          class="mb-4  no-underline"
+          rounded
+          variant="outlined"
+        />
+        <v-btn type="submit" color="green"  >Login</v-btn>
+      </v-form>
+      <v-alert v-if="error" type="error" class="mt-4" dense>
+        {{ error }}
+      </v-alert>
+    </v-card>
+  </v-container>
+</template>
   
   
-  <style scoped>
-  .login {
-  max-width: 400px;
-  margin: auto;
-}
-  </style>
+<style scoped>
+
+</style>
   
