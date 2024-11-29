@@ -59,6 +59,9 @@
           variant="outlined"
         />
         <v-btn type="submit" color="green"  >Login</v-btn>
+        <v-card-text>
+          <router-link to="/register">Don't have an account?<br>Register here.</router-link>
+        </v-card-text>
       </v-form>
       <v-alert v-if="error" type="error" class="mt-4" dense>
         {{ error }}

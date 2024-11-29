@@ -32,11 +32,11 @@ export default {
 </script>
 
 
-<template>
+<!-- <template>
     <div style="text-align: center; margin: 50px;">
       <h1>Register</h1>
   
-      <!-- Input fields for email and password -->
+      
       <input
         type="email"
         v-model="email"
@@ -50,12 +50,47 @@ export default {
         style="padding: 10px; width: 300px; margin-bottom: 10px;"
       />
   
-      <!-- Register button -->
+      
       <button @click="handleRegister" style="padding: 10px;">Register</button>
   
-      <!-- Error message if registration fails -->
+     
       <p v-if="error" style="color: red;">{{ error }}</p>
     </div>
+  </template> -->
+  
+
+  <template>
+    <v-container class="d-flex justify-center align-center">
+      <v-card class="pa-5 rounded-lg" width="300" elevation="5" color="grey-lighten-4">
+        <v-card-title class="text-h5" style="text-align: center;">Register</v-card-title>
+        <v-form @submit.prevent="handleRegister">
+          <v-text-field
+            v-model="email"
+            label="Email"
+            type="email"
+            class="mb-4 no-underline"
+            variant="outlined"
+            rounded
+            
+          />
+          <v-text-field
+            v-model="password"
+            label="Password"
+            type="password"
+            class="mb-4  no-underline"
+            rounded
+            variant="outlined"
+          />
+          <v-btn type="submit" color="green"  >Register</v-btn>
+          <v-card-text>
+            <router-link to="/login">Already have account?<br>Login here.</router-link>
+          </v-card-text>
+        </v-form>
+        <v-alert v-if="error" type="error" class="mt-4" dense>
+          {{ error }}
+        </v-alert>
+      </v-card>
+    </v-container>
   </template>
   
  
