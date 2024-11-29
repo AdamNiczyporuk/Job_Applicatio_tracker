@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes,Navigate  } from 'react-router-dom';
 import Login from './views/login';
 import Home from './views/home';
 import axios from 'axios';
@@ -27,7 +27,7 @@ const App = () => {
     <Route
     path="*"
     element={<Navigate to={isAuthenticated ? "/home" : "/login"} />}/>
-    
+
     </Routes>
 </Router>;
 };
