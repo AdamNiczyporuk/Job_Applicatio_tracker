@@ -12,7 +12,8 @@ export default {
 
     // Fetch applications when component mounts
     onMounted(() => {
-      api.fetchAppplications()
+      const userId = localStorage.getItem('userId');
+      api.fetchAplllicationsByUserId(userId)
         .then(response => {
           links.value = response.data;
         })
