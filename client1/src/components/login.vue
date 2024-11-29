@@ -37,30 +37,36 @@
 
 
 <template>
-    <div class="login" style="text-align: center; margin: 50px; height: 100vh;">
-      <h1>Login</h1>
-      <form @submit.prevent="handleLogin" style="display: flex; flex-direction: column; align-items: center;">
-        <input
-          type="email"
-          v-model="email"
-          placeholder="Email"
-          style="padding: 10px; width: 300px; margin-bottom: 10px;"
-        />
-        <input
-          type="password"
-          v-model="password"
-          placeholder="Password"
-          style="padding: 10px; width: 300px; margin-bottom: 10px;"
-        />
-        <button type="submit" style="padding: 10px;">Login</button>
-      </form>
-      <p v-if="error" style="color: red;">{{ error }}</p>
-    </div>
+    <v-container class="d-flex justify-center align-center" style="height: 100vh;">
+      <v-card class="pa-5" max-width="400px" elevation="2">
+        <v-card-title class="text-h5" style="text-align: center;">Login</v-card-title>
+        <v-form @submit.prevent="handleLogin">
+          <v-text-field
+            v-model="email"
+            label="Email"
+            type="email"
+            class="mb-4"
+          />
+          <v-text-field
+            v-model="password"
+            label="Password"
+            type="password"
+            class="mb-4"
+          />
+          <v-btn type="submit" color="primary" block>Login</v-btn>
+        </v-form>
+        <v-alert v-if="error" type="error" class="mt-4" dense>
+          {{ error }}
+        </v-alert>
+      </v-card>
+    </v-container>
   </template>
   
   
-  
   <style scoped>
-  /* Stylizacja komponentu */
+  .login {
+  max-width: 400px;
+  margin: auto;
+}
   </style>
   
