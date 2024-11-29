@@ -9,17 +9,9 @@ export default {
     const links = ref([]);
     const newLink = ref('');
     const name = ref('');
-    const userId = localStorage.getItem('userId');
+   
 
-    //Fetch applications when component mounts
-    // onMounted(() => {
-     
-    //   api.fetchAplllicationsByUserId(userId)
-    //     .then(response => {
-    //       links.value = response.data;
-    //     })
-    //     .catch(error => console.error("Error fetching data:", error));
-    // });
+   
     onMounted(() => {
       const token = localStorage.getItem('token');
       if (token) {
