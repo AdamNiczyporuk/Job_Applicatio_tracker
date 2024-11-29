@@ -16,12 +16,14 @@
           const response = await api.loginUser(email.value, password.value);
           console.log(response.data);
           const { token } = response.data;
-          localStorage.setItem('token', token); 
+          const { userId } = response.data;
+          localStorage.setItem('userId', userId); 
+          localStorage.setItem('token', token); // Zapisz token w localStorage
           alert('Login successful!');
-          error.value = ''; 
-          router.push('/home'); 
+          error.value = ''; // Zresetuj ewentualny błąd
+          router.push('/home'); // Przenieś użytkownika do strony głównej
         } catch (err) {
-          error.value = 'Login failed. Please try again.'; 
+          error.value = 'Login failed. Please try again.'; // Ustaw błąd, jeśli coś poszło nie tak
         }
       };
   

@@ -11,7 +11,7 @@ export default {
     const name = ref('');
     const userId = localStorage.getItem('userId');
 
-    // Fetch applications when component mounts
+    //Fetch applications when component mounts
     onMounted(() => {
      
       api.fetchAplllicationsByUserId(userId)
@@ -52,6 +52,8 @@ export default {
           alert("Failed to delete the application!");
         });
     };
+        //sFetch applications when component mounts
+    
 
     return {
       links,

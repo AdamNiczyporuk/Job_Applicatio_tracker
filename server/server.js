@@ -3,10 +3,7 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const server = jsonServer.create();
 const router = jsonServer.router('db.json');
-const jwt = require('jsonwebtoken');
 const middlewares = jsonServer.defaults();
-
-const SECRET_KEY = 'your_secret_key';
 
 server.use(cors());
 server.use(bodyParser.json());
@@ -21,26 +18,19 @@ server.post('/login', (req, res) => {
   const user = users.find(u => u.email === email && u.password === password);
 
   if (user) {
-      const token = jwt.sign({ userId: user.id }, SECRET_KEY, { expiresIn: '1h' });
-      res.status(200).json({token});
+      res.status(200).json({ token: 'fake-jwt-token',userId:user.id });
   } else {
       res.status(401).json({ message: 'Invalid email or password' });
   }
 });
 
 server.get('/applications', (req, res) => {
- const token =req.headers.authorization.split(' ')[1];
- try 
- {  
-  const decoded = jwt.verify(token, SECRET_KEY);
-  const applications = router.db.get('applications').value().filter({ userId: decoded.userId }).value();
+  const {userid} = req.query;
+  const applications = router.db.get('applications').filter({ userId: parseInt(userid) }).value();
   res.status(200).json(applications);
- }
- catch(error)
- { 
-  res.status(401).json({ message: 'Unauthorized' });
- }
 });
+
+
 
 server.use(router);
 server.listen(5000, () => {
