@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Login from './views/login';
-import Register from './views/register';
 import Home from './views/home';
 import axios from 'axios';
 import { verifyToken } from './Api';
@@ -19,12 +19,14 @@ const App = () => {
     } , []);
             
   
-
+<Router> 
+    <Routes>
     if (!isAuthenticated) {
-        return <Login />; // Wyświetl logowanie, jeśli niezalogowany
+       <Route path="/login" element={<Login />} />
     }
-
-    return <Home />;
+    <Route path="/home" element={<Home />} />
+    </Routes>
+</Router>;
 };
 
 export default App;
