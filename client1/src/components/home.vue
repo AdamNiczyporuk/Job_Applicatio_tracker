@@ -24,7 +24,7 @@ export default {
       if (newLink.value.trim()) {
         api.addApplication(name.value, newLink.value)
           .then(() => {
-            api.fetchAppplications()
+            api.fetchAplllicationsByUserId()
               .then(response => {
                 links.value = response.data;
               })

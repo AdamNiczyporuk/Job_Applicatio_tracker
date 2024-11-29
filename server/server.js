@@ -24,6 +24,14 @@ server.post('/login', (req, res) => {
   }
 });
 
+server.get('/applications', (req, res) => {
+  const { userid } = req.query;
+  const applications = router.db.get('applications').filter({ userId: parseInt(userid) }).value();
+  res.status(200).json(applications);
+});
+
+
+
 server.use(router);
 server.listen(5000, () => {
   console.log('JSON Server is running on http://localhost:5000');
