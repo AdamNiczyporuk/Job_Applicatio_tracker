@@ -9,10 +9,11 @@ export default {
     const links = ref([]);
     const newLink = ref('');
     const name = ref('');
+    const userId = localStorage.getItem('userId');
 
     // Fetch applications when component mounts
     onMounted(() => {
-      const userId = localStorage.getItem('userId');
+     
       api.fetchAplllicationsByUserId(userId)
         .then(response => {
           links.value = response.data;
@@ -23,9 +24,9 @@ export default {
     // Add a new application
     const addLink = () => {
       if (newLink.value.trim()) {
-        api.addApplication(name.value, newLink.value)
+        api.addApplication(name.value, newLink.value,userId)
           .then(() => {
-            api.fetchAplllicationsByUserId()
+            api.fetchAplllicationsByUserId(userId)
               .then(response => {
                 links.value = response.data;
               })
