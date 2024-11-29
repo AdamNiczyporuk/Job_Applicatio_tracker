@@ -33,14 +33,14 @@ const routes = [
   });
 
   
-// router.beforeEach((to, from, next) => {
-//   const isAuthenticated = localStorage.getItem('token'); 
+router.beforeEach((to, from, next) => {
+  const isAuthenticated = localStorage.getItem('token'); 
 
-//   if (to.meta.requiresAuth && !isAuthenticated) {
-//     next('/login'); 
-//   } else {
-//     next('/home');  
-//   }
-// });
+  if (to.meta.requiresAuth && !isAuthenticated) {
+    next('/login'); 
+  } else {
+    next();  
+  }
+});
   
   export default router;
