@@ -55,11 +55,17 @@ server.post('/applications',(req,res)=>
     return res.status(400).json({message:"Header missing"});
   }
 
-  const token = authHeader.split('')[1];
+  const token = authHeader.split(' ')[1];
   try{ 
     const decoded = jwt.verify(token,SECRET_KEY);
     const {name,link} = req.body; 
-    const newApplication = {name,link,userId: decoded.userId}; 
+
+    const applications = router.db.get('applications').value();
+    const maxId = applications.length > 0 ? Math.max(...applications.map(app => app.id)) : 0;
+
+
+
+   const newApplication = { id: maxId + 1, name, link, userId: decoded.userId };
     router.db.get('applications').push(newApplication).write();
     res.status(201).json(newApplication);
     }catch(error)

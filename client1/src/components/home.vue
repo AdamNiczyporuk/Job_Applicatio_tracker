@@ -72,7 +72,8 @@ export default {
     const deleteLink = (id) => {
       api.deleteApplication(id)
         .then(() => {
-          api.fetchAppplications()
+          const token = localStorage.getItem('token'); 
+          api.fetchApplications(token)
             .then(response => {
               links.value = response.data;
             })
