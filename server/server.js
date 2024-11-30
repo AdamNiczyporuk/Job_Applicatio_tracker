@@ -43,6 +43,7 @@ server.post('/login', (req, res) => {
 });
 
 
+
 server.post('/applications',(req,res)=>
 { 
   const authHeader = req.headers.authorization; 

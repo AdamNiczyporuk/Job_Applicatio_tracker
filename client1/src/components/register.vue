@@ -86,7 +86,7 @@ export default {
             <router-link to="/login">Already have account?<br>Login here.</router-link>
           </v-card-text>
         </v-form>
-        <v-alert v-if="error" type="error" class="mt-4" dense>
+        <v-alert v-if="error" type="error" class="mt-5" dense>
           {{ error }}
         </v-alert>
       </v-card>
