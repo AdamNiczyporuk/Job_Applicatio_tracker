@@ -48,6 +48,26 @@ server.post('/login', (req, res) => {
 //   res.status(200).json(applications);
 // });
 
+server.post('/applications',(req,res)=>
+{ 
+  const authHeader = req.headers.authorization; 
+  if(!authHeader){ 
+    return res.status(400).json({message:"Header missing"});
+  }
+
+  const token = authHeader.split('')[1];
+  try{ 
+    const decoded = jwt.verify(token,SECRET_KEY);
+    const {name,link} = req.body; 
+    const newApplication = {name,link,userId: decoded.userId}; 
+    router.db.get('applications').push(newApplication).write();
+    res.status(201).json(newApplication);
+    }catch(error)
+    { 
+      res.status(401).json({message:"Unauthorized"});
+    }
+});
+
 
 server.get('/applications', (req, res) => {
   const authHeader = req.headers.authorization;
