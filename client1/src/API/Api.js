@@ -21,6 +21,16 @@ export const fetchApplicationById = (id) =>
 //     return axios.post('http://localhost:5000/applications', {name, link,userid});
 // }
 
+export const addApplication = (name,link,token) => 
+{ 
+    return axios.post('http://localhost:5000/applications',{name,link},{
+        headers: 
+        { 
+            Authorization : `Bearer ${token}`
+        }
+    });
+};
+
 export const fetchAplllicationsByUserId = (userid) =>
 {
     return axios.get(`http://localhost:5000/applications?userid=${userid}`);
