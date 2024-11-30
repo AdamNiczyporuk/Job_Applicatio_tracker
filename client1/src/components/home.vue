@@ -24,20 +24,49 @@ export default {
     });
 
     // Add a new application
+    // const addLink = () => {
+    //   if (newLink.value.trim()) {
+    //     api.addApplication(name.value, newLink.value,userId)
+    //       .then(() => {
+    //         api.fetchAplllicationsByUserId(userId)
+    //           .then(response => {
+    //             links.value = response.data;
+    //           })
+    //           .catch(error => console.error("Error fetching updated data:", error));
+    //         newLink.value = ''; // Reset input after adding link
+    //       })
+    //       .catch(error => console.error("Error adding link:", error));
+    //   }
+    // };
+
+    
     const addLink = () => {
-      if (newLink.value.trim()) {
-        api.addApplication(name.value, newLink.value,userId)
-          .then(() => {
-            api.fetchAplllicationsByUserId(userId)
-              .then(response => {
-                links.value = response.data;
-              })
-              .catch(error => console.error("Error fetching updated data:", error));
-            newLink.value = ''; // Reset input after adding link
-          })
-          .catch(error => console.error("Error adding link:", error));
-      }
-    };
+  if (newLink.value.trim()) {
+    const token = localStorage.getItem('token');
+    if (token) {
+      api.addApplication(name.value, newLink.value, token)
+        .then(() => {
+          api.fetchApplications(token)
+            .then(response => {
+              links.value = response.data;
+            })
+            .catch(error => console.error("Error fetching updated data:", error));
+          newLink.value = ''; // Reset input after adding link
+        })
+        .catch(error => console.error("Error adding link:", error));
+    }
+  }
+};
+
+
+
+
+
+
+
+
+
+
 
     // Delete an application
     const deleteLink = (id) => {
