@@ -42,11 +42,6 @@ server.post('/login', (req, res) => {
   }
 });
 
-// server.get('/applications', (req, res) => {
-//   const {userid} = req.query;
-//   const applications = router.db.get('applications').filter({ userId: parseInt(userid) }).value();
-//   res.status(200).json(applications);
-// });
 
 server.post('/applications',(req,res)=>
 { 
@@ -90,6 +85,12 @@ server.get('/applications', (req, res) => {
     res.status(401).json({ message: 'Unauthorized' });
   }
 });
+
+
+
+
+
+
 
 
 server.use(router);
