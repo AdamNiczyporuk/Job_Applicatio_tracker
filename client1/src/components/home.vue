@@ -96,17 +96,14 @@ export default {
       />
       <button @click="addLink" style="margin-left: 10px; padding: 10px;">Add Link</button>
   
-      <!-- Displaying the list of applications -->
+      <!-- Displaying the list of applications
       <ul style="margin-top: 20px; list-style: none;">
         <li v-for="item in links" :key="item.id">
           <a :href="item.link" target="_blank" rel="noopener noreferrer">{{ item.name }}</a>
           <button @click="deleteLink(item.id)" style="margin-left: 10px;">Delete</button>
         </li>
-      </ul>
-    </div>
-
-    <v-table
-    height="300px"
+      </ul> -->
+      <v-table
     fixed-header
   >
     <thead>
@@ -127,11 +124,13 @@ export default {
         v-for="item in links" 
         :key="item.id"
       >
-        <td>{{ item.name }}</td>
-        <td>{{ item.calories }}</td>
+        <td class="text-left">{{ item.id }}</td>
+        <td class="text-left">{{ item.name }}</td>
+        <td class="text-left"> <button @click="deleteLink(item.id)" style="margin-left: 10px;">Delete</button></td>
       </tr>
     </tbody>
   </v-table>
+    </div> 
   </template>
   
  
