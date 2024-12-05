@@ -14,6 +14,10 @@ const vuetify = createVuetify({
       mdi,
     },
   },
+  theme:
+  { 
+    defaultTheme: 'dark',
+  }
 });
 
 export default vuetify;

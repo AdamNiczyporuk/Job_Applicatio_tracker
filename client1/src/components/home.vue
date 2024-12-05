@@ -76,18 +76,18 @@ export default {
 </script>
 
 
-<template color="#212121">
+<template>
     <div class="home" style="text-align: center; margin: 0px 50px 50px 50px; height: 100vh; ">
       <!-- <h1>Job Application Tracker</h1>
       <h2>Total Applications: {{ links.length }}</h2> -->
-    <tetx-h2>Job Application Tracker</tetx-h2>
-    <div class="d-flex justify-center mt-2">
-      <v-card width="auto">
-        <v-card-text  class="text-h6">
-          Total Applications: {{ links.length }}
-        </v-card-text>
-      </v-card>
-    </div>
+    <tetx-h2 class="font-weight-black text-white ">Job Application Tracker</tetx-h2>
+        <div class="d-flex justify-center mt-2">
+          <v-card width="auto" color="grey-darken-4" class="white-glow">
+            <v-card-text  class="text-h6 text-white">
+              Total Applications: {{ links.length }}
+            </v-card-text>
+          </v-card>
+        </div>
       <!-- Input fields for adding a new application -->
       <!-- <input
         type="text"
@@ -99,7 +99,9 @@ export default {
             <v-row class="d-flex align-center justify-center">
               <v-col cols="2">
                 <v-text-field
+                class="text-white"
                 :rules="rules"
+                v-model="name"
                 hide-details="auto"
                 label="Name of application"
                 
@@ -108,6 +110,8 @@ export default {
             </v-col>
             <v-col cols="6">
               <v-text-field
+                class="text-white"
+                v-model="newLink"
                 :rules="rules"
                 hide-details="auto"
                 label="Enter application link"
@@ -115,7 +119,7 @@ export default {
               </v-text-field>
             </v-col>
           </v-row>
-          <v-btn  @click="addLink" class="mt-5">Add Link</v-btn>
+          <v-btn @click="addLink" color="white"  class="mt-5">Add Link</v-btn>
       </v-conatiner>
       <!-- <input
         type="text"
@@ -132,16 +136,18 @@ export default {
           <button @click="deleteLink(item.id)" style="margin-left: 10px;">Delete</button>
         </li>
       </ul> -->
-      <v-card  class="mx-auto my-8"
-    elevation="10"
-    max-width="800" rounded="lg">
-        <v-table fixed-header >
+      <v-card  class="mx-auto my-8 custom-card"
+              elevation="10"
+              max-width="800" rounded="lg"
+              color="grey-darken-4"
+              >
+        <v-table fixed-header class="custom-card" theme="grey-darken-4" hover = true >
               <thead>
                 <tr>
                   <th class="text-left">
                     Id
                   </th>
-                  <th class="text-center">
+                  <th class="text-center ">
                     Name
                   </th>
                   <th class="text-left">
@@ -154,9 +160,9 @@ export default {
                   v-for="item in links" 
                   :key="item.id"
                 >
-                  <td class="text-left">{{ item.id }}</td>
-                  <td class="text-center"><a :href="item.link" target="_blank" rel="noopener noreferrer">{{ item.name }}</a></td>
-                  <td class="text-left"> <button @click="deleteLink(item.id)" style="margin-left: 10px;">Delete</button></td>
+                  <td class="text-left ">{{ item.id }}</td>
+                  <td class="text-center "><a :href="item.link" target="_blank" rel="noopener noreferrer">{{ item.name }}</a></td>
+                  <td class="text-left t"> <button @click="deleteLink(item.id)" style="margin-left: 10px;">Delete</button></td>
                 </tr>
               </tbody>
             </v-table>
@@ -166,11 +172,11 @@ export default {
   
  
   
-  <style scoped>
-  body
-  { 
-    background-color: #212121;
-  }
+  <style >
+body {
+  background-color: #212121;
+  color: #ffffff;
+}
 a {
   text-decoration: none;
   color: inherit;
@@ -179,6 +185,9 @@ a {
 a:visited {
   color: inherit;
 }
+
+
+
 
   </style>
   
