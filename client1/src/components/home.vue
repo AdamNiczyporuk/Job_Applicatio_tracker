@@ -104,6 +104,34 @@ export default {
         </li>
       </ul>
     </div>
+
+    <v-table
+    height="300px"
+    fixed-header
+  >
+    <thead>
+      <tr>
+        <th class="text-left">
+          Id
+        </th>
+        <th class="text-left">
+          Name
+        </th>
+        <th class="text-left">
+          Action
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        v-for="item in links" 
+        :key="item.id"
+      >
+        <td>{{ item.name }}</td>
+        <td>{{ item.calories }}</td>
+      </tr>
+    </tbody>
+  </v-table>
   </template>
   
  
