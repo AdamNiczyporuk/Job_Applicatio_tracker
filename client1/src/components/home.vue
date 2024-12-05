@@ -82,18 +82,34 @@ export default {
       <h2>Total Applications: {{ links.length }}</h2>
   
       <!-- Input fields for adding a new application -->
-      <input
+      <!-- <input
         type="text"
         v-model="name"
         placeholder="Name of application"
         style="padding: 10px; width: 200px; margin-right: 2px;"
-      />
-      <input
+      /> -->
+      <div>
+            <v-text-field
+            :rules="rules"
+            hide-details="auto"
+            label="Name of application"
+            style="padding: 10px; width: 200px; margin-right: 2px;"
+            >
+          </v-text-field>
+          <v-text-field
+            :rules="rules"
+            hide-details="auto"
+            label="Enter application link"
+          style="padding: 10px; width: 300px;"
+            >
+          </v-text-field>
+    </div>
+      <!-- <input
         type="text"
         v-model="newLink"
         placeholder="Enter application link"
         style="padding: 10px; width: 300px;"
-      />
+      /> -->
       <button @click="addLink" style="margin-left: 10px; padding: 10px;">Add Link</button>
   
       <!-- Displaying the list of applications
@@ -103,39 +119,49 @@ export default {
           <button @click="deleteLink(item.id)" style="margin-left: 10px;">Delete</button>
         </li>
       </ul> -->
-      <v-table
-    fixed-header
-  >
-    <thead>
-      <tr>
-        <th class="text-left">
-          Id
-        </th>
-        <th class="text-left">
-          Name
-        </th>
-        <th class="text-left">
-          Action
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr
-        v-for="item in links" 
-        :key="item.id"
-      >
-        <td class="text-left">{{ item.id }}</td>
-        <td class="text-left">{{ item.name }}</td>
-        <td class="text-left"> <button @click="deleteLink(item.id)" style="margin-left: 10px;">Delete</button></td>
-      </tr>
-    </tbody>
-  </v-table>
+      <v-card  class="mx-auto my-8"
+    elevation="10"
+    max-width="800" rounded="lg">
+        <v-table fixed-header >
+              <thead>
+                <tr>
+                  <th class="text-left">
+                    Id
+                  </th>
+                  <th class="text-center">
+                    Name
+                  </th>
+                  <th class="text-left">
+                    Action
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr
+                  v-for="item in links" 
+                  :key="item.id"
+                >
+                  <td class="text-left">{{ item.id }}</td>
+                  <td class="text-center"><a :href="item.link" target="_blank" rel="noopener noreferrer">{{ item.name }}</a></td>
+                  <td class="text-left"> <button @click="deleteLink(item.id)" style="margin-left: 10px;">Delete</button></td>
+                </tr>
+              </tbody>
+            </v-table>
+      </v-card>
     </div> 
   </template>
   
  
   
   <style scoped>
-  /* Dodatkowa stylizacja (opcjonalnie) */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+a:visited {
+  color: inherit;
+}
+
   </style>
   
