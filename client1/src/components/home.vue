@@ -76,11 +76,18 @@ export default {
 </script>
 
 
-<template>
-    <div class="home" style="text-align: center; margin: 50px; height: 100vh;">
-      <h1>Job Application Tracker</h1>
-      <h2>Total Applications: {{ links.length }}</h2>
-  
+<template color="#212121">
+    <div class="home" style="text-align: center; margin: 0px 50px 50px 50px; height: 100vh; ">
+      <!-- <h1>Job Application Tracker</h1>
+      <h2>Total Applications: {{ links.length }}</h2> -->
+    <tetx-h2>Job Application Tracker</tetx-h2>
+    <div class="d-flex justify-center mt-2">
+      <v-card width="auto">
+        <v-card-text  class="text-h6">
+          Total Applications: {{ links.length }}
+        </v-card-text>
+      </v-card>
+    </div>
       <!-- Input fields for adding a new application -->
       <!-- <input
         type="text"
@@ -88,29 +95,35 @@ export default {
         placeholder="Name of application"
         style="padding: 10px; width: 200px; margin-right: 2px;"
       /> -->
-      <div>
-            <v-text-field
-            :rules="rules"
-            hide-details="auto"
-            label="Name of application"
-            style="padding: 10px; width: 200px; margin-right: 2px;"
-            >
-          </v-text-field>
-          <v-text-field
-            :rules="rules"
-            hide-details="auto"
-            label="Enter application link"
-          style="padding: 10px; width: 300px;"
-            >
-          </v-text-field>
-    </div>
+      <v-conatiner class="mx-10 align-center justify-center ">
+            <v-row class="d-flex align-center justify-center">
+              <v-col cols="2">
+                <v-text-field
+                :rules="rules"
+                hide-details="auto"
+                label="Name of application"
+                
+                >
+              </v-text-field>
+            </v-col>
+            <v-col cols="6">
+              <v-text-field
+                :rules="rules"
+                hide-details="auto"
+                label="Enter application link"
+                >
+              </v-text-field>
+            </v-col>
+          </v-row>
+          <v-btn  @click="addLink" class="mt-5">Add Link</v-btn>
+      </v-conatiner>
       <!-- <input
         type="text"
         v-model="newLink"
         placeholder="Enter application link"
         style="padding: 10px; width: 300px;"
       /> -->
-      <button @click="addLink" style="margin-left: 10px; padding: 10px;">Add Link</button>
+     
   
       <!-- Displaying the list of applications
       <ul style="margin-top: 20px; list-style: none;">
@@ -154,6 +167,10 @@ export default {
  
   
   <style scoped>
+  body
+  { 
+    background-color: #212121;
+  }
 a {
   text-decoration: none;
   color: inherit;
