@@ -129,13 +129,7 @@ export default {
       /> -->
      
   
-      <!-- Displaying the list of applications
-      <ul style="margin-top: 20px; list-style: none;">
-        <li v-for="item in links" :key="item.id">
-          <a :href="item.link" target="_blank" rel="noopener noreferrer">{{ item.name }}</a>
-          <button @click="deleteLink(item.id)" style="margin-left: 10px;">Delete</button>
-        </li>
-      </ul> -->
+    
       <v-card  class="mx-auto my-8 custom-card"
               elevation="10"
               max-width="800" rounded="lg"
