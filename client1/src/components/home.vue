@@ -61,7 +61,7 @@ export default {
           alert("Failed to delete the application!");
         });
     };
-        //sFetch applications when component mounts
+        
     
 
     return {
@@ -78,8 +78,7 @@ export default {
 
 <template>
     <div class="home" style="text-align: center; margin: 0px 50px 50px 50px; height: 100vh; ">
-      <!-- <h1>Job Application Tracker</h1>
-      <h2>Total Applications: {{ links.length }}</h2> -->
+      
     <tetx-h2 class="font-weight-black text-white ">Job Application Tracker</tetx-h2>
         <div class="d-flex justify-center mt-2">
           <v-card width="auto" color="grey-darken-4" class="white-glow">
