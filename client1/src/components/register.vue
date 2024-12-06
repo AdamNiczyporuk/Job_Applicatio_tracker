@@ -15,9 +15,9 @@ export default {
       try {
         await api.registerUser(email.value, password.value);
         alert("Registration successful!");
-        error.value = ""; // Reset the error message
+        error.value = ""; 
       } catch (err) {
-        error.value = "Registration failed. Please try again."; // Set error message
+        error.value = "Registration failed. Please try again."; 
       }
     };
 
