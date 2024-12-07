@@ -114,12 +114,7 @@ export default {
           </v-row>
           <v-btn @click="addLink" color="white"  class="mt-5">Add Link</v-btn>
       </v-conatiner>
-      <!-- <input
-        type="text"
-        v-model="newLink"
-        placeholder="Enter application link"
-        style="padding: 10px; width: 300px;"
-      /> -->
+      
      
   
     
