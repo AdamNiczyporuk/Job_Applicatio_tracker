@@ -87,13 +87,7 @@ export default {
             </v-card-text>
           </v-card>
         </div>
-      <!-- Input fields for adding a new application -->
-      <!-- <input
-        type="text"
-        v-model="name"
-        placeholder="Name of application"
-        style="padding: 10px; width: 200px; margin-right: 2px;"
-      /> -->
+     
       <v-conatiner class="mx-10 align-center justify-center ">
             <v-row class="d-flex align-center justify-center">
               <v-col cols="2">
