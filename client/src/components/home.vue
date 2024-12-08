@@ -9,21 +9,35 @@ export default {
     const links = ref([]);
     const newLink = ref('');
     const name = ref('');
-   
+    const token = localStorage.getItem('token');
+    const user = ref({});
 
-   
-    onMounted(() => {
-
-
-      
-      const token = localStorage.getItem('token');
+    const fetchApplications = async () => {
       if (token) {
-        api.fetchApplications(token)
-          .then(response => {
-            links.value = response.data;
-          })
-          .catch(error => console.error("Error fetching data:", error));
+        try {
+          const response = await api.fetchApplications(token);
+          links.value = response.data;
+        } catch (error) {
+          console.error("Error fetching data:", error);
+        }
       }
+    };
+
+    const fetchUser = async () => {
+      if (token) {
+        try {
+          const response = await api.GetUserByID(token);
+          user.value = response.data;
+          console.log(user.value);
+        } catch (error) {
+          console.error("Error fetching user data:", error);
+        }
+      }
+    };
+
+    onMounted(() => {
+      fetchApplications();
+      fetchUser();
     });
 
   
@@ -31,7 +45,6 @@ export default {
     
     const addLink = () => {
   if (newLink.value.trim()) {
-    const token = localStorage.getItem('token');
     if (token) {
       api.addApplication(name.value, newLink.value, token)
         .then(() => {
@@ -64,6 +77,13 @@ export default {
           alert("Failed to delete the application!");
         });
     };
+    const copyToClipboard = (text) => {
+      navigator.clipboard.writeText(text).then(() => {
+        alert('Copied to clipboard');
+      }).catch(err => {
+        console.error('Failed to copy: ', err);
+      });
+    };
         
     
 
@@ -71,8 +91,10 @@ export default {
       links,
       newLink,
       name,
+      user,
       addLink,
       deleteLink,
+      copyToClipboard,
     };
   },
 };
@@ -82,12 +104,18 @@ export default {
 <template>
  <v-container class="home" style="text-align: center; margin: 0px 50px 50px 50px; height: 100vh;">
   <v-row>
-    <v-col cols="3">  
+    <v-col cols="3">
       <v-card class="pa-5 rounded-lg" elevation="5" color="deep-orange-darken-2" >
               <v-card-title class="text-h5" style="text-align: center;">User Info</v-card-title>
               <v-card-text class="text-white">
-                <p><strong>Name:</strong>Marek</p>
-                <p><strong>Email:</strong> Franek</p>
+                <p class="text-left"><strong>Name:</strong> {{ user.name }}</p>
+                <p class="text-left"><strong>Email:</strong> {{user.email}}</p>
+                <p class="text-left"><strong>GitHub:</strong> {{user.github}}
+                  <v-icon size="12"  @click="copyToClipboard(user.github)">mdi-content-copy</v-icon>
+                </p>
+                <p class="text-left"><strong>Linkedin:</strong> {{user.linkedin}}
+                <v-icon size="12"  @click="copyToClipboard(user.linkedin)">mdi-content-copy</v-icon>
+                </p>
           </v-card-text>
       </v-card>
     </v-col>
@@ -152,7 +180,7 @@ export default {
                     Name
                   </th>
                   <th class="text-left">
-                    Action
+                    Action  
                   </th>
                 </tr>
               </thead>
@@ -163,7 +191,7 @@ export default {
                 >
                   <td class="text-left ">{{ item.id }}</td>
                   <td class="text-center "><a :href="item.link" target="_blank" rel="noopener noreferrer">{{ item.name }}</a></td>
-                  <td class="text-left t"> <button @click="deleteLink(item.id)" style="margin-left: 10px;">Delete</button></td>
+                  <td class="text-left"> <button @click="deleteLink(item.id)" style="margin-left: 10px;">Delete</button></td>
                 </tr>
               </tbody>
             </v-table>
@@ -189,6 +217,10 @@ a:visited {
   color: inherit;
 }
 
+.copy-btn {
+  min-width: 0;
+  padding: 0;
+}
 
 
 
