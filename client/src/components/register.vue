@@ -60,7 +60,7 @@ export default {
   
 
   <template>
-    <v-container class="d-flex justify-center align-center">
+    <v-container class="d-flex justify-center align-center" style="height: 75vh;">
       <v-card class="pa-5 rounded-lg" width="300" elevation="5" color="grey-lighten-4">
         <v-card-title class="text-h5" style="text-align: center;">Register</v-card-title>
         <v-form @submit.prevent="handleRegister">
