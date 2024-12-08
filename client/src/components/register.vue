@@ -27,6 +27,7 @@ export default {
     };
 
     return {
+      name,
       email,
       password,
       error,
