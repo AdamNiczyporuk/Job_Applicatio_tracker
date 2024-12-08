@@ -42,6 +42,23 @@ server.post('/login', (req, res) => {
   }
 });
 
+server.post('/register', (req, res) => {
+  const {name,email, password } = req.body;
+  const users = router.db.get('users').value();
+  const userExists = users.find(u => u.email === email);
+
+  if(userExists)
+  { 
+    return res.status(400).json({message:"User already exists"});
+  }
+  else
+  {
+    const newUser = { id: users.length + 1, name, email, password };
+    router.db.get('users').push(newUser).write();
+    res.status(201).json({ message: 'User registered successfully'});
+  }
+});
+
 
 
 server.post('/applications',(req,res)=>

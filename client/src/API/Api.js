@@ -49,8 +49,8 @@ export const loginUser = (email, password) => {
     return axios.post('http://localhost:5000/login', { email, password });
 };
 
-export const registerUser = (email, password) => {
-    return axios.post('http://localhost:5000/register', { email, password });
+export const registerUser = (name,email, password) => {
+    return axios.post('http://localhost:5000/register', {name,email, password });
 };
 
 export const verifyToken = () => { 
