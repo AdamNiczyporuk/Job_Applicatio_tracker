@@ -13,6 +13,9 @@ export default {
 
    
     onMounted(() => {
+
+
+      
       const token = localStorage.getItem('token');
       if (token) {
         api.fetchApplications(token)
@@ -77,9 +80,19 @@ export default {
 
 
 <template>
-    <div class="home" style="text-align: center; margin: 0px 50px 50px 50px; height: 100vh; ">
-      
-    <tetx-h2 class="font-weight-black text-white ">Job Application Tracker</tetx-h2>
+ <v-container class="home" style="text-align: center; margin: 0px 50px 50px 50px; height: 100vh;">
+  <v-row>
+    <v-col cols="3">  
+      <v-card class="pa-5 rounded-lg" elevation="5" color="grey-darken-4" >
+              <v-card-title class="text-h5" style="text-align: center;">User Info</v-card-title>
+              <v-card-text class="text-white">
+                <p><strong>Name:</strong>Marek</p>
+                <p><strong>Email:</strong> Franek</p>
+          </v-card-text>
+      </v-card>
+    </v-col>
+    <v-col cols="9">
+    <h2 class="font-weight-black text-white ">Job Application Tracker</h2>
         <div class="d-flex justify-center mt-2">
           <v-card width="auto" color="grey-darken-4" class="white-glow">
             <v-card-text  class="text-h6 text-white">
@@ -87,32 +100,34 @@ export default {
             </v-card-text>
           </v-card>
         </div>
-     
       <v-conatiner class="mx-10 align-center justify-center ">
-            <v-row class="d-flex align-center justify-center">
-              <v-col cols="2">
+        <v-row class="d-flex align-center justify-center">
+              <v-col cols="4" class="pr-1">
                 <v-text-field
                 class="text-white"
                 :rules="rules"
                 v-model="name"
                 hide-details="auto"
                 label="Name of application"
-                
+                variant="outlined"
+                rounded
                 >
               </v-text-field>
             </v-col>
-            <v-col cols="6">
+            <v-col cols="6" class="pl-1">
               <v-text-field
                 class="text-white"
                 v-model="newLink"
                 :rules="rules"
                 hide-details="auto"
                 label="Enter application link"
+                variant="outlined"
+                rounded
                 >
               </v-text-field>
             </v-col>
           </v-row>
-          <v-btn @click="addLink" color="white"  class="mt-5">Add Link</v-btn>
+          <v-btn variant="outlined" @click="addLink" color="white"  class="mt-5">Add Link</v-btn>
       </v-conatiner>
       
      
@@ -149,7 +164,9 @@ export default {
               </tbody>
             </v-table>
       </v-card>
-    </div> 
+    </v-col>
+  </v-row>
+ </v-container> 
   </template>
   
  
