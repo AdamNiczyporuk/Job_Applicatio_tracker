@@ -83,7 +83,7 @@ export default {
  <v-container class="home" style="text-align: center; margin: 0px 50px 50px 50px; height: 100vh;">
   <v-row>
     <v-col cols="3">  
-      <v-card class="pa-5 rounded-lg" elevation="5" color="grey-darken-4" >
+      <v-card class="pa-5 rounded-lg" elevation="5" color="deep-orange-darken-2" >
               <v-card-title class="text-h5" style="text-align: center;">User Info</v-card-title>
               <v-card-text class="text-white">
                 <p><strong>Name:</strong>Marek</p>
@@ -94,7 +94,7 @@ export default {
     <v-col cols="9">
     <h2 class="font-weight-black text-white ">Job Application Tracker</h2>
         <div class="d-flex justify-center mt-2">
-          <v-card width="auto" color="grey-darken-4" class="white-glow">
+          <v-card width="auto" color="green-accent-4" class="white-glow">
             <v-card-text  class="text-h6 text-white">
               Total Applications: {{ links.length }}
             </v-card-text>
@@ -127,7 +127,11 @@ export default {
               </v-text-field>
             </v-col>
           </v-row>
-          <v-btn variant="outlined" @click="addLink" color="white"  class="mt-5">Add Link</v-btn>
+          <v-row class="d-flex justify-center mt-1">
+            <v-col cols="auto">
+              <v-btn variant="outlined" @click="addLink" color="white" >Add Link</v-btn>
+            </v-col>
+          </v-row>
       </v-conatiner>
       
      

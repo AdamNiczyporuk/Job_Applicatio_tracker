@@ -12,16 +12,25 @@
        const router = useRouter(); 
 
       
-      const handleLogin = async () => 
-    {
-      api.loginUser(email.value,password.value)
-      .then(response => {
-        const token = response.data.token;
-        localStorage.setItem('token', token); // Zapisz token JWT w localStorage
-        router.push('/home'); // Przekieruj na stronę główną
-      })
-      
-    }
+       const handleLogin = async () => {
+      try {
+        await api.loginUser(email.value, password.value)
+          .then(response => {
+            const token = response.data.token;
+            localStorage.setItem('token', token); // Zapisz token JWT w localStorage
+            router.push('/home'); // Przekieruj na stronę główną
+          })
+          .catch(err => {
+            if (err.response && err.response.status === 401) {
+              error.value = 'Invalid email or password';
+            } else {
+              error.value = 'Login failed. Please try again.';
+            }
+          });
+      } catch (err) {
+        error.value = 'Login failed. Please try again.'; // Ustaw błąd, jeśli coś poszło nie tak
+      }
+    };
         // Add Handling errors in handleLogidn
 
 
@@ -55,7 +64,7 @@
 
 
 <template>
-  <v-container class="d-flex justify-center align-center"  style="height: 75vh;">
+  <v-container class="d-flex justify-center align-center"  style="height: 75;">
     <v-card class="pa-5 rounded-lg" width="300" elevation="5" color="grey-lighten-4">
       <v-card-title class="text-h5" style="text-align: center;">Login</v-card-title>
       <v-form @submit.prevent="handleLogin">
@@ -81,7 +90,7 @@
           <router-link to="/register">Don't have an account?<br>Register here.</router-link>
         </v-card-text>
       </v-form>
-      <v-alert v-if="error" type="error" class="mt-4" dense>
+      <v-alert v-if="error" type="error" class="mt-4 dense text-center" :icon="false">
         {{ error }}
       </v-alert>
     </v-card>

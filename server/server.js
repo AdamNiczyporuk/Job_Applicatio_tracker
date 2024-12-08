@@ -43,7 +43,7 @@ server.post('/login', (req, res) => {
 });
 
 server.post('/register', (req, res) => {
-  const {name,email, password } = req.body;
+  const {name,email, password , github = '', linkedin = '' } = req.body;
   const users = router.db.get('users').value();
   const userExists = users.find(u => u.email === email);
 
@@ -53,7 +53,7 @@ server.post('/register', (req, res) => {
   }
   else
   {
-    const newUser = { id: users.length + 1, name, email, password };
+    const newUser = { id: users.length + 1, name, email, password,github,linkedin};
     router.db.get('users').push(newUser).write();
     res.status(201).json({ message: 'User registered successfully'});
   }

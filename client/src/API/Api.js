@@ -53,6 +53,11 @@ export const registerUser = (name,email, password) => {
     return axios.post('http://localhost:5000/register', {name,email, password });
 };
 
+export const GetUserByID  = (id) => { 
+    return axios.get(`http://localhost:5000/users/${id}`);
+} 
+
+
 export const verifyToken = () => { 
     const token = localStorage.getItem('token');
    if(!token){
