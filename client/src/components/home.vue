@@ -9,9 +9,12 @@ export default {
     const links = ref([]);
     const newLink = ref('');
     const name = ref('');
+    const editName = ref('');
+    const editNewLink = ref('');
     const token = localStorage.getItem('token');
     const user = ref({});
     const editingId = ref(null);
+    const dialog = ref(false);
 
     const fetchApplications = async () => {
       if (token) {
@@ -88,9 +91,10 @@ export default {
     const editLink = (id) =>{
       const application = links.value.find(link => link.id === id);
       if(application){
-        name.value = application.name;
-        newLink.value = application.link;
+        editName.value = application.name;
+        editNewLink.value = application.link;
         editingId.value = id;
+        dialog.value = true;
         }
       };
         
@@ -105,6 +109,10 @@ export default {
       deleteLink,
       copyToClipboard,
       editLink,
+      dialog,
+      editNewLink,
+      editName,
+
     };
   },
 };
@@ -216,6 +224,32 @@ export default {
       </v-card>
     </v-col>
   </v-row>
+  
+
+  <v-dialog v-model="dialog" max-width="500px" >
+      <v-card class="rounded-lg">
+        <v-card-title>
+          <span class="headline">Edit Application</span>
+        </v-card-title>
+        <v-card-text>
+          <v-container>
+            <v-row>
+              <v-col cols="12">
+                <v-text-field class="text-white" :rules="rules"  hide-details="auto"  variant="outlined" rounded v-model="editName" label="Name of application"></v-text-field>
+              </v-col>
+              <v-col cols="12">
+                <v-text-field v-model="editNewLink" label="Enter application link"></v-text-field>
+              </v-col>
+            </v-row>
+          </v-container>
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="blue darken-1" text @click="dialog = false">Cancel</v-btn>
+          <v-btn color="blue darken-1" text @click="updateLink">Save</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
  </v-container> 
   </template>
   
