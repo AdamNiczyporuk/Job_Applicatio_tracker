@@ -78,7 +78,7 @@ server.post('/applications',(req,res)=>
 
 
 
-   const newApplication = { id: maxId + 1, name, link, userId: decoded.userId };
+   const newApplication = { id: maxId + 1, name, link, userId: decoded.userId,dataTime:};
     router.db.get('applications').push(newApplication).write();
     res.status(201).json(newApplication);
     }catch(error)
