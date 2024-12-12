@@ -11,6 +11,7 @@ export default {
     const name = ref('');
     const token = localStorage.getItem('token');
     const user = ref({});
+    const editingId = ref(null);
 
     const fetchApplications = async () => {
       if (token) {
@@ -84,9 +85,14 @@ export default {
         console.error('Failed to copy: ', err);
       });
     };
-    const editLink = () =>{
-      // Placeholder function to avoid errors
-        };
+    const editLink = (id) =>{
+      const application = links.value.find(link => link.id === id);
+      if(application){
+        name.value = application.name;
+        newLink.value = application.link;
+        editingId.value = id;
+        }
+      };
         
     
 
