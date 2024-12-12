@@ -195,7 +195,11 @@ export default {
                   <td class="text-left ">{{ index+1 }}</td>
                   <td class="text-center "><a :href="item.link" target="_blank" rel="noopener noreferrer">{{ item.name }}</a></td>
                   <td class="text-center">{{ new Date(item.dataTime).toLocaleDateString('pl-PL', { year: 'numeric', month: 'long', day: 'numeric' }).replace(/\b[a-z]/g,char =>char.toUpperCase())}}</td>
-                  <td class="text-left"> <button @click="deleteLink(item.id)" style="margin-left: 10px;">Delete</button></td>
+                  <td class="text-center"> 
+                    <v-icon size="16" @click="deleteLink(item.id)">mdi-delete</v-icon> 
+                    
+
+                  </td>
                 </tr>
               </tbody>
             </v-table>
@@ -228,5 +232,5 @@ a:visited {
 
 
 
-  </style>
+  </styl>
   
