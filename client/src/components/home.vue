@@ -197,7 +197,7 @@ export default {
                   <td class="text-center">{{ new Date(item.dataTime).toLocaleDateString('pl-PL', { year: 'numeric', month: 'long', day: 'numeric' }).replace(/\b[a-z]/g,char =>char.toUpperCase())}}</td>
                   <td class="text-center"> 
                     <v-icon size="16" @click="deleteLink(item.id)">mdi-delete</v-icon> 
-                    
+
 
                   </td>
                 </tr>
@@ -232,5 +232,5 @@ a:visited {
 
 
 
-  </styl>
+</style>
   
