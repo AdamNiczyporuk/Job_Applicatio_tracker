@@ -173,13 +173,16 @@ export default {
         <v-table fixed-header class="custom-card" theme="grey-darken-4" hover = true >
               <thead>
                 <tr>
-                  <th class="text-left">
+                  <th class="text-center">
                     Id
                   </th>
-                  <th class="text-center ">
+                  <th class="text-center">
                     Name
                   </th>
-                  <th class="text-left">
+                  <th class="text-center">
+                    Data Time  
+                  </th>
+                  <th class="text-center">
                     Action  
                   </th>
                 </tr>
@@ -191,6 +194,7 @@ export default {
                 >
                   <td class="text-left ">{{ index+1 }}</td>
                   <td class="text-center "><a :href="item.link" target="_blank" rel="noopener noreferrer">{{ item.name }}</a></td>
+                  <td class="text-center ">{{new Date(item.dataTime).toLocaleDateString()}}</td>
                   <td class="text-left"> <button @click="deleteLink(item.id)" style="margin-left: 10px;">Delete</button></td>
                 </tr>
               </tbody>
