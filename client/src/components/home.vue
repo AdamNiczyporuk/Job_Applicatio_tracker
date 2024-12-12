@@ -75,7 +75,7 @@ export default {
         .catch(error => {
           console.error("Error deleting application:", error);
           alert("Failed to delete the application!");
-        });
+        });   
     };
     const copyToClipboard = (text) => {
       navigator.clipboard.writeText(text).then(() => {
@@ -84,6 +84,9 @@ export default {
         console.error('Failed to copy: ', err);
       });
     };
+    const editLink = () =>{
+      // Placeholder function to avoid errors
+        };
         
     
 
@@ -95,6 +98,7 @@ export default {
       addLink,
       deleteLink,
       copyToClipboard,
+      editLink,
     };
   },
 };
@@ -196,9 +200,9 @@ export default {
                   <td class="text-center "><a :href="item.link" target="_blank" rel="noopener noreferrer">{{ item.name }}</a></td>
                   <td class="text-center">{{ new Date(item.dataTime).toLocaleDateString('pl-PL', { year: 'numeric', month: 'long', day: 'numeric' }).replace(/\b[a-z]/g,char =>char.toUpperCase())}}</td>
                   <td class="text-center"> 
+                    <v-icon size="16" @click="editLink(item.id)" style="margin-right: 10px;">mdi-pencil</v-icon> 
                     <v-icon size="16" @click="deleteLink(item.id)">mdi-delete</v-icon> 
-
-
+                    
                   </td>
                 </tr>
               </tbody>
