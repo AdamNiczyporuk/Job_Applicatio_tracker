@@ -186,10 +186,10 @@ export default {
               </thead>
               <tbody>
                 <tr
-                  v-for="item in links" 
+                  v-for="(item,index) in links" 
                   :key="item.id"
                 >
-                  <td class="text-left ">{{ item.id }}</td>
+                  <td class="text-left ">{{ index+1 }}</td>
                   <td class="text-center "><a :href="item.link" target="_blank" rel="noopener noreferrer">{{ item.name }}</a></td>
                   <td class="text-left"> <button @click="deleteLink(item.id)" style="margin-left: 10px;">Delete</button></td>
                 </tr>
