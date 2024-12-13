@@ -238,7 +238,7 @@ export default {
                 <v-text-field class="text-white" :rules="rules"  hide-details="auto"  variant="outlined" rounded v-model="editName" label="Name of application"></v-text-field>
               </v-col>
               <v-col cols="12">
-                <v-text-field v-model="editNewLink" label="Enter application link"></v-text-field>
+                <v-text-field class="text-white" :rules="rules"  hide-details="auto"  variant="outlined" rounded v-model="editNewLink" label="Enter application link"></v-text-field>
               </v-col>
             </v-row>
           </v-container>
