@@ -228,7 +228,7 @@ export default {
 
   <v-dialog v-model="dialog" max-width="500px" >
       <v-card class="rounded-lg">
-        <v-card-title>
+        <v-card-title class>
           <span class="headline">Edit Application</span>
         </v-card-title>
         <v-card-text>
@@ -243,8 +243,7 @@ export default {
             </v-row>
           </v-container>
         </v-card-text>
-        <v-card-actions>
-          <v-spacer></v-spacer>
+        <v-card-actions> 
           <v-btn color="blue darken-1" text @click="dialog = false">Cancel</v-btn>
           <v-btn color="blue darken-1" text @click="updateLink">Save</v-btn>
         </v-card-actions>
