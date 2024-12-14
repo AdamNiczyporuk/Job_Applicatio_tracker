@@ -231,7 +231,7 @@ export default {
         <v-card-title class="text-center">
           <span>Edit Application</span>
         </v-card-title>
-        <v-card-text>
+        <v- -text>
           <v-container>
             <v-row>
               <v-col cols="12">
@@ -242,7 +242,7 @@ export default {
               </v-col>
             </v-row>
           </v-container>
-        </v-card-text>
+        </v->
         <v-card-actions>
           <v-btn color="blue darken-1" text @click="dialog = false">Cancel</v-btn>
           <v-btn color="blue darken-1" text @click="updateLink">Save</v-btn>
