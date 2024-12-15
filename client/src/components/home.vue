@@ -265,7 +265,7 @@ export default {
         <v-card-title class="text-center">
           <span>Edit Application</span>
         </v-card-title>
-        <v-card-text class="mb-0">
+        <v-card-text style="margin-bottom: -20px;">
           <v-container>
             <v-row>
               <v-col cols="12">
