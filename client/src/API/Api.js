@@ -39,10 +39,13 @@ export const deleteApplication = (id) =>
     return axios.delete(`http://localhost:5000/applications/${id}`);
 } 
 
-export const updateApplication = (id, name, link) =>
-{
-    return axios.put(`http://localhost:5000/applications/${id}`, {name, link});
-}
+export const updateApplication = (id, data, token) => {
+    return axios.put(`http://localhost:5000/applications/${id}`, data, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  };
 
 
 export const loginUser = (email, password) => {

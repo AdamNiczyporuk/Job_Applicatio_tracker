@@ -123,6 +123,45 @@ server.get('/user', (req, res) => {
   }
 });
 
+server.put('/applications/:id', (req, res) => {
+  const authHeader = req.headers.authorization;
+  if (!authHeader) {
+    return res.status(401).json({ message: 'Authorization header missing' });
+  }
+
+  const token = authHeader.split(' ')[1];
+  try {
+    const decoded = jwt.verify(token, SECRET_KEY);
+    const { id } = req.params;
+    const { name, link } = req.body;
+
+    const applications = router.db.get('applications').value();
+    const applicationIndex = applications.findIndex(app => app.id === parseInt(id) && app.userId === decoded.userId);
+
+    if (applicationIndex === -1) {
+      return res.status(404).json({ message: 'Application not found or you do not have permission to edit it' });
+    }
+
+    // Aktualizowanie aplikacji
+    const updatedApplication = {
+      ...applications[applicationIndex],
+      name: name || applications[applicationIndex].name, // Jeśli nowe dane nie są dostarczone, zachowaj stare wartości
+      link: link || applications[applicationIndex].link,
+      dataTime: new Date().toISOString() // Zaktualizuj datę modyfikacji
+    };
+
+    // Zapisz zmiany do bazy danych
+    router.db.get('applications')
+      .find({ id: parseInt(id) })
+      .assign(updatedApplication)
+      .write();
+
+    res.status(200).json(updatedApplication);
+  } catch (error) {
+    res.status(401).json({ message: 'Unauthorized' });
+  }
+});
+
 
 
 

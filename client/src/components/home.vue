@@ -44,6 +44,39 @@ export default {
       fetchUser();
     });
 
+    const updateLink = async () => {
+  if (!editName.value.trim() || !editNewLink.value.trim()) {
+    alert("Both name and link are required!");
+    return;
+  }
+
+  if (editingId.value !== null && token) {
+    try {
+      // Call the API to update the application
+      await api.updateApplication(editingId.value, {
+        name: editName.value,
+        link: editNewLink.value,
+      }, token);
+
+      // Fetch the updated list of applications
+      const response = await api.fetchApplications(token);
+      links.value = response.data;
+
+      // Reset dialog and editing state
+      dialog.value = false;
+      editingId.value = null;
+      editName.value = "";
+      editNewLink.value = "";
+    } catch (error) {
+      console.error("Error updating application:", error);
+      alert("Failed to update the application!");
+    }
+  } else {
+    alert("Invalid application ID or token.");
+  }
+};
+    
+    
   
 
     
@@ -112,6 +145,7 @@ export default {
       dialog,
       editNewLink,
       editName,
+      updateLink,
 
     };
   },
