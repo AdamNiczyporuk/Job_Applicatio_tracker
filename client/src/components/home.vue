@@ -11,10 +11,15 @@ export default {
     const name = ref('');
     const editName = ref('');
     const editNewLink = ref('');
+    const editUserName = ref('');
+    const editUserEmail = ref('');
+    const editUserGithub = ref('');
+    const editUserLinkedin = ref('');
     const token = localStorage.getItem('token');
     const user = ref({});
     const editingId = ref(null);
     const dialog = ref(false);
+    const user_dialog = ref(false);
 
     const fetchApplications = async () => {
       if (token) {
@@ -130,6 +135,14 @@ export default {
         dialog.value = true;
         }
       };
+
+    const  editUserData = () => {
+      editUserName.value = user.value.name;
+      editUserEmail.value = user.value.email;
+      editUserGithub.value = user.value.github;
+      editUserLinkedin.value = user.value.linkedin;
+      user_dialog.value = true;
+    };
         
       const logout = () => {
       localStorage.removeItem('token');
@@ -150,7 +163,13 @@ export default {
       editNewLink,
       editName,
       updateLink,
-      logout
+      logout,
+      user_dialog,
+      editUserData,
+      editUserName,
+      editUserEmail,
+      editUserGithub,
+      editUserLinkedin,
 
     };
   },
@@ -175,11 +194,12 @@ export default {
                 <p v-if="user.github !==''" class="text-left"><strong>GitHub:</strong> {{user.github}}
                   <v-icon size="12"  @click="copyToClipboard(user.github)">mdi-content-copy</v-icon>
                 </p>
-                <p v-else class="text-left" ><b>Add Github Link !!!!</b></p>
+                <p v-else class="text-left" ><b>Add Github Link</b></p>
                 <p v-if="user.linkedin !==''"  class="text-left"><strong>Linkedin:</strong> {{user.linkedin}}
                 <v-icon size="12"  @click="copyToClipboard(user.linkedin)">mdi-content-copy</v-icon>
                 </p>
-                <v-btn  @click="user_dialog = true" variant="outlined" color="deep-orange-accent-1" class="mt-5">Update Profile</v-btn>
+                <p v-else class="text-left" ><b>Add LinkedIn Link</b></p>
+                <v-btn  @click="editUserData" variant="outlined" color="white" class="mt-5">Update Profile</v-btn>
           </v-card-text>
       </v-card>
     </v-col>
@@ -270,7 +290,36 @@ export default {
       </v-card>
     </v-col>
   </v-row>
-  
+
+  <v-dialog v-model="user_dialog" max-width="500px" >
+      <v-card class="rounded-lg">
+        <v-card-title class="text-center mt-3">
+       <b>Update User</b>
+        </v-card-title>
+        <v-card-text style="margin-bottom: -20px; margin-top: -20px;">
+          <v-container>
+            <v-row>
+              <v-col cols="12">
+                <v-text-field class="text-white" :rules="rules"  hide-details="auto"  variant="outlined" rounded v-model="editUserName" label="Name"></v-text-field>
+              </v-col>
+              <v-col cols="12">
+                <v-text-field class="text-white" :rules="rules"  hide-details="auto"  variant="outlined" rounded v-model="editUserEmail" label="Mail"></v-text-field>
+              </v-col>
+              <v-col cols="12">
+                <v-text-field class="text-white" :rules="rules"  hide-details="auto"  variant="outlined" rounded v-model="editUserGithub"  label="Github Link"></v-text-field>
+              </v-col>
+              <v-col cols="12">
+                <v-text-field class="text-white" :rules="rules"  hide-details="auto"  variant="outlined" rounded  v-model="editUserLinkedin" label="LinkedIn Link"></v-text-field>
+              </v-col>
+            </v-row>
+          </v-container>
+        </v-card-text>
+        <v-card-actions class="mb-5 justify-center">
+          <v-btn color="green-accent-4" size="large"  width="70px" >Save</v-btn>
+          <v-btn color="red-accent-4"  size="large"  width="70px" text @click="user_dialog = false">Cancel</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
 
   <v-dialog v-model="dialog" max-width="500px" >
       <v-card class="rounded-lg">
