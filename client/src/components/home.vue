@@ -175,7 +175,7 @@ export default {
                 <p v-if="user.github !==''" class="text-left"><strong>GitHub:</strong> {{user.github}}
                   <v-icon size="12"  @click="copyToClipboard(user.github)">mdi-content-copy</v-icon>
                 </p>
-                <p class="text-left" v-else><b>Add Github Link !!!!</b></p>
+                <p v-else class="text-left" ><b>Add Github Link !!!!</b></p>
                 <p v-if="user.linkedin !==''"  class="text-left"><strong>Linkedin:</strong> {{user.linkedin}}
                 <v-icon size="12"  @click="copyToClipboard(user.linkedin)">mdi-content-copy</v-icon>
                 </p>
