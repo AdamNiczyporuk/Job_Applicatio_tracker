@@ -154,7 +154,12 @@ export default {
 
 
 <template>
- <v-container class="home" style="text-align: center; margin: 0px 50px 50px 50px; height: 100vh;">
+    <v-row>
+    <v-col  class="d-flex justify-end mr-5" style="margin-top: -50px;">
+      <v-btn @click="logout" size="large" variant="outlined" color="red" text>Logout</v-btn>
+    </v-col>
+  </v-row>
+ <v-container class="home" style="text-align: center; margin: -20px 50px 50px 50px; height: 100vh;">
   <v-row>
     <v-col cols="3">
       <v-card class="pa-5 rounded-lg" elevation="5" color="deep-orange-darken-2" >
