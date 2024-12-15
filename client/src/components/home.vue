@@ -131,6 +131,10 @@ export default {
         }
       };
         
+      const logout = () => {
+      localStorage.removeItem('token');
+      window.location.reload();
+    };
     
 
     return {
@@ -146,6 +150,7 @@ export default {
       editNewLink,
       editName,
       updateLink,
+      logout
 
     };
   },
@@ -155,7 +160,7 @@ export default {
 
 <template>
     <v-row>
-    <v-col  class="d-flex justify-end mr-5" style="margin-top: -50px;">
+    <v-col  class="d-flex justify-end mr-5" style="margin-top: -40px;">
       <v-btn @click="logout" size="large" variant="outlined" color="red" text>Logout</v-btn>
     </v-col>
   </v-row>
