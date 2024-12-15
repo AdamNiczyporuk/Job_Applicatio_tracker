@@ -277,9 +277,9 @@ export default {
             </v-row>
           </v-container>
         </v-card-text>
-        <v-card-actions>
+        <v-card-actions class="align-center ">
+          <v-btn color="green-accent-4" text @click="updateLink">Save</v-btn>
           <v-btn color="blue darken-1" text @click="dialog = false">Cancel</v-btn>
-          <v-btn color="blue darken-1" text @click="updateLink">Save</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
