@@ -261,10 +261,10 @@ export default {
                     Id
                   </th>
                   <th class="text-center">
-                    Name
+                    Name <v-icon size="16" @click="sortByName">mdi-sort</v-icon>
                   </th>
                   <th class="text-center">
-                    Data Time  
+                    Data Time <v-icon size="16" @click="sortByDate">mdi-sort</v-icon>
                   </th>
                   <th class="text-center">
                     Action  
