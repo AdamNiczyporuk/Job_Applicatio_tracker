@@ -20,6 +20,8 @@ export default {
     const editingId = ref(null);
     const dialog = ref(false);
     const user_dialog = ref(false);
+    const sortBy = ref('name');
+    const sortOrder = ref('desc');
 
     const fetchApplications = async () => {
       if (token) {
@@ -148,6 +150,38 @@ export default {
       localStorage.removeItem('token');
       window.location.reload();
     };
+
+    const sortByName = () => {
+      if (sortBy.value === 'name') {
+        sortOrder.value = sortOrder.value === 'asc' ? 'desc' : 'asc';
+      } else {
+        sortBy.value = 'name';
+        sortOrder.value = 'asc';
+      }
+      sortLinks();
+    };
+
+    const sortByDate = () => {
+      if (sortBy.value === 'date') {
+        sortOrder.value = sortOrder.value === 'asc' ? 'desc' : 'asc';
+      } else {
+        sortBy.value = 'date';
+        sortOrder.value = 'asc';
+      }
+      sortLinks();
+    };
+
+    const sortLinks = () => {
+      links.value.sort((a, b) => {
+        let result = 0;
+        if (sortBy.value === 'name') {
+          result = a.name.localeCompare(b.name);
+        } else if (sortBy.value === 'date') {
+          result = new Date(a.dataTime) - new Date(b.dataTime);
+        }
+        return sortOrder.value === 'desc' ? result : -result;
+      });
+    };
     
 
     return {
@@ -170,6 +204,8 @@ export default {
       editUserEmail,
       editUserGithub,
       editUserLinkedin,
+      sortByName,
+      sortByDate,
 
     };
   },
