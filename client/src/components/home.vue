@@ -172,12 +172,14 @@ export default {
               <v-card-text class="text-white">
                 <p class="text-left"><strong>Name:</strong> {{ user.name }}</p>
                 <p class="text-left"><strong>Email:</strong> {{user.email}}</p>
-                <p class="text-left"><strong>GitHub:</strong> {{user.github}}
+                <p v-if="user.github !==''" class="text-left"><strong>GitHub:</strong> {{user.github}}
                   <v-icon size="12"  @click="copyToClipboard(user.github)">mdi-content-copy</v-icon>
                 </p>
-                <p class="text-left"><strong>Linkedin:</strong> {{user.linkedin}}
+                <p class="text-left" v-else><b>Add Github Link !!!!</b></p>
+                <p v-if="user.linkedin !==''"  class="text-left"><strong>Linkedin:</strong> {{user.linkedin}}
                 <v-icon size="12"  @click="copyToClipboard(user.linkedin)">mdi-content-copy</v-icon>
                 </p>
+                <v-btn  @click="user_dialog = true" variant="outlined" color="deep-orange-accent-1" class="mt-5">Update Profile</v-btn>
           </v-card-text>
       </v-card>
     </v-col>
