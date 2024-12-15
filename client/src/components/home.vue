@@ -156,7 +156,7 @@ export default {
         sortOrder.value = sortOrder.value === 'asc' ? 'desc' : 'asc';
       } else {
         sortBy.value = 'name';
-        sortOrder.value = 'asc';
+        sortOrder.value = 'desc';
       }
       sortLinks();
     };
@@ -180,6 +180,7 @@ export default {
           result = new Date(a.dataTime) - new Date(b.dataTime);
         }
         return sortOrder.value === 'desc' ? result : -result;
+        
       });
     };
     
