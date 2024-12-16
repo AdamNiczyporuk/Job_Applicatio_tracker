@@ -47,9 +47,20 @@ export default {
         }
       }
     };
+    const checkLoginDate = () => {
+      const lastLoginDate = localStorage.getItem('lastLoginDate');
+      const today = new Date().toISOString().split('T')[0]; // Tylko data, bez czasu
+
+      if (lastLoginDate === today) {
+        toast.success('Hello loser, you still do no have a job!');
+      } else {
+        toast.info('Welcome to the Job Application Tracker!');
+        localStorage.setItem('lastLoginDate', today);
+      }
+    };
 
     onMounted(() => {
-      toast.info("Welcome to the Job Application Tracker!");
+      checkLoginDate();
       fetchApplications();
       fetchUser();
 
@@ -408,8 +419,6 @@ a:visited {
   min-width: 0;
   padding: 0;
 }
-
-
 
 </style>
   
