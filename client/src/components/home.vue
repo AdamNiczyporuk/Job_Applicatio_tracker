@@ -7,6 +7,7 @@ export default {
   name: "HomePanel",
   setup() {
     // Reactive variables for managing the state
+    const toast = useToast();
     const links = ref([]);
     const newLink = ref('');
     const name = ref('');
@@ -23,8 +24,7 @@ export default {
     const user_dialog = ref(false);
     const sortBy = ref('name');
     const sortOrder = ref('desc');
-    const toast = useToast();
-
+    
     const fetchApplications = async () => {
       if (token) {
         try {
@@ -54,16 +54,18 @@ export default {
       const today = new Date().toISOString().split('T')[0]; 
 
       if (lastLoginDate === today) {
-        toast.success("Hello loser,you still don't have a job!", {
-          toastClassName: "my-custom-toast-class",
-          bodyClassName: ["custom-class-1"],
-          
-        });
-        toast.success(`${{links.length }} and stil without job`, {
-          toastClassName: "my-custom-toast-class",
-          bodyClassName: ["custom-class-1"],
-          
-        });
+        const randomChoice = Math.random() < 0.5;
+        if (randomChoice) {
+            toast.success("Hello loser, you still don't have a job!", {
+              toastClassName: "my-custom-toast-class",
+              bodyClassName: ["custom-class-1"],
+            });
+          } else {
+            toast.success(`${links.value.length} applications and still without job`, {
+              toastClassName: "my-custom-toast-class",
+              bodyClassName: ["custom-class-1"]
+            });
+          }
       } else {
         toast.info('Welcome to the Job Application Tracker!', {
           toastClassName: "my-custom-toast-class",
@@ -71,13 +73,14 @@ export default {
           
         });
         localStorage.setItem('lastLoginDate', today);
+        
       }
     };
 
-    onMounted(() => {
+    onMounted(async () => {
+      await fetchApplications();
+      await fetchUser();
       checkLoginDate();
-      fetchApplications();
-      fetchUser();
 
     });
 
