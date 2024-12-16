@@ -235,6 +235,37 @@ export default {
         
       });
     };
+    const updateUser = async () => {
+      if (token) {
+        try {
+          await api.updateUserProfile({
+            name: editUserName.value,
+            email: editUserEmail.value,
+            github: editUserGithub.value,
+            linkedin: editUserLinkedin.value
+          }, token);
+
+          // Fetch the updated user data
+          await fetchUser();
+
+          // Close the dialog
+          user_dialog.value = false;
+
+          toast.success('User profile updated successfully!', {
+            toastClassName: "my-custom-toast-class",
+            bodyClassName: ["custom-class-1"]
+          });
+        } catch (error) {
+          console.error("Error updating user profile:", error);
+          toast.error('Failed to update user profile.', {
+            toastClassName: "my-custom-toast-class",
+            bodyClassName: ["custom-class-1"]
+          });
+        }
+      } else {
+        alert("Invalid token.");
+      }
+    };
     
 
     return {
@@ -257,6 +288,7 @@ export default {
       editUserEmail,
       editUserGithub,
       editUserLinkedin,
+      updateUser,
       sortByName,
       sortByDate,
 
@@ -404,7 +436,7 @@ export default {
           </v-container>
         </v-card-text>
         <v-card-actions class="mb-5 justify-center">
-          <v-btn color="green-accent-4" size="large"  width="70px" >Save</v-btn>
+          <v-btn color="green-accent-4" size="large"  width="70px" @click="updateUser">Save</v-btn>
           <v-btn color="red-accent-4"  size="large"  width="70px" text @click="user_dialog = false">Cancel</v-btn>
         </v-card-actions>
       </v-card>
