@@ -1,6 +1,7 @@
 <script>
 import { ref, onMounted } from "vue";
 import * as api from "../API/Api.js";
+import { useToast } from "vue-toastification";
 
 export default {
   name: "HomePanel",
@@ -22,6 +23,7 @@ export default {
     const user_dialog = ref(false);
     const sortBy = ref('name');
     const sortOrder = ref('desc');
+    const toast = useToast();
 
     const fetchApplications = async () => {
       if (token) {
@@ -47,8 +49,10 @@ export default {
     };
 
     onMounted(() => {
+      toast.info("Welcome to the Job Application Tracker!");
       fetchApplications();
       fetchUser();
+
     });
 
     const updateLink = async () => {
