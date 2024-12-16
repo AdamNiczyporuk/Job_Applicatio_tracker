@@ -32,6 +32,7 @@ export default {
           links.value = response.data;
         } catch (error) {
           console.error("Error fetching data:", error);
+          toast.error('Failed to fetch applications.');
         }
       }
     };
@@ -44,6 +45,7 @@ export default {
           console.log(user.value);
         } catch (error) {
           console.error("Error fetching user data:", error);
+          toast.error('Failed to fetch user data.');
         }
       }
     };
@@ -54,13 +56,18 @@ export default {
       if (lastLoginDate === today) {
         toast.success("Hello loser,you still don't have a job!", {
           toastClassName: "my-custom-toast-class",
-          bodyClassName: ["custom-class-1", "custom-class-2"],
+          bodyClassName: ["custom-class-1"],
+          
+        });
+        toast.success(`${{links.length }} and stil without job`, {
+          toastClassName: "my-custom-toast-class",
+          bodyClassName: ["custom-class-1"],
           
         });
       } else {
         toast.info('Welcome to the Job Application Tracker!', {
           toastClassName: "my-custom-toast-class",
-          bodyClassName: ["custom-class-1", "custom-class-2"],
+          bodyClassName: ["custom-class-1"],
           
         });
         localStorage.setItem('lastLoginDate', today);
@@ -99,7 +106,10 @@ export default {
       editNewLink.value = "";
     } catch (error) {
       console.error("Error updating application:", error);
-      alert("Failed to update the application!");
+      toast.error('Failed to update link.', {
+            toastClassName: "my-custom-toast-class",
+            bodyClassName: ["custom-class-1"]
+          });
     }
   } else {
     alert("Invalid application ID or token.");
@@ -120,9 +130,19 @@ export default {
               links.value = response.data;
             })
             .catch(error => console.error("Error fetching updated data:", error));
-          newLink.value = ''; // Reset input after adding link
+            newLink.value = ''; 
+              toast.success('Link added successfully!', {
+                toastClassName: "my-custom-toast-class",
+                bodyClassName: ["custom-class-1"]
+              });
         })
-        .catch(error => console.error("Error adding link:", error));
+        .catch(error => {
+              console.error('Error adding link:', error);
+              toast.error('Failed to add link.', {
+                toastClassName: "my-custom-toast-class",
+                bodyClassName: ["custom-class-1"]
+              });
+            });
     }
   }
 };
@@ -141,12 +161,18 @@ export default {
         })
         .catch(error => {
           console.error("Error deleting application:", error);
-          alert("Failed to delete the application!");
+          toast.error('Failed to delete the application.', {
+            toastClassName: "my-custom-toast-class",
+            bodyClassName: ["custom-class-1"]
+          });
         });   
     };
     const copyToClipboard = (text) => {
       navigator.clipboard.writeText(text).then(() => {
-        alert('Copied to clipboard');
+        toast.success('Copied to clipboard', {
+          toastClassName: "my-custom-toast-class",
+          bodyClassName: ["custom-class-1"]
+        });
       }).catch(err => {
         console.error('Failed to copy: ', err);
       });

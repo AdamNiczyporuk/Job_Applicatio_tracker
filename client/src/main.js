@@ -21,6 +21,7 @@ app.use(Toast, {
   showCloseButtonOnHover: false,
   hideProgressBar: false,
   closeButton: "button",
+  maxToasts: 5,
   icon: true,
   rtl: false,
   
