@@ -55,7 +55,7 @@ export default {
 
       if (lastLoginDate === today) {
         const randomChoice = Math.random() < 0.5;
-        if (randomChoice) {
+        if (randomChoice && links.value.length === 0) {
             toast.success("Hello loser, you still don't have a job!", {
               toastClassName: "my-custom-toast-class",
               bodyClassName: ["custom-class-1"],
