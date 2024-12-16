@@ -23,6 +23,7 @@ app.use(Toast, {
   closeButton: "button",
   icon: true,
   rtl: false,
+  
 });
 app.mount('#app')
 

@@ -54,12 +54,14 @@ export default {
       if (lastLoginDate === today) {
         toast.success("Hello loser,you still don't have a job!", {
           toastClassName: "my-custom-toast-class",
-          bodyClassName: ["custom-class-1", "custom-class-2"]
+          bodyClassName: ["custom-class-1", "custom-class-2"],
+          
         });
       } else {
         toast.info('Welcome to the Job Application Tracker!', {
           toastClassName: "my-custom-toast-class",
-          bodyClassName: ["custom-class-1", "custom-class-2"]
+          bodyClassName: ["custom-class-1", "custom-class-2"],
+          
         });
         localStorage.setItem('lastLoginDate', today);
       }
@@ -427,20 +429,11 @@ a:visited {
 }
 
 
-/* When setting CSS, remember that priority increases with specificity, so don't forget to select the existing classes as well */
-
-.Vue-Toastification__toast--default.my-custom-toast-class {
-  background-color: red;
-}
-
-/* Applied to the toast body when using regular strings as content */
 .Vue-Toastification__toast-body.custom-class-1 {
   font-size: 15px;
 }
 
-/* Applied to a wrapper div when using a custom component as content */
-.Vue-Toastification__toast-component-body.custom-class-2 {
-  width: 10%;
-}
+
+
 </style>
   
