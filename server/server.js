@@ -59,6 +59,41 @@ server.post('/register', (req, res) => {
   }
 });
 
+server.put('/user', (req, res) => {
+  const authHeader = req.headers.authorization;
+  if (!authHeader) {
+    return res.status(401).json({ message: 'Authorization header missing' });
+  }
+
+  const token = authHeader.split(' ')[1];
+  try {
+    const decoded = jwt.verify(token, SECRET_KEY);
+    const { name, email, github = '', linkedin = '' } = req.body;
+    const users = router.db.get('users').value();
+    const userIndex = users.findIndex(u => u.id === decoded.userId);
+
+    if (userIndex === -1) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    const updatedUser = {
+      ...users[userIndex],
+      name: name || users[userIndex].name,
+      email: email || users[userIndex].email,
+      github: github || users[userIndex].github,
+      linkedin: linkedin || users[userIndex].linkedin
+    };
+
+    router.db.get('users')
+      .find({ id: decoded.userId })
+      .assign(updatedUser)
+      .write();
+
+    res.status(200).json(updatedUser);
+  } catch (error) {
+    res.status(401).json({ message: 'Unauthorized' });
+  }
+});
 
 
 server.post('/applications',(req,res)=>
