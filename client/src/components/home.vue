@@ -368,12 +368,12 @@ watch(searchQuery, (newQuery) => {
           </v-row>
         </v-conatiner>
 
-        <v-card class="mx-auto my-8 custom-card" max-width="900">
+        <v-container class="mx-auto  custom-card" max-width="900">
           <v-text-field v-model="searchQuery" label="Search Applications" variant="outlined" rounded
-            class="mx-4 mt-4"></v-text-field></v-card>
+            class="mx-4 mt-4 text-white"></v-text-field></v-container>
 
         <v-card class="mx-auto
-         my-8 custom-card" elevation="10" max-width="900" rounded="lg" color="grey-darken-4">
+          custom-card" elevation="10" max-width="900" rounded="lg" color="grey-darken-4">
 
           <v-table fixed-header class="custom-card" theme="grey-darken-4" hover=true>
             <thead>
