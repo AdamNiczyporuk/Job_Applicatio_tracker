@@ -9,7 +9,23 @@
       const email = ref('');
       const password = ref('');
       const error = ref('');
-       const router = useRouter(); 
+      const router = useRouter(); 
+
+      const validateInputs = () => {
+      if (!email.value) {
+        error.value = "Email is required.";
+        return false;
+      }
+      if (!password.value) {
+        error.value = "Password is required.";
+        return false;
+      }
+      return true;
+    };
+
+
+
+
        const handleLogin = async () => {
       try {
         await api.loginUser(email.value, password.value)
