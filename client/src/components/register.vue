@@ -74,7 +74,7 @@ export default {
           />
           <v-btn type="submit" color="green"  >Register</v-btn>
           <v-card-text>
-            <router-link to="/login">Already have account?<br>Login here.</router-link>
+            <router-link to="/login">Already have account?<br><b>Login here.</b></router-link>
           </v-card-text>
         </v-form>
         <v-alert v-if="error" type="error" class="mt-5" dense>

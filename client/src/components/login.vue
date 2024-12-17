@@ -10,8 +10,6 @@
       const password = ref('');
       const error = ref('');
        const router = useRouter(); 
-
-      
        const handleLogin = async () => {
       try {
         await api.loginUser(email.value, password.value)
@@ -28,7 +26,7 @@
             }
           });
       } catch (err) {
-       
+       error.value = 'Login failed. Please try again.';
       }
     };
       
@@ -73,7 +71,7 @@
         />
         <v-btn type="submit" color="green"  >Login</v-btn>
         <v-card-text>
-          <router-link to="/register">Don't have an account?<br>Register here.</router-link>
+          <router-link to="/register">Don't have an account?<br><b>Register here.</b></router-link>
         </v-card-text>
       </v-form>
       <v-alert v-if="error" type="error" class="mt-4 dense text-center" :icon="false">
