@@ -60,16 +60,16 @@ export default {
       if (lastLoginDate === today) {
         const randomChoice = Math.random() < 0.5;
         if (randomChoice || links.value.length === 0) {
-          toast.success("Hello loser, you still don't have a job!", {
-            toastClassName: "my-custom-toast-class",
-            bodyClassName: ["custom-class-1"],
-          });
-        } else {
-          toast.success(`${links.value.length} applications and still without job`, {
-            toastClassName: "my-custom-toast-class",
-            bodyClassName: ["custom-class-1"]
-          });
-        }
+            toast.success("Hello loser, you still don't have a job!", {
+              toastClassName: "my-custom-toast-class",
+              bodyClassName: ["custom-class-1"],
+            });
+          } else {
+            toast.success(`${links.value.length} applications and still without job?!`, {
+              toastClassName: "my-custom-toast-class",
+              bodyClassName: ["custom-class-1"]
+            });
+          }
       } else {
         toast.info('Welcome to the Job Application Tracker!', {
           toastClassName: "my-custom-toast-class",
