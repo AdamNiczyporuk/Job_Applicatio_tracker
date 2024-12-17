@@ -54,7 +54,11 @@ export default {
         router.push("/login");
         error.value = "";
       } catch (err) {
-        error.value = "Registration failed. Please try again.";
+        if (err.response && err.response.data && err.response.data.message) {
+          error.value = err.response.data.message;
+        } else {
+          error.value = "Registration failed. Please try again.";
+        }
       }
     };
 
