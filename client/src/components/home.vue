@@ -164,7 +164,7 @@ watch(searchQuery, (newQuery) => {
     };
 
 
-    // Delete an application
+  
     const deleteLink = (id) => {
       api.deleteApplication(id)
         .then(() => {
@@ -258,10 +258,10 @@ watch(searchQuery, (newQuery) => {
             linkedin: editUserLinkedin.value
           }, token);
 
-          // Fetch the updated user data
+          
           await fetchUser();
 
-          // Close the dialog
+        
           user_dialog.value = false;
 
           toast.success('User profile updated successfully!', {
@@ -306,7 +306,7 @@ watch(searchQuery, (newQuery) => {
       sortByDate,
       filteredLinks,
       searchQuery,
-
+ 
     };
   },
 };
@@ -368,12 +368,12 @@ watch(searchQuery, (newQuery) => {
           </v-row>
         </v-conatiner>
 
-        <v-card class="mx-auto my-8 custom-card" max-width="600">
+        <v-card class="mx-auto my-8 custom-card" max-width="900">
           <v-text-field v-model="searchQuery" label="Search Applications" variant="outlined" rounded
             class="mx-4 mt-4"></v-text-field></v-card>
 
         <v-card class="mx-auto
-         my-8 custom-card" elevation="10" max-width="800" rounded="lg" color="grey-darken-4">
+         my-8 custom-card" elevation="10" max-width="900" rounded="lg" color="grey-darken-4">
 
           <v-table fixed-header class="custom-card" theme="grey-darken-4" hover=true>
             <thead>
@@ -394,7 +394,7 @@ watch(searchQuery, (newQuery) => {
             </thead>
             <tbody>
               <tr v-for="(item, index) in filteredLinks" :key="item.id">
-                <td class="text-left ">{{ index + 1 }}</td>
+                <td class="text-center ">{{ index + 1 }}</td>
                 <td class="text-center "><a :href="item.link" target="_blank" rel="noopener noreferrer">{{ item.name
                     }}</a></td>
                 <td class="text-center">{{ new Date(item.dataTime).toLocaleDateString('pl-PL', {
