@@ -2,6 +2,7 @@
 import { ref } from "vue";
 import * as api from "../API/Api.js";
 import { useRouter } from 'vue-router';
+import { useToast } from "vue-toastification";
 
 export default {
   name: "RegisterPanel",
@@ -49,7 +50,7 @@ export default {
       }
       try {
         await api.registerUser(name.value, email.value, password.value);
-        alert("Registration successful!");
+        ("Registration successful!");
         router.push("/login");
         error.value = "";
       } catch (err) {
