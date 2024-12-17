@@ -33,8 +33,7 @@
       try {
         const response = await api.loginUser(email.value, password.value);
         localStorage.setItem('token', response.data.token);
-        toast.success("Login successful!");
-        router.push("/");
+        router.push("/home");
         error.value = "";
       } catch (err) {
         if (err.response && err.response.data && err.response.data.message) {
