@@ -26,23 +26,22 @@
 
 
 
-       const handleLogin = async () => {
+    const handleLogin = async () => {
+      if (!validateInputs()) {
+        return;
+      }
       try {
-        await api.loginUser(email.value, password.value)
-          .then(response => {
-            const token = response.data.token;
-            localStorage.setItem('token', token); 
-            router.push('/home'); 
-          })
-          .catch(err => {
-            if (err.response && err.response.status === 401) {
-              error.value = 'Invalid email or password';
-            } else {
-              error.value = 'Login failed. Please try again.';
-            }
-          });
+        const response = await api.loginUser(email.value, password.value);
+        localStorage.setItem('token', response.data.token);
+        toast.success("Login successful!");
+        router.push("/");
+        error.value = "";
       } catch (err) {
-       error.value = 'Login failed. Please try again.';
+        if (err.response && err.response.data && err.response.data.message) {
+          error.value = err.response.data.message;
+        } else {
+          error.value = "Login failed. Please try again.";
+        }
       }
     };
       
