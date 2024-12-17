@@ -10,7 +10,7 @@ export default {
     const name= ref("");
     const email = ref("");
     const password = ref("");
-    
+    const confirmPassword = ref("");
     const error = ref("");
     const router = useRouter(); 
 
@@ -66,6 +66,14 @@ export default {
           />
           <v-text-field
             v-model="password"
+            label="Password"
+            type="password"
+            class="mb-4  no-underline"
+            rounded
+            variant="outlined"
+          />
+          <v-text-field
+            v-model="confirmPassword"
             label="Password"
             type="password"
             class="mb-4  no-underline"
