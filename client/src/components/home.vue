@@ -61,7 +61,7 @@ export default {
               bodyClassName: ["custom-class-1"],
             });
           } else {
-            toast.success(`${links.value.length} applications and still without job!?`, {
+            toast.success(`${links.value.length} applications and still without job?!`, {
               toastClassName: "my-custom-toast-class",
               bodyClassName: ["custom-class-1"]
             });
