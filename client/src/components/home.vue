@@ -1,5 +1,5 @@
 <script>
-import { ref, onMounted, computed } from "vue";
+import { ref, onMounted, watch} from "vue";
 import * as api from "../API/Api.js";
 import { useToast } from "vue-toastification";
 
@@ -9,6 +9,7 @@ export default {
     // Reactive variables for managing the state
     const toast = useToast();
     const links = ref([]);
+    var filteredLinks = ref([]);
     const newLink = ref('');
     const name = ref('');
     const editName = ref('');
@@ -31,13 +32,14 @@ export default {
         try {
           const response = await api.fetchApplications(token);
           links.value = response.data;
+          filteredLinks.value = links.value; 
         } catch (error) {
           console.error("Error fetching data:", error);
           toast.error('Failed to fetch applications.');
         }
       }
     };
-
+    
     const fetchUser = async () => {
       if (token) {
         try {
@@ -50,9 +52,16 @@ export default {
         }
       }
     };
-    const filteredLinks = computed(() => {
-      return links.value.filter(link => link.name.toLowerCase().includes(searchQuery.value.toLowerCase()));
-    });
+    
+   
+watch(searchQuery, (newQuery) => {
+  console.log('searchQuery:', newQuery);
+  filteredLinks.value = links.value.filter(link => 
+    link.name.toLowerCase().includes(newQuery.toLowerCase())
+  );
+  console.log('filteredLinks:', filteredLinks.value);
+});
+
     const checkLoginDate = () => {
       const lastLoginDate = localStorage.getItem('lastLoginDate');
       const today = new Date().toISOString().split('T')[0];
@@ -60,16 +69,16 @@ export default {
       if (lastLoginDate === today) {
         const randomChoice = Math.random() < 0.5;
         if (randomChoice || links.value.length === 0) {
-            toast.success("Hello loser, you still don't have a job!", {
-              toastClassName: "my-custom-toast-class",
-              bodyClassName: ["custom-class-1"],
-            });
-          } else {
-            toast.success(`${links.value.length} applications and still without job?!`, {
-              toastClassName: "my-custom-toast-class",
-              bodyClassName: ["custom-class-1"]
-            });
-          }
+          toast.success("Hello loser, you still don't have a job!", {
+            toastClassName: "my-custom-toast-class",
+            bodyClassName: ["custom-class-1"],
+          });
+        } else {
+          toast.success(`${links.value.length} applications and still without job?!`, {
+            toastClassName: "my-custom-toast-class",
+            bodyClassName: ["custom-class-1"]
+          });
+        }
       } else {
         toast.info('Welcome to the Job Application Tracker!', {
           toastClassName: "my-custom-toast-class",
@@ -228,7 +237,7 @@ export default {
     };
 
     const sortLinks = () => {
-      links.value.sort((a, b) => {
+      filteredLinks.value.sort((a, b) => {
         let result = 0;
         if (sortBy.value === 'name') {
           result = a.name.localeCompare(b.name);
@@ -296,6 +305,7 @@ export default {
       sortByName,
       sortByDate,
       filteredLinks,
+      searchQuery,
 
     };
   },
@@ -359,11 +369,12 @@ export default {
         </v-conatiner>
 
         <v-card class="mx-auto my-8 custom-card" max-width="600">
-        <v-text-field v-model="searchQuery" label="Search Applications" variant="outlined" rounded
+          <v-text-field v-model="searchQuery" label="Search Applications" variant="outlined" rounded
             class="mx-4 mt-4"></v-text-field></v-card>
 
-        <v-card class="mx-auto my-8 custom-card" elevation="10" max-width="800" rounded="lg" color="grey-darken-4">
-          
+        <v-card class="mx-auto
+         my-8 custom-card" elevation="10" max-width="800" rounded="lg" color="grey-darken-4">
+
           <v-table fixed-header class="custom-card" theme="grey-darken-4" hover=true>
             <thead>
               <tr>
@@ -393,7 +404,6 @@ export default {
                 <td class="text-center">
                   <v-icon size="16" @click="editLink(item.id)" style="margin-right: 10px;">mdi-pencil</v-icon>
                   <v-icon size="16" @click="deleteLink(item.id)">mdi-delete</v-icon>
-
                 </td>
               </tr>
             </tbody>
