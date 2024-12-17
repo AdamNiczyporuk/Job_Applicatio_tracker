@@ -2,11 +2,6 @@
  "name": "job-application-tracker",
   "version": "1.0.0",
   "scripts": {
-   "start": "concurrently \"npm run server\" \"npm run client\"",
-    "server": "start cmd /k \"npm run server:run\"",
-    "server:run": "node server/server.js",
-    "client": "start cmd /k \"npm run client:run\"",
-    "client:run": "npm start --prefix client"
   },
   "dependencies": {
     "@mdi/font": "^7.4.47"
