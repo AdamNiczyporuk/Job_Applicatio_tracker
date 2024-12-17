@@ -42,15 +42,18 @@ export default {
       }
       return true;
     };
-    // Handle registration logic
+    
     const handleRegister = async () => {
+      if (!validateInputs()) {
+        return;
+      }
       try {
-        await api.registerUser(name.value,email.value, password.value);
+        await api.registerUser(name.value, email.value, password.value);
         alert("Registration successful!");
         router.push("/login");
-        error.value = ""; 
+        error.value = "";
       } catch (err) {
-        error.value = "Registration failed. Please try again."; 
+        error.value = "Registration failed. Please try again.";
       }
     };
 
