@@ -14,6 +14,34 @@ export default {
     const error = ref("");
     const router = useRouter(); 
 
+    const validateInputs = () => {
+      if (!name.value) {
+        error.value = "Name is required.";
+        return false;
+      }
+      if (!email.value) {
+        error.value = "Email is required.";
+        return false;
+      }
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailPattern.test(email.value)) {
+        error.value = "Invalid email format.";
+        return false;
+      }
+      if (!password.value) {
+        error.value = "Password is required.";
+        return false;
+      }
+      if (password.value.length < 6) {
+        error.value = "Password must be at least 6 characters long.";
+        return false;
+      }
+      if (password.value !== confirmPassword.value) {
+        error.value = "Passwords do not match.";
+        return false;
+      }
+      return true;
+    };
     // Handle registration logic
     const handleRegister = async () => {
       try {
@@ -30,6 +58,7 @@ export default {
       name,
       email,
       password,
+      confirmPassword,
       error,
       handleRegister,
     };
