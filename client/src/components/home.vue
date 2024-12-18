@@ -121,6 +121,8 @@ watch(searchQuery, (newQuery) => {
           editingId.value = null;
           editName.value = "";
           editNewLink.value = "";
+
+          searchQuery.value = '';
         } catch (error) {
           console.error("Error updating application:", error);
           toast.error('Failed to update link.', {
@@ -146,6 +148,7 @@ watch(searchQuery, (newQuery) => {
                 .then(response => {
                   links.value = response.data;
                   filteredLinks.value = links.value; 
+                  searchQuery.value = '';
                 })
                 .catch(error => console.error("Error fetching updated data:", error));
               newLink.value = '';
@@ -176,6 +179,7 @@ watch(searchQuery, (newQuery) => {
             .then(response => {
               links.value = response.data;
               filteredLinks.value = links.value; 
+              searchQuery.value = '';
             })
             .catch(error => console.error("Error fetching updated data:", error));
         })
