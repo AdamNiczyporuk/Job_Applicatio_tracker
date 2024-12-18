@@ -99,7 +99,7 @@ watch(searchQuery, (newQuery) => {
 
     const updateLink = async () => {
       if (!editName.value.trim() || !editNewLink.value.trim()) {
-        alert("Both name and link are required!");
+        toast.error("Both name and link are required!");
         return;
       }
 
@@ -114,6 +114,7 @@ watch(searchQuery, (newQuery) => {
           // Fetch the updated list of applications
           const response = await api.fetchApplications(token);
           links.value = response.data;
+          filteredLinks.value = links.value; 
 
           // Reset dialog and editing state
           dialog.value = false;
@@ -128,7 +129,7 @@ watch(searchQuery, (newQuery) => {
           });
         }
       } else {
-        alert("Invalid application ID or token.");
+        toast.error("Invalid application ID or token.");
       }
     };
 
@@ -144,9 +145,11 @@ watch(searchQuery, (newQuery) => {
               api.fetchApplications(token)
                 .then(response => {
                   links.value = response.data;
+                  filteredLinks.value = links.value; 
                 })
                 .catch(error => console.error("Error fetching updated data:", error));
               newLink.value = '';
+              name.value = '';
               toast.success('Link added successfully!', {
                 toastClassName: "my-custom-toast-class",
                 bodyClassName: ["custom-class-1"]
@@ -172,6 +175,7 @@ watch(searchQuery, (newQuery) => {
           api.fetchApplications(token)
             .then(response => {
               links.value = response.data;
+              filteredLinks.value = links.value; 
             })
             .catch(error => console.error("Error fetching updated data:", error));
         })
@@ -276,7 +280,7 @@ watch(searchQuery, (newQuery) => {
           });
         }
       } else {
-        alert("Invalid token.");
+        toast.error("Invalid token.");
       }
     };
 
