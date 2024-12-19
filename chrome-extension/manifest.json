@@ -10,7 +10,7 @@
     "notifications"
   ],
   "host_permissions": [
-    "http://localhost/*",
+    "http://localhost:*/*",
     "https://www.pracuj.pl/*"
   ],
   "background": {
@@ -18,7 +18,7 @@
   },
   "content_scripts": [
     {
-      "matches": ["http://localhost/*"],
+      "matches": ["http://localhost:*/*"],
       "js": ["content-localhost.js"]
     },
     {

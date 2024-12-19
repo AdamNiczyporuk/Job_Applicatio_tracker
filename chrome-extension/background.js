@@ -1,20 +1,17 @@
-// Nasłuchiwanie komunikatów z content scriptów
+let storedToken = null; // Zmienna do przechowywania tokena
+
+// Obsługa komunikatów
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (message.action === "saveToken") {
-    // Zapisz token w chrome.storage.local
-    chrome.storage.local.set({ token: message.token }, () => {
-      console.log("Token zapisany:", message.token);
-      sendResponse({ status: "success" });
-    });
-    return true; // Aby umożliwić asynchroniczne sendResponse
+    storedToken = message.token; // Zapisz token w zmiennej
+    console.log("Token zapisany w zmiennej:", storedToken);
+    sendResponse({ success: true });
   }
 
   if (message.action === "getToken") {
-    // Pobierz token
-    chrome.storage.local.get("token", (data) => {
-      const token = data.token || null;
-      sendResponse({ token: token });
-    });
-    return true; // Aby umożliwić asynchroniczne sendResponse
+    console.log("Token pobrany z zmiennej:", storedToken);
+    sendResponse({ token: storedToken }); // Wyślij token do skryptu, który o niego poprosił
   }
+
+  return true; // Wymagane dla asynchronicznych odpowiedzi
 });
