@@ -1,6 +1,6 @@
 document.addEventListener('click', function(event) {
-    if (event.target.matches('.apply-button-class')) { // Zmień selektor na odpowiedni dla przycisku "Aplikuj"
-      const jobTitle = document.querySelector('.job-title-class').innerText; // Zmień selektor na odpowiedni dla tytułu pracy
+    if (event.target.matches('.b14qiyz3')) { // Zmień selektor na odpowiedni dla przycisku "Aplikuj"
+      const jobTitle = document.querySelector('.cp9trhu').innerText; // Zmień selektor na odpowiedni dla tytułu pracy
       const jobLink = window.location.href;
   
       chrome.runtime.sendMessage({
