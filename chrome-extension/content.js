@@ -4,10 +4,28 @@ document.addEventListener('click', function(event) {
     const jobTitle = jobTitleElement ? jobTitleElement.innerText : 'Unknown Job Title';
     const jobLink = window.location.href;
 
-    chrome.runtime.sendMessage({
-      action: 'addJob',
-      jobTitle: jobTitle,
-      jobLink: jobLink
-    });
+    // Wysyłanie danych do serwera
+    fetch('http://localhost:5000/applications', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      },
+      body: JSON.stringify({
+        name: jobTitle,
+        link: jobLink
+      })
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log('Job added:', data);
+      // Wyświetlanie powiadomienia
+      chrome.runtime.sendMessage({
+        action: 'showNotification',
+        title: 'Job Application Tracker',
+        message: 'Job application saved successfully!'
+      });
+    })
+    .catch(error => console.error('Error adding job:', error));
   }
 }, false);
