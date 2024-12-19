@@ -1,24 +1,40 @@
 {
-    "manifest_version": 3,
-    "name": "Job Application Tracker",
-    "version": "1.0",
-    "description": "Track your job applications",
-    "permissions": [
-      "storage",
-      "activeTab",
-      "scripting"
-    ],
-    "background": {
-      "service_worker": "background.js"
+  "manifest_version": 3,
+  "name": "Job Application Tracker",
+  "version": "1.0",
+  "description": "Track job applications on pracuj.pl",
+  "permissions": [
+    "storage",
+    "activeTab",
+    "scripting",
+    "notifications"
+  ],
+  "host_permissions": [
+    "http://localhost/*",
+    "https://www.pracuj.pl/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["http://localhost/*"],
+      "js": ["content-localhost.js"]
     },
-    "content_scripts": [
-      {
-        "matches": ["<all_urls>"],
-        "js": ["content.js"]
-      }
-    ],
-    "icons": {
+    {
+      "matches": ["https://www.pracuj.pl/*"],
+      "js": ["content-pracuj.js"]
+    }
+  ],
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png"
+  },
+  "action": {
+    "default_icon": {
       "16": "icons/icon16.png",
       "48": "icons/icon48.png"
-    }
+    },
+    "default_title": "Job Application Tracker"
   }
+}

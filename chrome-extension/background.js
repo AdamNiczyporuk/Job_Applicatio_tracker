@@ -1,17 +1,20 @@
-chrome.runtime.onMessage.addListener((message) => {
-  if (message.action === 'showNotification') {
-    chrome.notifications.create({
-      type: 'basic',
-      iconUrl: 'icons/icon48.png',
-      title: message.title,
-      message: message.message
+// Nasłuchiwanie komunikatów z content scriptów
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+  if (message.action === "saveToken") {
+    // Zapisz token w chrome.storage.local
+    chrome.storage.local.set({ token: message.token }, () => {
+      console.log("Token zapisany:", message.token);
+      sendResponse({ status: "success" });
     });
+    return true; // Aby umożliwić asynchroniczne sendResponse
   }
-  else if (message.action === 'saveToken') {
-    chrome.storage.local.set({ token: message.token }, function() {
-      console.log('Token saved');
-      sendResponse({ status: 'success' });
+
+  if (message.action === "getToken") {
+    // Pobierz token
+    chrome.storage.local.get("token", (data) => {
+      const token = data.token || null;
+      sendResponse({ token: token });
     });
-    return true; // Keep the message channel open for sendResponse
+    return true; // Aby umożliwić asynchroniczne sendResponse
   }
 });

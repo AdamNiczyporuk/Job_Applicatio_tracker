@@ -1,5 +1,4 @@
 <script>
-/* global chrome */
   import { ref } from 'vue';
    import { useRouter } from 'vue-router'; // Do obsługi nawigacji
   import * as api from "../API/Api.js";
@@ -36,21 +35,7 @@
       try {
         const response = await api.loginUser(email.value, password.value);
        localStorage.setItem('token', response.data.token);
-       if (typeof chrome !== 'undefined' && chrome.runtime) {
-          console.log('Sending message to save token');
-          chrome.runtime.sendMessage(
-            { action: 'saveToken', token: response.data.token },
-            function(response) {
-              if (response && response.status === 'success') {
-                console.log('Token saved in chrome.storage');
-              } else {
-                console.error('Failed to save token in chrome.storage');
-              }
-            }
-          );
-        } else {
-          console.error('chrome.runtime is not available');
-        }
+
         router.push("/home");
         error.value = "";
       } catch (err) {
