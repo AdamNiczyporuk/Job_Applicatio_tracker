@@ -1,5 +1,5 @@
 document.addEventListener('click', function(event) {
-  if (event.target.matches('[data-test="anchor-apply"]') || event.target.closest('[data-test="anchor-apply"]')) { 
+  if (event.target.matches('[data-test="anchor-apply"]') ) { 
     event.preventDefault(); // Przechwycenie kliknięcia i zapobieżenie domyślnemu zachowaniu
 
     const jobTitleElement = document.querySelector('[data-test="text-employerName"]'); // Zmień selektor na odpowiedni dla tytułu pracy

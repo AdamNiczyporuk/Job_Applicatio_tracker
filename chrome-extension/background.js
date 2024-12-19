@@ -7,4 +7,11 @@ chrome.runtime.onMessage.addListener((message) => {
       message: message.message
     });
   }
+  else if (message.action === 'saveToken') {
+    chrome.storage.local.set({ token: message.token }, function() {
+      console.log('Token saved');
+      sendResponse({ status: 'success' });
+    });
+    return true; // Keep the message channel open for sendResponse
+  }
 });

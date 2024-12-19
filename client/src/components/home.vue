@@ -18,7 +18,9 @@ export default {
     const editUserEmail = ref('');
     const editUserGithub = ref('');
     const editUserLinkedin = ref('');
-    const token = localStorage.getItem('token');
+    const token =localStorage.getItem('token');
+    // chrome.storage.local.get(['token']);
+    
     const user = ref({});
     const editingId = ref(null);
     const dialog = ref(false);
@@ -174,7 +176,6 @@ watch(searchQuery, (newQuery) => {
     const deleteLink = (id) => {
       api.deleteApplication(id)
         .then(() => {
-          const token = localStorage.getItem('token');
           api.fetchApplications(token)
             .then(response => {
               links.value = response.data;
