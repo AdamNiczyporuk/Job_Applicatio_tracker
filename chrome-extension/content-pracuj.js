@@ -1,5 +1,9 @@
 document.addEventListener('click', function(event) {
-  if (event.target.matches('[data-test="anchor-apply"]')) { 
+  const applyButton = event.target.closest('[data-test="anchor-apply"]');
+  const applySpan = event.target.closest('span.sm8uzh7, span.s1u5ksyd');
+
+  if (applyButton || applySpan) {
+
     event.preventDefault(); 
 
     const jobTitleElement = document.querySelector('[data-test="text-employerName"]');
