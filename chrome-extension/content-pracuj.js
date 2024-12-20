@@ -38,7 +38,7 @@ document.addEventListener('click', function(event) {
       .then(data => {
         console.log('Job added:', data);
         setTimeout(() => {
-          window.location.href = event.target.closest('[data-test="anchor-apply"]').href;
+          window.location.href = applyButton ? applyButton.href : event.target.closest('a').href;
         }, 100);
       })
       .catch(error => console.error('Error adding job:', error));
