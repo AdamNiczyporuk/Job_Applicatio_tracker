@@ -96,6 +96,13 @@ watch(searchQuery, (newQuery) => {
       await fetchApplications();
       await fetchUser();
       checkLoginDate();
+      window.addEventListener("message", (event) => {
+        console.log('Event received:', event);
+        if (event.data === "Update") {
+          console.log('Update event received');
+          fetchApplications();
+        }
+      });
 
     });
 
