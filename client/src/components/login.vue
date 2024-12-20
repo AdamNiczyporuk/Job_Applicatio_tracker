@@ -35,7 +35,6 @@
       try {
         const response = await api.loginUser(email.value, password.value);
        localStorage.setItem('token', response.data.token);
-
         router.push("/home");
         error.value = "";
       } catch (err) {
