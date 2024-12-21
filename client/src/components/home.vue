@@ -92,22 +92,32 @@ watch(searchQuery, (newQuery) => {
 
       }
     };
+    const handleExtensionEvent = (event) => {
+      const jobData = event.detail?.data;
+      console.log('Received job data:', jobData);
+      
+      if (jobData) {
+        links.value.push(jobData); // Add new job data to the applications list
+        filteredLinks.value = links.value; // Update the filtered list
+        toast.success('New job added successfully!', {
+          toastClassName: "my-custom-toast-class",
+          bodyClassName: ["custom-class-1"],
+        });
+      }
+    };
 
     onMounted(async () => {
       await fetchApplications();
       await fetchUser();
       checkLoginDate();
-      window.addEventListener("message",reciveMessage,false);
-       
-      function reciveMessage(event){
-        console.log(event.data);
-          if(event.data === 'updateTable'){
-            fetchApplications();
-          }
-        }
-      
-
-    });
+      window.addEventListener('EXTENSION_EVENT', handleExtensionEvent);
+   
+      document.addEventListener('EXTENSION_EVENT', (event) => {
+    console.log('Otrzymano zdarzenie:', event.detail);
+    // Zaktualizuj stan aplikacji
+    fetchApplications();
+  });
+});
 
     
       
