@@ -97,15 +97,20 @@ watch(searchQuery, (newQuery) => {
       await fetchApplications();
       await fetchUser();
       checkLoginDate();
-      window.addEventListener('message', (event) => {
-        console.log('Received postMessage:', event.data);
-        if (event.data && event.data.type === 'updateTable') {
-          console.log('Updating table...');
-          fetchApplications();
+      window.addEventListener("message",reciveMessage,false);
+       
+      function reciveMessage(event){
+        console.log(event.data);
+          if(event.data === 'updateTable'){
+            fetchApplications();
+          }
         }
-      });
+      
 
     });
+
+    
+      
 
     const updateLink = async () => {
       if (!editName.value.trim() || !editNewLink.value.trim()) {
