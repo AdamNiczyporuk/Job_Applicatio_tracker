@@ -37,6 +37,7 @@ document.addEventListener('click', function(event) {
       .then(response => response.json())
       .then(data => {
         console.log('Job added:', data);
+        console.log('Sending postMessage to updateTable');
         window.postMessage({ type: 'updateTable' }, '*');
         setTimeout(() => {
           window.location.href = applyButton ? applyButton.href : event.target.closest('a').href;

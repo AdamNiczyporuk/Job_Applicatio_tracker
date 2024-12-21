@@ -98,7 +98,9 @@ watch(searchQuery, (newQuery) => {
       await fetchUser();
       checkLoginDate();
       window.addEventListener('message', (event) => {
-        if (event.data.action === 'updateTable') {
+        console.log('Received postMessage:', event.data);
+        if (event.data && event.data.type === 'updateTable') {
+          console.log('Updating table...');
           fetchApplications();
         }
       });
