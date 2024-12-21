@@ -12,15 +12,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     console.log("Token pobrany z zmiennej:", storedToken);
     sendResponse({ token: storedToken }); // Wyślij token do skryptu, który o niego poprosił
   }
-  
-  if (message.action === 'updateTable') {
-    // Znajdź zakładkę z URL `http://localhost:8080/home`
-    chrome.tabs.query({ url: 'http://localhost:8080/home' }, (tabs) => {
-      if (tabs.length > 0) {
-        chrome.tabs.sendMessage(tabs[0].id, { action: 'updateTable' });
-      }
-    });
-  }
+
 
   return true; // Wymagane dla asynchronicznych odpowiedzi
 });

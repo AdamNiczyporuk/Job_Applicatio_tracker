@@ -1,3 +1,4 @@
+
 <script>
 import { ref, onMounted, watch} from "vue";
 import * as api from "../API/Api.js";
@@ -96,8 +97,8 @@ watch(searchQuery, (newQuery) => {
       await fetchApplications();
       await fetchUser();
       checkLoginDate();
-      chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-        if (message.action === 'updateTable') {
+      window.addEventListener('message', (event) => {
+        if (event.data.action === 'updateTable') {
           fetchApplications();
         }
       });
