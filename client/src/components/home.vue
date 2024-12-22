@@ -98,14 +98,7 @@ watch(searchQuery, (newQuery) => {
       await fetchApplications();
       await fetchUser();
       checkLoginDate();
-      window.addEventListener('EXTENSION_EVENT', (event) => {
-        console.log('Received CustomEvent:', event.detail);
-        if (event.detail && event.detail.jobData) {
-          console.log('Updating table with new job data...');
-          links.value.push(event.detail.jobData);
-          filteredLinks.value = links.value;
-        }
-      });
+      
   });
 
 
