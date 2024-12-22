@@ -5,17 +5,24 @@ const server = jsonServer.create();
 const jwt = require('jsonwebtoken');
 const router = jsonServer.router('db.json');
 const middlewares = jsonServer.defaults();
-const http = require('http');
-const WebSocket = require('ws');
 
-const SECRET_KEY = 'franek';
+
+const WebSocket = require('ws');
+const http = require('http');
 
 server.use(cors());
 server.use(bodyParser.json());
 server.use(middlewares);
 
+
+
+const SECRET_KEY = 'franek';
+
+
+
+
 const httpServer = http.createServer(server);
-const wss = new WebSocket.Server({ server: httpServer });
+const wss = new WebSocket.Server({ noServer: true });
 
 // WebSocket configuration
 wss.on('connection', (ws) => {
@@ -23,12 +30,28 @@ wss.on('connection', (ws) => {
 
   ws.on('message', (message) => {
     console.log('Received:', message);
+    // Możesz dodać logikę obsługi wiadomości tutaj
   });
 
   ws.on('close', () => {
     console.log('Client disconnected');
   });
 });
+
+httpServer.on('upgrade', (request, socket, head) => {
+  // Make sure the request is for the WebSocket endpoint
+  if (request.url === '/ws') {
+    wss.handleUpgrade(request, socket, head, (ws) => {
+      wss.emit('connection', ws, request);
+    });
+  } else {
+    socket.destroy();  // Reject if not for /ws
+  }
+});
+
+
+
+
 
 server.post('/login', (req, res) => {
   const { email, password } = req.body;

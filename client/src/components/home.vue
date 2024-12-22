@@ -98,7 +98,7 @@ watch(searchQuery, (newQuery) => {
       await fetchApplications();
       await fetchUser();
       checkLoginDate();
-      const socket = new WebSocket('http://localhost:5000');
+      const socket = new WebSocket("wss://localhost:5000/ws");
 
       socket.addEventListener('open', () => {
         console.log('WebSocket connection established');
