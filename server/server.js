@@ -240,11 +240,11 @@ server.put('/applications/:id', (req, res) => {
 
 
 
-// server.use(router);
+ server.use(router);
 // server.listen(5000, () => {
 //   console.log('JSON Server is running on http://localhost:5000');
 // });
 
-httpServer.listen(5000, 'localhost', () => {
+httpServer.listen(5000, () => {
   console.log('Server is listening on port 5000');
 });
