@@ -5,13 +5,17 @@ const server = jsonServer.create();
 const jwt = require('jsonwebtoken');
 const router = jsonServer.router('db.json');
 const middlewares = jsonServer.defaults();
-const wss = new WebSocket.Server({ server });
+const http = require('http');
+const WebSocket = require('ws');
 
 const SECRET_KEY = 'franek';
 
 server.use(cors());
 server.use(bodyParser.json());
 server.use(middlewares);
+
+const httpServer = http.createServer(server);
+const wss = new WebSocket.Server({ server: httpServer });
 
 // WebSocket configuration
 wss.on('connection', (ws) => {
