@@ -44,7 +44,7 @@ document.addEventListener('click', function(event) {
             jobData: {
               name: jobTitle,
               link: jobLink
-            }
+            },
           }
         }));
         setTimeout(() => {
