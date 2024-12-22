@@ -24,6 +24,8 @@ const SECRET_KEY = 'franek';
 const httpServer = http.createServer(server);
 const wss = new WebSocket.Server({ noServer: true });
 
+console.log(wss);
+
 // WebSocket configuration
 wss.on('connection', (ws) => {
   console.log('Client connected');
