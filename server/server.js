@@ -140,12 +140,13 @@ server.post('/applications',(req,res)=>
 
 
 
-   const newApplication = { id: maxId + 1, name, link, userId: decoded.userId,dataTime: new Date().toISOString() };
+    const newApplication = { id: maxId + 1, name, link, userId: decoded.userId,dataTime: new Date().toISOString() };
     router.db.get('applications').push(newApplication).write();
 
     wss.clients.forEach((client) => {
       if (client.readyState === WebSocket.OPEN) {
-        client.send(JSON.stringify({ type: 'updateTable', job: newApplication }));
+        console.log('Sending updateTable message to client');
+        client.send(JSON.stringify({ type: 'updateTable'}));
       }
     });
 
@@ -239,7 +240,11 @@ server.put('/applications/:id', (req, res) => {
 
 
 
-server.use(router);
-server.listen(5000, () => {
-  console.log('JSON Server is running on http://localhost:5000');
+// server.use(router);
+// server.listen(5000, () => {
+//   console.log('JSON Server is running on http://localhost:5000');
+// });
+
+httpServer.listen(5000, 'localhost', () => {
+  console.log('Server is listening on port 5000');
 });
