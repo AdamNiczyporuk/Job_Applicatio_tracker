@@ -5,6 +5,7 @@ const server = jsonServer.create();
 const jwt = require('jsonwebtoken');
 const router = jsonServer.router('db.json');
 const middlewares = jsonServer.defaults();
+const wss = new WebSocket.Server({ server });
 
 const SECRET_KEY = 'franek';
 
@@ -12,7 +13,18 @@ server.use(cors());
 server.use(bodyParser.json());
 server.use(middlewares);
 
+// WebSocket configuration
+wss.on('connection', (ws) => {
+  console.log('Client connected');
 
+  ws.on('message', (message) => {
+    console.log('Received:', message);
+  });
+
+  ws.on('close', () => {
+    console.log('Client disconnected');
+  });
+});
 
 server.post('/login', (req, res) => {
   const { email, password } = req.body;
@@ -102,6 +114,14 @@ server.post('/applications',(req,res)=>
 
    const newApplication = { id: maxId + 1, name, link, userId: decoded.userId,dataTime: new Date().toISOString() };
     router.db.get('applications').push(newApplication).write();
+
+    wss.clients.forEach((client) => {
+      if (client.readyState === WebSocket.OPEN) {
+        client.send(JSON.stringify({ type: 'updateTable', job: newApplication }));
+      }
+    });
+
+
     res.status(201).json(newApplication);
     }catch(error)
     { 

@@ -38,15 +38,10 @@ document.addEventListener('click', function(event) {
       .then(data => {
         console.log('Job added:', data);
         console.log('Sending postMessage to updateTable');
-        window.dispatchEvent(new CustomEvent('EXTENSION_EVENT', {
-          detail: { 
-            message: 'Job added successfully!',
-            jobData: {
-              name: jobTitle,
-              link: jobLink
-            },
-          }
-        }));
+        const socket = new WebSocket('ws://localhost:5000');
+          socket.addEventListener('open', () => {
+            socket.send(JSON.stringify({ type: 'updateTable', job: data }));
+          });
         setTimeout(() => {
           window.location.href = applyButton ? applyButton.href : event.target.closest('a').href;
         }, 100);
