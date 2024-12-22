@@ -98,7 +98,23 @@ watch(searchQuery, (newQuery) => {
       await fetchApplications();
       await fetchUser();
       checkLoginDate();
-      
+      const socket = new WebSocket('ws://localhost:5000');
+
+      socket.addEventListener('open', () => {
+        console.log('WebSocket connection established');
+      });
+
+      socket.addEventListener('message', (event) => {
+        const data = JSON.parse(event.data);
+        console.log('Received WebSocket message:', data);
+        if (data.type === 'updateTable') {
+          fetchApplications();
+        }
+      });
+
+      socket.addEventListener('close', () => {
+        console.log('WebSocket connection closed');
+      });
   });
 
 
