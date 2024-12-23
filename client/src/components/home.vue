@@ -62,7 +62,7 @@ watch(searchQuery, (newQuery) => {
    links.value.filter(link => 
     link.name.toLowerCase().includes(newQuery.toLowerCase())
   );
-  console.log('filteredLinks:', filteredLinks.value);
+  // console.log('filteredLinks:', filteredLinks.value);
 });
 
     const checkLoginDate = () => {
@@ -139,7 +139,7 @@ watch(searchQuery, (newQuery) => {
           // Fetch the updated list of applications
           const response = await api.fetchApplications(token);
           links.value = response.data;
-          filteredLinks.value = links.value; 
+          // filteredLinks.value = links.value; 
 
           // Reset dialog and editing state
           dialog.value = false;
