@@ -169,13 +169,9 @@ watch(searchQuery, (newQuery) => {
         if (token) {
           api.addApplication(name.value, newLink.value, token)
             .then(() => {
-              api.fetchApplications(token)
-                .then(response => {
-                  links.value = response.data;
-                  filteredLinks.value = links.value; 
-                  searchQuery.value = '';
-                })
-                .catch(error => console.error("Error fetching updated data:", error));
+              
+              
+              searchQuery.value = '';
               newLink.value = '';
               name.value = '';
               toast.success('Link added successfully!', {
