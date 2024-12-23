@@ -1,5 +1,3 @@
-
-
 function checkForToken() {
   const token = localStorage.getItem('token');
   if (token) {
