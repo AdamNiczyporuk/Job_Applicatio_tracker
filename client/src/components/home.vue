@@ -35,7 +35,7 @@ export default {
         try {
           const response = await api.fetchApplications(token);
           links.value = response.data;
-          filteredLinks.value = links.value; 
+          // filteredLinks.value = links.value; 
         } catch (error) {
           console.error("Error fetching data:", error);
           toast.error('Failed to fetch applications.');
