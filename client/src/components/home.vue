@@ -10,7 +10,6 @@ export default {
     // Reactive variables for managing the state
     const toast = useToast();
     const links = ref([]);
-    // var filteredLinks = ref([]);
     const newLink = ref('');
     const name = ref('');
     const editName = ref('');
@@ -35,7 +34,6 @@ export default {
         try {
           const response = await api.fetchApplications(token);
           links.value = response.data;
-          // filteredLinks.value = links.value; 
         } catch (error) {
           console.error("Error fetching data:", error);
           toast.error('Failed to fetch applications.');
@@ -62,7 +60,7 @@ watch(searchQuery, (newQuery) => {
    links.value.filter(link => 
     link.name.toLowerCase().includes(newQuery.toLowerCase())
   );
-  // console.log('filteredLinks:', filteredLinks.value);
+  console.log('filteredLinks:', links.value);
 });
 
     const checkLoginDate = () => {
@@ -130,18 +128,15 @@ watch(searchQuery, (newQuery) => {
 
       if (editingId.value !== null && token) {
         try {
-          // Call the API to update the application
           await api.updateApplication(editingId.value, {
             name: editName.value,
             link: editNewLink.value,
           }, token);
 
-          // Fetch the updated list of applications
-          const response = await api.fetchApplications(token);
-          links.value = response.data;
-          // filteredLinks.value = links.value; 
 
-          // Reset dialog and editing state
+          const response = await api.fetchApplications(token);
+          links.value = response.data; 
+
           dialog.value = false;
           editingId.value = null;
           editName.value = "";
@@ -198,7 +193,6 @@ watch(searchQuery, (newQuery) => {
           api.fetchApplications(token)
             .then(response => {
               links.value = response.data;
-              // filteredLinks.value = links.value; 
               searchQuery.value = '';
             })
             .catch(error => console.error("Error fetching updated data:", error));
@@ -332,7 +326,6 @@ watch(searchQuery, (newQuery) => {
       updateUser,
       sortByName,
       sortByDate,
-      // filteredLinks,
       searchQuery,
  
     };
