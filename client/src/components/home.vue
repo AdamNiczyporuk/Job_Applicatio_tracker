@@ -10,7 +10,7 @@ export default {
     // Reactive variables for managing the state
     const toast = useToast();
     const links = ref([]);
-    var filteredLinks = ref([]);
+    // var filteredLinks = ref([]);
     const newLink = ref('');
     const name = ref('');
     const editName = ref('');
