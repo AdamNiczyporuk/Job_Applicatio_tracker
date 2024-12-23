@@ -59,7 +59,7 @@ export default {
    
 watch(searchQuery, (newQuery) => {
   console.log('searchQuery:', newQuery);
-  filteredLinks.value = links.value.filter(link => 
+   links.value.filter(link => 
     link.name.toLowerCase().includes(newQuery.toLowerCase())
   );
   console.log('filteredLinks:', filteredLinks.value);
