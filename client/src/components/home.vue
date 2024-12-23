@@ -198,7 +198,7 @@ watch(searchQuery, (newQuery) => {
           api.fetchApplications(token)
             .then(response => {
               links.value = response.data;
-              filteredLinks.value = links.value; 
+              // filteredLinks.value = links.value; 
               searchQuery.value = '';
             })
             .catch(error => console.error("Error fetching updated data:", error));
@@ -265,7 +265,7 @@ watch(searchQuery, (newQuery) => {
     };
 
     const sortLinks = () => {
-      filteredLinks.value.sort((a, b) => {
+      links.value.sort((a, b) => {
         let result = 0;
         if (sortBy.value === 'name') {
           result = a.name.localeCompare(b.name);
@@ -332,7 +332,7 @@ watch(searchQuery, (newQuery) => {
       updateUser,
       sortByName,
       sortByDate,
-      filteredLinks,
+      // filteredLinks,
       searchQuery,
  
     };
@@ -421,7 +421,7 @@ watch(searchQuery, (newQuery) => {
               </tr>
             </thead>
             <tbody>
-              <tr v-for="(item, index) in filteredLinks" :key="item.id">
+              <tr v-for="(item, index) in links" :key="item.id">
                 <td class="text-center ">{{ index + 1 }}</td>
                 <td class="text-center "><a :href="item.link" target="_blank" rel="noopener noreferrer">{{ item.name
                     }}</a></td>
