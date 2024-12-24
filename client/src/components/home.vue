@@ -52,72 +52,42 @@ export default {
     };
     
    
-watch(searchQuery, (newQuery) => {
-  console.log('searchQuery:', newQuery);
-   links.value.filter(link => 
-    link.name.toLowerCase().includes(newQuery.toLowerCase())
-  );
-  console.log('filteredLinks:', links.value);
-});
+      watch(searchQuery, (newQuery) => {
+        console.log('searchQuery:', newQuery);
+        links.value.filter(link => 
+          link.name.toLowerCase().includes(newQuery.toLowerCase())
+        );
+        console.log('filteredLinks:', links.value);
+      });
 
-    const checkLoginDate = () => {
-      const lastLoginDate = localStorage.getItem('lastLoginDate');
-      const today = new Date().toISOString().split('T')[0];
+      const checkLoginDate = () => {
+        const lastLoginDate = localStorage.getItem('lastLoginDate');
+        const today = new Date().toISOString().split('T')[0];
 
-      if (lastLoginDate === today) {
-        const randomChoice = Math.random() < 0.5;
-        if (randomChoice || links.value.length === 0) {
-          toast.success("Hello loser, you still don't have a job!", {
+        if (lastLoginDate === today) {
+          const randomChoice = Math.random() < 0.5;
+          if (randomChoice || links.value.length === 0) {
+            toast.success("Hello loser, you still don't have a job!", {
+              toastClassName: "my-custom-toast-class",
+              bodyClassName: ["custom-class-1"],
+            });
+          } else {
+            toast.success(`${links.value.length} applications and still without job?!`, {
+              toastClassName: "my-custom-toast-class",
+              bodyClassName: ["custom-class-1"]
+            });
+          }
+        } else {
+          toast.info('Welcome to the Job Application Tracker!', {
             toastClassName: "my-custom-toast-class",
             bodyClassName: ["custom-class-1"],
+
           });
-        } else {
-          toast.success(`${links.value.length} applications and still without job?!`, {
-            toastClassName: "my-custom-toast-class",
-            bodyClassName: ["custom-class-1"]
-          });
+          localStorage.setItem('lastLoginDate', today);
+
         }
-      } else {
-        toast.info('Welcome to the Job Application Tracker!', {
-          toastClassName: "my-custom-toast-class",
-          bodyClassName: ["custom-class-1"],
-
-        });
-        localStorage.setItem('lastLoginDate', today);
-
-      }
-    };
-    
-
-    onMounted(async () => {
-      await fetchApplications();
-      await fetchUser();
-      checkLoginDate();
-      const socket = new WebSocket("ws://localhost:5000/ws");
-
-      console.log(socket);
-      socket.addEventListener('open', () => {
-        console.log('WebSocket connection established');
-      });
-
-      socket.addEventListener('message', (event) => {
-        const data = JSON.parse(event.data);
-        console.log('Received WebSocket message:', data);
-        if (data.type === 'updateTable') {
-          fetchApplications();
-        }
-      });
-
-      socket.addEventListener('close', () => {
-        console.log('WebSocket connection closed');
-      });
-  });
-
-
-    
-      
-
-    const updateLink = async () => {
+      };
+      const updateLink = async () => {
       if (!editName.value.trim() || !editNewLink.value.trim()) {
         toast.error("Both name and link are required!");
         return;
@@ -151,10 +121,31 @@ watch(searchQuery, (newQuery) => {
         toast.error("Invalid application ID or token.");
       }
     };
+    
 
+    onMounted(async () => {
+      await fetchApplications();
+      await fetchUser();
+      checkLoginDate();
+      const socket = new WebSocket("ws://localhost:5000/ws");
 
+      console.log(socket);
+      socket.addEventListener('open', () => {
+        console.log('WebSocket connection established');
+      });
 
+      socket.addEventListener('message', (event) => {
+        const data = JSON.parse(event.data);
+        console.log('Received WebSocket message:', data);
+        if (data.type === 'updateTable') {
+          fetchApplications();
+        }
+      });
 
+      socket.addEventListener('close', () => {
+        console.log('WebSocket connection closed');
+      });
+  });
 
     const addLink = () => {
       if (newLink.value.trim()) {
