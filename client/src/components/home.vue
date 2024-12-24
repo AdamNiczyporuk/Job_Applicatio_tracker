@@ -52,102 +52,102 @@ export default {
     };
     
    
-      watch(searchQuery, (newQuery) => {
-        console.log('searchQuery:', newQuery);
-        links.value.filter(link => 
-          link.name.toLowerCase().includes(newQuery.toLowerCase())
-        );
-        console.log('filteredLinks:', links.value);
-      });
+    watch(searchQuery, (newQuery) => {
+      console.log('searchQuery:', newQuery);
+      links.value.filter(link => 
+        link.name.toLowerCase().includes(newQuery.toLowerCase())
+      );
+      console.log('filteredLinks:', links.value);
+    });
 
-      const checkLoginDate = () => {
-        const lastLoginDate = localStorage.getItem('lastLoginDate');
-        const today = new Date().toISOString().split('T')[0];
+    const checkLoginDate = () => {
+      const lastLoginDate = localStorage.getItem('lastLoginDate');
+      const today = new Date().toISOString().split('T')[0];
 
-        if (lastLoginDate === today) {
-          const randomChoice = Math.random() < 0.5;
-          if (randomChoice || links.value.length === 0) {
-            toast.success("Hello loser, you still don't have a job!", {
-              toastClassName: "my-custom-toast-class",
-              bodyClassName: ["custom-class-1"],
-            });
-          } else {
-            toast.success(`${links.value.length} applications and still without job?!`, {
-              toastClassName: "my-custom-toast-class",
-              bodyClassName: ["custom-class-1"]
-            });
-          }
-        } else {
-          toast.info('Welcome to the Job Application Tracker!', {
+      if (lastLoginDate === today) {
+        const randomChoice = Math.random() < 0.5;
+        if (randomChoice || links.value.length === 0) {
+          toast.success("Hello loser, you still don't have a job!", {
             toastClassName: "my-custom-toast-class",
             bodyClassName: ["custom-class-1"],
-
           });
-          localStorage.setItem('lastLoginDate', today);
-
-        }
-      };
-
-      const addLink = () => {
-      if (newLink.value.trim()) {
-        if (token) {
-          api.addApplication(name.value, newLink.value, token)
-            .then(() => {
-              
-              
-              searchQuery.value = '';
-              newLink.value = '';
-              name.value = '';
-              toast.success('Link added successfully!', {
-                toastClassName: "my-custom-toast-class",
-                bodyClassName: ["custom-class-1"]
-              });
-            })
-            .catch(error => {
-              console.error('Error adding link:', error);
-              toast.error('Failed to add link.', {
-                toastClassName: "my-custom-toast-class",
-                bodyClassName: ["custom-class-1"]
-              });
-            });
-        }
-      }
-    };
-
-      const updateLink = async () => {
-      if (!editName.value.trim() || !editNewLink.value.trim()) {
-        toast.error("Both name and link are required!");
-        return;
-      }
-
-      if (editingId.value !== null && token) {
-        try {
-          await api.updateApplication(editingId.value, {
-            name: editName.value,
-            link: editNewLink.value,
-          }, token);
-
-
-          const response = await api.fetchApplications(token);
-          links.value = response.data; 
-
-          dialog.value = false;
-          editingId.value = null;
-          editName.value = "";
-          editNewLink.value = "";
-
-          searchQuery.value = '';
-        } catch (error) {
-          console.error("Error updating application:", error);
-          toast.error('Failed to update link.', {
+        } else {
+          toast.success(`${links.value.length} applications and still without job?!`, {
             toastClassName: "my-custom-toast-class",
             bodyClassName: ["custom-class-1"]
           });
         }
       } else {
-        toast.error("Invalid application ID or token.");
+        toast.info('Welcome to the Job Application Tracker!', {
+          toastClassName: "my-custom-toast-class",
+          bodyClassName: ["custom-class-1"],
+
+        });
+        localStorage.setItem('lastLoginDate', today);
+
       }
     };
+
+    const addLink = () => {
+    if (newLink.value.trim()) {
+      if (token) {
+        api.addApplication(name.value, newLink.value, token)
+          .then(() => {
+            
+            
+            searchQuery.value = '';
+            newLink.value = '';
+            name.value = '';
+            toast.success('Link added successfully!', {
+              toastClassName: "my-custom-toast-class",
+              bodyClassName: ["custom-class-1"]
+            });
+          })
+          .catch(error => {
+            console.error('Error adding link:', error);
+            toast.error('Failed to add link.', {
+              toastClassName: "my-custom-toast-class",
+              bodyClassName: ["custom-class-1"]
+            });
+          });
+      }
+    }
+  };
+
+    const updateLink = async () => {
+    if (!editName.value.trim() || !editNewLink.value.trim()) {
+      toast.error("Both name and link are required!");
+      return;
+    }
+
+    if (editingId.value !== null && token) {
+      try {
+        await api.updateApplication(editingId.value, {
+          name: editName.value,
+          link: editNewLink.value,
+        }, token);
+
+
+        const response = await api.fetchApplications(token);
+        links.value = response.data; 
+
+        dialog.value = false;
+        editingId.value = null;
+        editName.value = "";
+        editNewLink.value = "";
+
+        searchQuery.value = '';
+      } catch (error) {
+        console.error("Error updating application:", error);
+        toast.error('Failed to update link.', {
+          toastClassName: "my-custom-toast-class",
+          bodyClassName: ["custom-class-1"]
+        });
+      }
+    } else {
+      toast.error("Invalid application ID or token.");
+    }
+  };
     
     const editLink = (id) => {
       const application = links.value.find(link => link.id === id);
@@ -177,6 +177,7 @@ export default {
           });
         });
     };
+
     const copyToClipboard = (text) => {
       navigator.clipboard.writeText(text).then(() => {
         toast.success('Copied to clipboard', {
@@ -187,31 +188,7 @@ export default {
         console.error('Failed to copy: ', err);
       });
     };
-
-    onMounted(async () => {
-      await fetchApplications();
-      await fetchUser();
-      checkLoginDate();
-      const socket = new WebSocket("ws://localhost:5000/ws");
-
-      console.log(socket);
-      socket.addEventListener('open', () => {
-        console.log('WebSocket connection established');
-      });
-
-      socket.addEventListener('message', (event) => {
-        const data = JSON.parse(event.data);
-        console.log('Received WebSocket message:', data);
-        if (data.type === 'updateTable') {
-          fetchApplications();
-        }
-      });
-
-      socket.addEventListener('close', () => {
-        console.log('WebSocket connection closed');
-      });
-  });
-
+    
    
 
     const editUserData = () => {
@@ -259,6 +236,8 @@ export default {
 
       });
     };
+
+
     const updateUser = async () => {
       if (token) {
         try {
@@ -268,13 +247,8 @@ export default {
             github: editUserGithub.value,
             linkedin: editUserLinkedin.value
           }, token);
-
-          
           await fetchUser();
-
-        
           user_dialog.value = false;
-
           toast.success('User profile updated successfully!', {
             toastClassName: "my-custom-toast-class",
             bodyClassName: ["custom-class-1"]
@@ -291,33 +265,56 @@ export default {
       }
     };
 
+    onMounted(async () => {
+      await fetchApplications();
+      await fetchUser();
+      checkLoginDate();
+      const socket = new WebSocket("ws://localhost:5000/ws");
 
-    return {
-      links,
-      newLink,
-      name,
-      user,
-      addLink,
-      deleteLink,
-      copyToClipboard,
-      editLink,
-      dialog,
-      editNewLink,
-      editName,
-      updateLink,
-      logout,
-      user_dialog,
-      editUserData,
-      editUserName,
-      editUserEmail,
-      editUserGithub,
-      editUserLinkedin,
-      updateUser,
-      sortByName,
-      sortByDate,
-      searchQuery,
- 
-    };
+      console.log(socket);
+      socket.addEventListener('open', () => {
+        console.log('WebSocket connection established');
+      });
+
+      socket.addEventListener('message', (event) => {
+        const data = JSON.parse(event.data);
+        console.log('Received WebSocket message:', data);
+        if (data.type === 'updateTable') {
+          fetchApplications();
+        }
+      });
+
+      socket.addEventListener('close', () => {
+        console.log('WebSocket connection closed');
+      });
+  });
+
+  return {
+    links,
+    newLink,
+    name,
+    user,
+    addLink,
+    deleteLink,
+    copyToClipboard,
+    editLink,
+    dialog,
+    editNewLink,
+    editName,
+    updateLink,
+    logout,
+    user_dialog,
+    editUserData,
+    editUserName,
+    editUserEmail,
+    editUserGithub,
+    editUserLinkedin,
+    updateUser,
+    sortByName,
+    sortByDate,
+    searchQuery,
+
+  };
   },
 };
 </script>
