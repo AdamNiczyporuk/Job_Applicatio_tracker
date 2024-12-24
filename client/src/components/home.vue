@@ -19,8 +19,6 @@ export default {
     const editUserGithub = ref('');
     const editUserLinkedin = ref('');
     const token =localStorage.getItem('token');
-    // chrome.storage.local.get(['token']);
-    
     const user = ref({});
     const editingId = ref(null);
     const dialog = ref(false);
