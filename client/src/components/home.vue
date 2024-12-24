@@ -7,7 +7,6 @@ import { useToast } from "vue-toastification";
 export default {
   name: "HomePanel",
   setup() {
-    // Reactive variables for managing the state
     const toast = useToast();
     const links = ref([]);
     const newLink = ref('');
