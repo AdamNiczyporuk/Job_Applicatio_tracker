@@ -87,6 +87,33 @@ export default {
 
         }
       };
+
+      const addLink = () => {
+      if (newLink.value.trim()) {
+        if (token) {
+          api.addApplication(name.value, newLink.value, token)
+            .then(() => {
+              
+              
+              searchQuery.value = '';
+              newLink.value = '';
+              name.value = '';
+              toast.success('Link added successfully!', {
+                toastClassName: "my-custom-toast-class",
+                bodyClassName: ["custom-class-1"]
+              });
+            })
+            .catch(error => {
+              console.error('Error adding link:', error);
+              toast.error('Failed to add link.', {
+                toastClassName: "my-custom-toast-class",
+                bodyClassName: ["custom-class-1"]
+              });
+            });
+        }
+      }
+    };
+
       const updateLink = async () => {
       if (!editName.value.trim() || !editNewLink.value.trim()) {
         toast.error("Both name and link are required!");
@@ -122,59 +149,16 @@ export default {
       }
     };
     
-
-    onMounted(async () => {
-      await fetchApplications();
-      await fetchUser();
-      checkLoginDate();
-      const socket = new WebSocket("ws://localhost:5000/ws");
-
-      console.log(socket);
-      socket.addEventListener('open', () => {
-        console.log('WebSocket connection established');
-      });
-
-      socket.addEventListener('message', (event) => {
-        const data = JSON.parse(event.data);
-        console.log('Received WebSocket message:', data);
-        if (data.type === 'updateTable') {
-          fetchApplications();
-        }
-      });
-
-      socket.addEventListener('close', () => {
-        console.log('WebSocket connection closed');
-      });
-  });
-
-    const addLink = () => {
-      if (newLink.value.trim()) {
-        if (token) {
-          api.addApplication(name.value, newLink.value, token)
-            .then(() => {
-              
-              
-              searchQuery.value = '';
-              newLink.value = '';
-              name.value = '';
-              toast.success('Link added successfully!', {
-                toastClassName: "my-custom-toast-class",
-                bodyClassName: ["custom-class-1"]
-              });
-            })
-            .catch(error => {
-              console.error('Error adding link:', error);
-              toast.error('Failed to add link.', {
-                toastClassName: "my-custom-toast-class",
-                bodyClassName: ["custom-class-1"]
-              });
-            });
-        }
+    const editLink = (id) => {
+      const application = links.value.find(link => link.id === id);
+      if (application) {
+        editName.value = application.name;
+        editNewLink.value = application.link;
+        editingId.value = id;
+        dialog.value = true;
       }
     };
 
-
-  
     const deleteLink = (id) => {
       api.deleteApplication(id)
         .then(() => {
@@ -203,15 +187,32 @@ export default {
         console.error('Failed to copy: ', err);
       });
     };
-    const editLink = (id) => {
-      const application = links.value.find(link => link.id === id);
-      if (application) {
-        editName.value = application.name;
-        editNewLink.value = application.link;
-        editingId.value = id;
-        dialog.value = true;
-      }
-    };
+
+    onMounted(async () => {
+      await fetchApplications();
+      await fetchUser();
+      checkLoginDate();
+      const socket = new WebSocket("ws://localhost:5000/ws");
+
+      console.log(socket);
+      socket.addEventListener('open', () => {
+        console.log('WebSocket connection established');
+      });
+
+      socket.addEventListener('message', (event) => {
+        const data = JSON.parse(event.data);
+        console.log('Received WebSocket message:', data);
+        if (data.type === 'updateTable') {
+          fetchApplications();
+        }
+      });
+
+      socket.addEventListener('close', () => {
+        console.log('WebSocket connection closed');
+      });
+  });
+
+   
 
     const editUserData = () => {
       editUserName.value = user.value.name;
