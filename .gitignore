@@ -1,3 +1,4 @@
 server/db.json
 server/db.json
 /node_modules
+.env
