@@ -353,7 +353,7 @@ export default {
               <v-icon size="12" @click="copyToClipboard(user.linkedin)">mdi-content-copy</v-icon>
             </p>
             <p v-else class="text-left"><b>Add LinkedIn Link</b></p>
-            <v-btn @click="editUserData" variant="outlined" color="white" class="mt-5">Update Profile</v-btn>
+            <v-btn @click="editUserData" variant="outlined" color="white" class="mt-5 mr-2 ">Update Profile</v-btn>
             <v-btn @click="routeCV" variant="outlined" color="white" class="mt-5">Create CV</v-btn>
           </v-card-text>
         </v-card>
