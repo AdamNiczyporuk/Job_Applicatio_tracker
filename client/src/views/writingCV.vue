@@ -1,30 +1,42 @@
-<template>
-  
-</template>
-
 <script>
-export default {
-  name: 'HelloWorld',
-  props: {
-    msg: String
-  }
-}
-</script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
+
+
+
+  
+  export default {
+    name: 'WritingCV',
+    setup() {
+
+     
+     
+
+
+      
+
+
+
+     
+  
+      return {
+        
+      };
+    },
+  };
+  </script>
+
+
+
+<template>
+  <v-container class="d-flex justify-center align-center"  style="height: 75vh;">
+    <v-card class="pa-5 rounded-lg" width="300" elevation="5" color="grey-lighten-4">
+      
+    </v-card>
+  </v-container>
+</template>
+  
+  
 <style scoped>
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
+
 </style>
+  

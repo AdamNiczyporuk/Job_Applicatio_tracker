@@ -3,6 +3,7 @@
 import { ref, onMounted, watch} from "vue";
 import * as api from "../API/Api.js";
 import { useToast } from "vue-toastification";
+import { useRouter } from 'vue-router';
 
 export default {
   name: "HomePanel",
@@ -25,6 +26,7 @@ export default {
     const sortBy = ref('name');
     const sortOrder = ref('desc');
     const searchQuery = ref('');
+    const router = useRouter(); 
 
     const fetchApplications = async () => {
       if (token) {
@@ -263,7 +265,15 @@ export default {
       } else {
         toast.error("Invalid token.");
       }
+
+
+
     };
+
+
+   const routeCV = () => {
+    router.push("/writingCV");
+    }; 
 
     onMounted(async () => {
       await fetchApplications();
@@ -313,6 +323,7 @@ export default {
     sortByName,
     sortByDate,
     searchQuery,
+    routeCV
 
   };
   },
@@ -343,6 +354,7 @@ export default {
             </p>
             <p v-else class="text-left"><b>Add LinkedIn Link</b></p>
             <v-btn @click="editUserData" variant="outlined" color="white" class="mt-5">Update Profile</v-btn>
+            <v-btn @click="routeCV" variant="outlined" color="white" class="mt-5">Create CV</v-btn>
           </v-card-text>
         </v-card>
       </v-col>
