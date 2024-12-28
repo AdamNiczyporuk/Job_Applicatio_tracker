@@ -8,16 +8,6 @@
     name: 'WritingCV',
     setup() {
 
-     
-     
-
-
-      
-
-
-
-     
-  
       return {
         
       };
@@ -28,8 +18,12 @@
 
 
 <template>
-  <v-container class="d-flex justify-center align-center"  style="height: 75vh;">
-    <v-card class="pa-5 rounded-lg" width="300" elevation="5" color="grey-lighten-4">
+  <v-container >
+    <v-card class="mx-auto" max-width="1200">
+      <v-card-title>
+        <h2>Writing CV</h2>
+      </v-card-title>
+    
       
     </v-card>
   </v-container>
