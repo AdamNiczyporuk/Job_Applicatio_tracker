@@ -23,7 +23,7 @@
         <h2>Writing CV</h2>
       </v-card-title>
     
-    <v-card class="mx-auto" max-width="1200">
+    <v-card class="pa-5 rounded-lg"  color="grey-darken-3">
       
       
     </v-card>
