@@ -18,12 +18,13 @@
 
 
 <template>
-  <v-container >
-    <v-card class="mx-auto" max-width="1200">
-      <v-card-title>
+  <v-container class="" style="height: 100vh;"  >
+    <v-card-title class="text-white">
         <h2>Writing CV</h2>
       </v-card-title>
     
+    <v-card class="mx-auto" max-width="1200">
+      
       
     </v-card>
   </v-container>
