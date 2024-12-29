@@ -33,6 +33,7 @@ export default {
         try {
           const response = await api.fetchApplications(token);
           links.value = response.data;
+          sortData();
         } catch (error) {
           console.error("Error fetching data:", error);
           toast.error('Failed to fetch applications.');
@@ -40,6 +41,11 @@ export default {
       }
     };
     
+    const sortData = () => {
+      links.value.sort((a, b) => new Date(b.date) - new Date(a.date));
+    };
+
+
     const fetchUser = async () => {
       if (token) {
         try {
