@@ -1,15 +1,16 @@
 <script>
-
-
-
-
-  
   export default {
     name: 'WritingCV',
     setup() {
 
+
+      const logout = () => {
+      localStorage.removeItem('token');
+      window.location.reload();
+    };
+
       return {
-        
+        logout
       };
     },
   };
@@ -18,17 +19,21 @@
 
 
 <template >
-  <v-container  class=" justify-center align-center">
-  <v-card-title class="text-white" style="margin-top:-5vh">
-        <h2>Writing CV</h2>
-      </v-card-title>
-  <v-container>
+  <v-row>
+    <v-col class="d-flex justify-end mr-5" style="margin-top: -40px;">
+      <v-btn @click="logout" size="large" variant="outlined" color="red" text>Logout</v-btn>
+    </v-col>
+  </v-row>
+  <v-container  class="justify-center align-center" style="margin-top: -6vh;">
     <v-card class="rounded-lg mx-auto"  color="grey-darken-3"  width="75vw" style="overflow: auto;">
+      <v-card-title class="text-white ">
+        <h2>Fill Data to Generate CV</h2>
+      </v-card-title>
       <v-text-field 
         label="Job Title" 
         variant="outlined" 
         rounded    
-        class="mt-4 text-white ml-5" max-width="25vw">
+        class="text-white ml-5" max-width="25vw">
       </v-text-field>
       <v-text-field 
         label="Company name" 
@@ -77,7 +82,6 @@
     </v-card-actions>   
     </v-card>
   </v-container>
-  </v-container> 
 </template>
   
   

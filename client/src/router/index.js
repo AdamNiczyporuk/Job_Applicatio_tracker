@@ -30,7 +30,10 @@ const routes = [
       component: Register},
     {path: '/writingCV',
     name:"WritingCV",
-    component: WritingCV},
+    component: WritingCV,
+    meta:{
+      requiresAuth:true,
+    }},
       
   ];
 
