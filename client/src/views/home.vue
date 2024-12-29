@@ -332,17 +332,13 @@ export default {
 
 
 <template>
-  <v-app>
-   <v-app-bar app color="dark" dark>
-      <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
-      <v-toolbar-title>My Application</v-toolbar-title>
-      <v-spacer></v-spacer>
-      <v-btn text @click="$router.push('/home')">Home</v-btn>
-      <v-btn text @click="$router.push('/about')">About</v-btn>
-      <v-btn text @click="$router.push('/contact')">Contact</v-btn>
+  
+  <v-row>
+    <v-col class="d-flex justify-end mr-5" style="margin-top: -40px;">
       <v-btn @click="logout" size="large" variant="outlined" color="red" text>Logout</v-btn>
-    </v-app-bar>
-    <v-container class="home" style="text-align: center; margin: 10px 50px 50px 50px; height: 100vh;" color="dark">
+    </v-col>
+  </v-row>
+  <v-container class="home" style="text-align: center; margin: -20px 50px 50px 50px; height: 100vh;">
     <v-row>
       <v-col cols="3">
         <v-card class="pa-5 rounded-lg" elevation="5" color="deep-orange-darken-2">
@@ -496,13 +492,6 @@ export default {
       </v-card>
     </v-dialog>
   </v-container>
-  </v-app>
-  <!-- <v-row>
-    <v-col class="d-flex justify-end mr-5" style="margin-top: -40px;">
-      
-    </v-col>
-  </v-row> -->
-  
 </template>
 
 
