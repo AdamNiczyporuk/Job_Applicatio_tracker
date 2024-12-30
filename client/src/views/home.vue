@@ -102,8 +102,7 @@ export default {
       if (token) {
         api.addApplication(name.value, newLink.value, token)
           .then(() => {
-            
-            
+            fetchApplications(token);
             searchQuery.value = '';
             newLink.value = '';
             name.value = '';
