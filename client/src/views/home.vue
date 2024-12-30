@@ -1,6 +1,6 @@
 
 <script>
-import { ref, onMounted, watch} from "vue";
+import { ref, onMounted} from "vue";
 import * as api from "../API/Api.js";
 import { useToast } from "vue-toastification";
 import { useRouter } from 'vue-router';
@@ -56,13 +56,17 @@ export default {
       }
     };
     
-  
-    watch(searchQuery, (newQuery) => {
-      console.log('searchQuery:', newQuery);
-       links.value =  links.value.filter(link => 
-        link.name.toLowerCase().includes(newQuery.toLowerCase())
+    const filteredLinks = computed(() => {
+      return links.value.filter(link =>
+        link.name.toLowerCase().includes(searchQuery.value.toLowerCase())
       );
     });
+    // watch(searchQuery, (newQuery) => {
+    //   console.log('searchQuery:', newQuery);
+    //    links.value =  links.value.filter(link => 
+    //     link.name.toLowerCase().includes(newQuery.toLowerCase())
+    //   );
+    // });
 
     const checkLoginDate = () => {
       const lastLoginDate = localStorage.getItem('lastLoginDate');
@@ -320,7 +324,8 @@ export default {
     sortByName,
     sortByDate,
     searchQuery,
-    routeCV
+    routeCV,
+    filteredLinks
 
   };
   },
@@ -410,7 +415,7 @@ export default {
               </tr>
             </thead>
             <tbody>
-              <tr v-for="(item, index) in links" :key="item.id">
+              <tr v-for="(item, index) in filteredLinks" :key="item.id">
                 <td class="text-center ">{{ index + 1 }}</td>
                 <td class="text-center "><a :href="item.link" target="_blank" rel="noopener noreferrer">{{ item.name
                     }}</a></td>
