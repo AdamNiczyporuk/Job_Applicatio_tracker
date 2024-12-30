@@ -34,15 +34,17 @@ export default {
         try {
           const response = await api.fetchApplications(token);
           links.value = response.data;
-          sortByDate();
+          sortByDateDescending();
         } catch (error) {
           console.error("Error fetching data:", error);
           toast.error('Failed to fetch applications.');
         }
       }
     };
-
-
+    
+    const sortByDateDescending = () => {
+      links.value.sort((a, b) => new Date(b.dataTime) - new Date(a.dataTime));
+    };
 
     const fetchUser = async () => {
       if (token) {
@@ -136,8 +138,7 @@ export default {
         }, token);
 
 
-        const response = await api.fetchApplications(token);
-        links.value = response.data; 
+        fetchApplications(token);
 
         dialog.value = false;
         editingId.value = null;
@@ -222,7 +223,7 @@ export default {
         sortOrder.value = sortOrder.value === 'asc' ? 'desc' : 'asc';
       } else {
         sortBy.value = 'date';
-        sortOrder.value = 'asc';
+        sortOrder.value = 'desc';
       }
       sortLinks();
     };
