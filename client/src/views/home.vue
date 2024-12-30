@@ -34,6 +34,7 @@ export default {
         try {
           const response = await api.fetchApplications(token);
           links.value = response.data;
+          sortByDate();
         } catch (error) {
           console.error("Error fetching data:", error);
           toast.error('Failed to fetch applications.');
