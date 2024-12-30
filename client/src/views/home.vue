@@ -5,6 +5,7 @@ import * as api from "../API/Api.js";
 import { useToast } from "vue-toastification";
 import { useRouter } from 'vue-router';
 
+
 export default {
   name: "HomePanel",
   setup() {
@@ -33,17 +34,13 @@ export default {
         try {
           const response = await api.fetchApplications(token);
           links.value = response.data;
-          sortData();
         } catch (error) {
           console.error("Error fetching data:", error);
           toast.error('Failed to fetch applications.');
         }
       }
     };
-    
-    const sortData = () => {
-      links.value.sort((a, b) => new Date(b.date) - new Date(a.date));
-    };
+
 
 
     const fetchUser = async () => {
@@ -59,7 +56,7 @@ export default {
       }
     };
     
-   
+  
     watch(searchQuery, (newQuery) => {
       console.log('searchQuery:', newQuery);
       links.value.filter(link => 
@@ -170,12 +167,7 @@ export default {
     const deleteLink = (id) => {
       api.deleteApplication(id)
         .then(() => {
-          api.fetchApplications(token)
-            .then(response => {
-              links.value = response.data;
-              searchQuery.value = '';
-            })
-            .catch(error => console.error("Error fetching updated data:", error));
+          fetchApplications(token);
         })
         .catch(error => {
           console.error("Error deleting application:", error);
