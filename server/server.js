@@ -213,12 +213,11 @@ server.put('/applications/:id', (req, res) => {
       return res.status(404).json({ message: 'Application not found or you do not have permission to edit it' });
     }
 
-    // Aktualizowanie aplikacji
+
     const updatedApplication = {
       ...applications[applicationIndex],
-      name: name || applications[applicationIndex].name, // Jeśli nowe dane nie są dostarczone, zachowaj stare wartości
+      name: name || applications[applicationIndex].name, 
       link: link || applications[applicationIndex].link,
-      dataTime: new Date().toISOString() // Zaktualizuj datę modyfikacji
     };
 
     // Zapisz zmiany do bazy danych
