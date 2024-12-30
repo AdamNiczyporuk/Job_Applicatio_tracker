@@ -59,10 +59,9 @@ export default {
   
     watch(searchQuery, (newQuery) => {
       console.log('searchQuery:', newQuery);
-      links.value.filter(link => 
+       links.value =  links.value.filter(link => 
         link.name.toLowerCase().includes(newQuery.toLowerCase())
       );
-      console.log('filteredLinks:', links.value);
     });
 
     const checkLoginDate = () => {
