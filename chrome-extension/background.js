@@ -14,7 +14,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
       console.log("Token pobrany z chrome.storage:", result.token);
       sendResponse({ token: result.token });
     });
-    return true; // Informuje Chrome, że odpowiedź będzie asynchroniczna
+    return true; 
   }
 
 
