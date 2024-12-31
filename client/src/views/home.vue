@@ -64,12 +64,7 @@ export default {
         link.name.toLowerCase().includes(searchQuery.value.toLowerCase())
       );
     });
-    // watch(searchQuery, (newQuery) => {
-    //   console.log('searchQuery:', newQuery);
-    //    links.value =  links.value.filter(link => 
-    //     link.name.toLowerCase().includes(newQuery.toLowerCase())
-    //   );
-    // });
+   
 
     const checkLoginDate = () => {
       const lastLoginDate = localStorage.getItem('lastLoginDate');
