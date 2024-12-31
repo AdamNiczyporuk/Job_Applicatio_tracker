@@ -25,13 +25,12 @@ const httpServer = http.createServer(server);
 const wss = new WebSocket.Server({ noServer: true });
 
 
-// WebSocket configuration
 wss.on('connection', (ws) => {
   console.log('Client connected');
 
   ws.on('message', (message) => {
     console.log('Received:', message);
-    // Możesz dodać logikę obsługi wiadomości tutaj
+
   });
 
   ws.on('close', () => {
@@ -40,13 +39,13 @@ wss.on('connection', (ws) => {
 });
 
 httpServer.on('upgrade', (request, socket, head) => {
-  // Make sure the request is for the WebSocket endpoint
+
   if (request.url === '/ws') {
     wss.handleUpgrade(request, socket, head, (ws) => {
       wss.emit('connection', ws, request);
     });
   } else {
-    socket.destroy();  // Reject if not for /ws
+    socket.destroy();  
   }
 });
 
