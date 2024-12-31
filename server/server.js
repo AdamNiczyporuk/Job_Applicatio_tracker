@@ -219,7 +219,7 @@ server.put('/applications/:id', (req, res) => {
       link: link || applications[applicationIndex].link,
     };
 
-    // Zapisz zmiany do bazy danych
+  
     router.db.get('applications')
       .find({ id: parseInt(id) })
       .assign(updatedApplication)
