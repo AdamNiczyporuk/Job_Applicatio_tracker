@@ -1,6 +1,6 @@
 <script>
   import { ref } from 'vue';
-   import { useRouter } from 'vue-router'; // Do obsługi nawigacji
+   import { useRouter } from 'vue-router';
   import * as api from "../API/Api.js";
 
 
@@ -46,12 +46,7 @@
         }
       }
     };
-      
 
-
-
-     
-  
       return {
         email,
         password,
