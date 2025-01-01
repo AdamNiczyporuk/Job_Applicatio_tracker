@@ -22,7 +22,7 @@ document.addEventListener('click', function(event) {
       }
   
 
-      // Wysyłanie danych do serwera
+    
       fetch('http://localhost:5000/applications', {
         method: 'POST',
         headers: {
