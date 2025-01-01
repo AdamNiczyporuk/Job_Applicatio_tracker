@@ -54,7 +54,17 @@ const authenticateToken = (req,res,next) => {
   {
     return  res.status(401).json({message:"AuthHeader missing"});
   }
-  
+  const token = authHeader.split(' ')[1];
+  try
+  { 
+    const decoded = jwt.verify(token,SECRET_KEY);
+    const {name,link} = req.body; 
+    next();
+  }catch(errr)
+  { 
+    res.status(401).json({message:"Unauthorized"});
+  }
+
 
 } 
 
