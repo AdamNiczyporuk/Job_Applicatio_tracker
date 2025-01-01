@@ -20,7 +20,6 @@ const SECRET_KEY = 'franek';
 
 
 
-
 const httpServer = http.createServer(server);
 const wss = new WebSocket.Server({ noServer: true });
 
@@ -49,7 +48,12 @@ httpServer.on('upgrade', (request, socket, head) => {
   }
 });
 
-
+const authenticateToken = (req,res,next) => {
+  const authHeader = req.headers.authhorization;
+  if(!authHeader)
+  {
+    return  res.status(401).json({message:"AuthHeader missing"});
+  }
 
 
 
