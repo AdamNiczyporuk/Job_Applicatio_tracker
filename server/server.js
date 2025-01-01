@@ -48,8 +48,8 @@ httpServer.on('upgrade', (request, socket, head) => {
   }
 });
 
-const authenticateToken = (req,res,next) => {
-  const authHeader = req.headers.authhorization;
+const authenticateToken = (req, res, next) => {
+  const authHeader = req.headers.authorization;
   if(!authHeader)
   {
     return  res.status(401).json({message:"AuthHeader missing"});
@@ -58,15 +58,13 @@ const authenticateToken = (req,res,next) => {
   try
   { 
     const decoded = jwt.verify(token,SECRET_KEY);
-    const {name,link} = req.body; 
+    req.userId = decoded.userId;
     next();
-  }catch(errr)
+  }catch(err)
   { 
     res.status(401).json({message:"Unauthorized"});
   }
-
-
-} 
+};
 
 
 
@@ -191,23 +189,12 @@ server.get('/applications', (req, res) => {
   }
 });
 
-server.get('/user', (req, res) => {
-  const authHeader = req.headers.authorization;
-  if (!authHeader) {
-    return res.status(401).json({ message: 'Authorization header missing' });
-  }
-
-  const token = authHeader.split(' ')[1];
-  try {
-    const decoded = jwt.verify(token, SECRET_KEY);
-    const user = router.db.get('users').find({ id: decoded.userId }).value();
+server.get('/user',authenticateToken, (req, res) => {
+    const user = router.db.get('users').find({ id: req.userId }).value();
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
     }
     res.status(200).json(user);
-  } catch (error) {
-    res.status(401).json({ message: 'Unauthorized' });
-  }
 });
 
 server.put('/applications/:id', (req, res) => {
