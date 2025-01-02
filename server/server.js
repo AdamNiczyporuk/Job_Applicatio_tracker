@@ -151,24 +151,17 @@ server.post('/applications',authenticateToken,(req,res)=>
     res.status(201).json(newApplication);
     }catch(error)
     { 
-      res.status(401).json({message:"Missing Data"});
+      res.status(401).json({message:"Failed Post Application"});
     }
 });
 
 
-server.get('/applications', (req, res) => {
-  const authHeader = req.headers.authorization;
-  if (!authHeader) {
-    return res.status(401).json({ message: 'Authorization header missing' });
-  }
-
-  const token = authHeader.split(' ')[1];
+server.get('/applications',authenticateToken, (req, res) => {
   try {
-    const decoded = jwt.verify(token, SECRET_KEY);
-    const applications = router.db.get('applications').filter({ userId: decoded.userId }).value();
+    const applications = router.db.get('applications').filter({ userId: req.userId }).value();
     res.status(200).json(applications);
   } catch (error) {
-    res.status(401).json({ message: 'Unauthorized' });
+    res.status(401).json({ message: 'Failed Get Applications' });
   }
 });
 
