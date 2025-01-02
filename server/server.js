@@ -101,11 +101,6 @@ server.post('/register', (req, res) => {
 });
 
 server.put('/user',authenticateToken ,(req, res) => {
-  const authHeader = req.headers.authorization;
-  if (!authHeader) {
-    return res.status(401).json({ message: 'Authorization header missing' });
-  }
-
   try {
     const { name, email, github = '', linkedin = '' } = req.body;
     const users = router.db.get('users').value();
@@ -135,24 +130,14 @@ server.put('/user',authenticateToken ,(req, res) => {
 });
 
 
-server.post('/applications',(req,res)=>
+server.post('/applications',authenticateToken,(req,res)=>
 { 
-  const authHeader = req.headers.authorization; 
-  if(!authHeader){ 
-    return res.status(400).json({message:"Header missing"});
-  }
-
-  const token = authHeader.split(' ')[1];
   try{ 
-    const decoded = jwt.verify(token,SECRET_KEY);
     const {name,link} = req.body; 
-
     const applications = router.db.get('applications').value();
     const maxId = applications.length > 0 ? Math.max(...applications.map(app => app.id)) : 0;
 
-
-
-    const newApplication = { id: maxId + 1, name, link, userId: decoded.userId,dataTime: new Date().toISOString() };
+    const newApplication = { id: maxId + 1, name, link, userId: req.userId,dataTime: new Date().toISOString() };
     router.db.get('applications').push(newApplication).write();
 
     wss.clients.forEach((client) => {
@@ -166,7 +151,7 @@ server.post('/applications',(req,res)=>
     res.status(201).json(newApplication);
     }catch(error)
     { 
-      res.status(401).json({message:"Unauthorized"});
+      res.status(401).json({message:"Missing Data"});
     }
 });
 
