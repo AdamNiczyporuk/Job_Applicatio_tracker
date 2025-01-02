@@ -100,18 +100,16 @@ server.post('/register', (req, res) => {
   }
 });
 
-server.put('/user', (req, res) => {
+server.put('/user',authenticateToken ,(req, res) => {
   const authHeader = req.headers.authorization;
   if (!authHeader) {
     return res.status(401).json({ message: 'Authorization header missing' });
   }
 
-  const token = authHeader.split(' ')[1];
   try {
-    const decoded = jwt.verify(token, SECRET_KEY);
     const { name, email, github = '', linkedin = '' } = req.body;
     const users = router.db.get('users').value();
-    const userIndex = users.findIndex(u => u.id === decoded.userId);
+    const userIndex = users.findIndex(u => u.id === req.userId);
 
     if (userIndex === -1) {
       return res.status(404).json({ message: 'User not found' });
@@ -126,7 +124,7 @@ server.put('/user', (req, res) => {
     };
 
     router.db.get('users')
-      .find({ id: decoded.userId })
+      .find({ id: req.userId })
       .assign(updatedUser)
       .write();
 
