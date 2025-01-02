@@ -173,20 +173,13 @@ server.get('/user',authenticateToken, (req, res) => {
     res.status(200).json(user);
 });
 
-server.put('/applications/:id', (req, res) => {
-  const authHeader = req.headers.authorization;
-  if (!authHeader) {
-    return res.status(401).json({ message: 'Authorization header missing' });
-  }
-
-  const token = authHeader.split(' ')[1];
+server.put('/applications/:id',authenticateToken, (req, res) => {
   try {
-    const decoded = jwt.verify(token, SECRET_KEY);
     const { id } = req.params;
     const { name, link } = req.body;
 
     const applications = router.db.get('applications').value();
-    const applicationIndex = applications.findIndex(app => app.id === parseInt(id) && app.userId === decoded.userId);
+    const applicationIndex = applications.findIndex(app => app.id === parseInt(id) && app.userId === req.userId);
 
     if (applicationIndex === -1) {
       return res.status(404).json({ message: 'Application not found or you do not have permission to edit it' });
@@ -207,7 +200,7 @@ server.put('/applications/:id', (req, res) => {
 
     res.status(200).json(updatedApplication);
   } catch (error) {
-    res.status(401).json({ message: 'Unauthorized' });
+    res.status(401).json({ message: 'Failed Put application' });
   }
 });
 
