@@ -192,7 +192,6 @@ server.put('/applications/:id',authenticateToken, (req, res) => {
       link: link || applications[applicationIndex].link,
     };
 
-  
     router.db.get('applications')
       .find({ id: parseInt(id) })
       .assign(updatedApplication)
@@ -203,14 +202,6 @@ server.put('/applications/:id',authenticateToken, (req, res) => {
     res.status(401).json({ message: 'Failed Put application' });
   }
 });
-
-
-
-
-
-
-
-
  server.use(router);
 // server.listen(5000, () => {
 //   console.log('JSON Server is running on http://localhost:5000');
