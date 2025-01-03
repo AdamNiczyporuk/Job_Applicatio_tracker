@@ -9,7 +9,9 @@
       localStorage.removeItem('token');
       window.location.reload();
 
-      conts 
+      const routeHome = () => {
+    router.push("/home");
+    }; 
     };
 
       return {
