@@ -23,6 +23,9 @@
     <v-col class="d-flex justify-end mr-5" style="margin-top: -40px;">
       <v-btn @click="logout" size="large" variant="outlined" color="red" text>Logout</v-btn>
     </v-col>
+    <v-col class="d-flex justify-end mr-5" style="margin-top: -40px;">
+      <v-btn @click="logout" size="large" variant="outlined" color="red" text>Back</v-btn>
+    </v-col>
   </v-row>
   <v-container  class="justify-center align-center" style="margin-top: -6vh;">
     <v-card class="rounded-lg mx-auto"  color="grey-darken-3"  width="75vw" style="overflow: auto;">
