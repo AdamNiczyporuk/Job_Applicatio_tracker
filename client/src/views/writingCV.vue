@@ -1,4 +1,6 @@
 <script>
+import { useRouter } from 'vue-router';
+
   export default {
     name: 'WritingCV',
     setup() {
@@ -8,14 +10,16 @@
       const logout = () => {
       localStorage.removeItem('token');
       window.location.reload();
-
-      const routeHome = () => {
-    router.push("/home");
-    }; 
     };
 
+    const routeHome = () => {
+    router.push("/home");
+    }; 
+
       return {
-        logout
+        logout,
+        routeHome,
+
       };
     },
   };
@@ -26,7 +30,7 @@
 <template >
   <v-row>
     <v-col class="d-flex justify-start ml-5" style="margin-top: -40px;">
-      <v-btn @click="logout" size="large" variant="outlined" color="green" text>Back</v-btn>
+      <v-btn @click="routeHome" size="large" variant="outlined" color="green" text>Back</v-btn>
     </v-col>
     <v-col class="d-flex justify-end mr-5" style="margin-top: -40px;">
       <v-btn @click="logout" size="large" variant="outlined" color="red" text>Logout</v-btn>
