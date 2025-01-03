@@ -2,11 +2,14 @@
   export default {
     name: 'WritingCV',
     setup() {
+      const router = useRouter();
 
 
       const logout = () => {
       localStorage.removeItem('token');
       window.location.reload();
+
+      conts 
     };
 
       return {
