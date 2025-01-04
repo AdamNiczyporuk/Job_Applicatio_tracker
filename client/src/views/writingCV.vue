@@ -15,6 +15,11 @@ import { useRouter } from 'vue-router';
     const routeHome = () => {
     router.push("/home");
     }; 
+    
+    const generateCV = () => {
+      console.log("CV generated");
+    };
+
 
       return {
         logout,
