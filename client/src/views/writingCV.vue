@@ -24,6 +24,7 @@ import { useRouter } from 'vue-router';
       return {
         logout,
         routeHome,
+        generateCV
 
       };
     },
