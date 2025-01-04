@@ -379,6 +379,14 @@ export default {
               </v-text-field>
             </v-col>
           </v-row>
+          <v-row 
+          justify="center">
+            <v-col cols="4"  >
+              <v-text-field class="text-white" v-model="phoneNumber" :rules="rules" hide-details="auto"
+                label="Enter phone number" variant="outlined" rounded>
+              </v-text-field>
+            </v-col>
+          </v-row>
           <v-row class="d-flex justify-center mt-1">
             <v-col cols="auto">
               <v-btn variant="outlined" @click="addLink" color="white">Add Link</v-btn>
