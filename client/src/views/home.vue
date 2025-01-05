@@ -12,6 +12,7 @@ export default {
     const toast = useToast();
     const links = ref([]);
     const newLink = ref('');
+    const phoneNumber = ref('');
     const name = ref('');
     const editName = ref('');
     const editNewLink = ref('');
@@ -103,6 +104,7 @@ export default {
             searchQuery.value = '';
             newLink.value = '';
             name.value = '';
+            phoneNumber.value = '';
             toast.success('Link added successfully!', {
               toastClassName: "my-custom-toast-class",
               bodyClassName: ["custom-class-1"]
@@ -300,6 +302,7 @@ export default {
     links,
     newLink,
     name,
+    phoneNumber,
     user,
     addLink,
     deleteLink,
