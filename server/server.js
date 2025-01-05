@@ -137,7 +137,7 @@ server.post('/applications',authenticateToken,(req,res)=>
     const applications = router.db.get('applications').value();
     const maxId = applications.length > 0 ? Math.max(...applications.map(app => app.id)) : 0;
 
-    const newApplication = { id: maxId + 1, name, link, userId: req.userId,dataTime: new Date().toISOString(),phoneNumber: phoneNumber || '' };
+    const newApplication = { id: maxId + 1, name, link, userId: req.userId,dataTime: new Date().toISOString(),phoneNumber: phoneNumber || null };
     router.db.get('applications').push(newApplication).write();
 
     wss.clients.forEach((client) => {
