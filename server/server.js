@@ -133,11 +133,11 @@ server.put('/user',authenticateToken ,(req, res) => {
 server.post('/applications',authenticateToken,(req,res)=>
 { 
   try{ 
-    const {name,link} = req.body; 
+    const {name,link,phoneNumber} = req.body; 
     const applications = router.db.get('applications').value();
     const maxId = applications.length > 0 ? Math.max(...applications.map(app => app.id)) : 0;
 
-    const newApplication = { id: maxId + 1, name, link, userId: req.userId,dataTime: new Date().toISOString() };
+    const newApplication = { id: maxId + 1, name, link, userId: req.userId,dataTime: new Date().toISOString(),phoneNumber: phoneNumber || '' };
     router.db.get('applications').push(newApplication).write();
 
     wss.clients.forEach((client) => {
