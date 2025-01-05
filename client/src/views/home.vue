@@ -97,7 +97,7 @@ export default {
     const addLink = () => {
     if (newLink.value.trim()) {
       if (token) {
-        api.addApplication(name.value, newLink.value, token)
+        api.addApplication(name.value, newLink.value,phoneNumber.value,token)
           .then(() => {
             fetchApplications(token);
             searchQuery.value = '';
