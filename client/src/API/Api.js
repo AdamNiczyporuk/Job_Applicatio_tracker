@@ -17,7 +17,7 @@ export const fetchApplicationById = (id) => {
 
 
 export const addApplication = (name, link,phoneNumber, token) => {
-  return axios.post('http://localhost:5000/applications', { name, link }, {
+  return axios.post('http://localhost:5000/applications', { name, link,phoneNumber}, {
     headers:
     {
       Authorization: `Bearer ${token}`
