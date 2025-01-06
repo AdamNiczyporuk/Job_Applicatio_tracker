@@ -4,6 +4,7 @@ import { ref, onMounted,computed} from "vue";
 import * as api from "../API/Api.js";
 import { useToast } from "vue-toastification";
 import { useRouter } from 'vue-router';
+import { responseEncoding } from "axios";
 
 
 export default {
@@ -101,10 +102,7 @@ export default {
         api.addApplication(name.value, newLink.value,phoneNumber.value,token)
           .then(() => {
             fetchApplications(token);
-            searchQuery.value = '';
-            newLink.value = '';
-            name.value = '';
-            phoneNumber.value = '';
+            restetValues({newLink,name,phoneNumber,searchQuery});
             toast.success('Link added successfully!', {
               toastClassName: "my-custom-toast-class",
               bodyClassName: ["custom-class-1"]
