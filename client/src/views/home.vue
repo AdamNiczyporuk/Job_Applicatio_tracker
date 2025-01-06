@@ -274,6 +274,15 @@ export default {
     router.push("/writingCV");
     }; 
 
+    const restetValues = (values) =>
+    { 
+      Object.keys(values).forEach(key => {
+        if(key in values)
+      { 
+        values[key] = '';
+      }
+      });
+    }
     onMounted(async () => {
       await fetchApplications();
       await fetchUser();
