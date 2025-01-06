@@ -139,10 +139,7 @@ export default {
 
         dialog.value = false;
         editingId.value = null;
-        editName.value = "";
-        editNewLink.value = "";
-
-        searchQuery.value = '';
+        restetValues({editName,editNewLink,searchQuery});
       } catch (error) {
         console.error("Error updating application:", error);
         toast.error('Failed to update link.', {
