@@ -4,7 +4,15 @@ import OpenAI from "openai";
 const openai = new OpenAI(process.env.REACT_APP_OPENAI_API_KEY);
 
 
-async function getAnswer(question) {
+async function generateCV(promptData) {
+  try { 
+    const prompt = ` `
+  }
+  catch (error) {
+    console.error("Error generating CV:", error);
+  }
+};
+
 
 
 export const fetchApplications = (token) => {

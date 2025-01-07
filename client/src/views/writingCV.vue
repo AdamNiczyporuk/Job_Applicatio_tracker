@@ -1,10 +1,22 @@
 <script>
+import { reactive } from 'vue';
 import { useRouter } from 'vue-router';
+import { reactive } from 'vue';
 
   export default {
     name: 'WritingCV',
     setup() {
       const router = useRouter();
+      const PromptData = reactive({
+        name: '',
+        lastname: '',
+        email: '',
+        jobTitle: '',
+        company: '',
+        reqExperience: '',
+        jobDescription: '',
+        keyValues: '',
+      })
 
 
       const logout = () => {
