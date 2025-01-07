@@ -1,6 +1,10 @@
 import axios from "axios";
+import OpenAI from "openai";
+
+const openai = new OpenAI(process.env.REACT_APP_OPENAI_API_KEY);
 
 
+async function getAnswer(question) {
 
 
 export const fetchApplications = (token) => {
