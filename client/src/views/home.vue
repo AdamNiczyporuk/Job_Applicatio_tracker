@@ -1,10 +1,10 @@
 
 <script>
+/* eslint-disable no-unused-vars */
 import { ref, onMounted,computed} from "vue";
 import * as api from "../API/Api.js";
 import { useToast } from "vue-toastification";
 import { useRouter } from 'vue-router';
-import { responseEncoding } from "axios";
 
 
 export default {

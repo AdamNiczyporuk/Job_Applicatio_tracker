@@ -4,5 +4,7 @@ module.exports = defineConfig({
   devServer: {
     host: 'localhost',
     port: 8080
+  }, env: {
+    API_KEY: process.env.API_KEY
   }
 });

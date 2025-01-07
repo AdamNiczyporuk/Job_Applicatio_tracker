@@ -1,12 +1,15 @@
 <script>
-import { reactive } from 'vue';
+/* eslint-disable no-unused-vars */
+import { ref,reactive } from 'vue';
 import { useRouter } from 'vue-router';
-import { reactive } from 'vue';
+import * as api from "../API/Api.js";
+
 
   export default {
     name: 'WritingCV',
     setup() {
       const router = useRouter();
+      const cvText = ref('');
       const PromptData = reactive({
         name: '',
         lastname: '',
@@ -17,7 +20,14 @@ import { reactive } from 'vue';
         jobDescription: '',
         keyValues: '',
       })
-
+      
+      const getCV = async() =>
+      { 
+        const cvText = await api.generateCV(PromptData);
+        console.log("Generated CV:\n",cvText);
+      }
+       
+  
 
       const logout = () => {
       localStorage.removeItem('token');

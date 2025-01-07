@@ -1,17 +1,30 @@
 import axios from "axios";
 import OpenAI from "openai";
 
-const openai = new OpenAI(process.env.REACT_APP_OPENAI_API_KEY);
+
+console.log(API_KEY);
+
+const openai = new OpenAI({ apiKey: API_KEY });
 
 
-async function generateCV(promptData) {
+
+export async function generateCV(promptData) {
   try { 
-    const prompt = ` `
+    const prompt = `prompt: ${promptData}`;
+    const completion = await openai.chat.completions.create({
+      model: "gpt-4o-mini",
+      messages: [
+          { role: "system", content: "You are a professional CV writer." },
+          { role: "user", content: prompt },
+      ],
+  });
+
+  return completion.choices[0].message.content;
   }
   catch (error) {
     console.error("Error generating CV:", error);
   }
-};
+}
 
 
 
