@@ -2,9 +2,9 @@ import axios from "axios";
 import OpenAI from "openai";
 
 
-console.log(API_KEY);
+console.log(process.env.API_KEY);
 
-const openai = new OpenAI({ apiKey: API_KEY });
+const openai = new OpenAI({ apiKey: process.env.VUE_APP_API_KEY });
 
 
 

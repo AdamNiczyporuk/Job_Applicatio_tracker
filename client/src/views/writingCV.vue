@@ -1,5 +1,4 @@
 <script>
-/* eslint-disable no-unused-vars */
 import { ref,reactive } from 'vue';
 import { useRouter } from 'vue-router';
 import * as api from "../API/Api.js";

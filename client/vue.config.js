@@ -1,10 +1,11 @@
 const { defineConfig } = require('@vue/cli-service');
+const dotenv = require('dotenv');
+dotenv.config();
+
 module.exports = defineConfig({
   transpileDependencies: true,
   devServer: {
     host: 'localhost',
     port: 8080
-  }, env: {
-    API_KEY: process.env.API_KEY
   }
 });
