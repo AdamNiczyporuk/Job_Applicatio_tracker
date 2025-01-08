@@ -44,7 +44,7 @@ import { generateCV } from '@/API/GptAPI.js';
       return {
         logout,
         routeHome,
-        generateCV
+        getCV,
 
       };
     },
@@ -119,8 +119,13 @@ import { generateCV } from '@/API/GptAPI.js';
       <v-btn 
       color="green" 
       variant="outlined"
-      class="mx-auto">Generate CV</v-btn>
-    </v-card-actions>   
+      class="mx-auto"
+      @click="getCV"
+      >Generate CV</v-btn>
+    </v-card-actions> 
+    <v-card-text v-if="cvText">
+          <pre>{{ cvText }}</pre> <!-- Wyświetl wygenerowany tekst CV -->
+        </v-card-text>  
   </v-card>
 </v-container>
 </v-row>
