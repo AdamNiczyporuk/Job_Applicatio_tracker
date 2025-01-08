@@ -2,7 +2,7 @@
 <script>
 /* eslint-disable no-unused-vars */
 import { ref, onMounted,computed} from "vue";
-import * as api from "../API/Api.js";
+import * as api from "../API/ServerApi.js";
 import { useToast } from "vue-toastification";
 import { useRouter } from 'vue-router';
 

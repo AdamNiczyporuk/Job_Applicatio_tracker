@@ -1,6 +1,6 @@
 <script>
 import { ref } from "vue";
-import * as api from "../API/Api.js";
+import * as api from "../API/ServerApi.js";
 import { useRouter } from 'vue-router';
 import { useToast } from "vue-toastification";
 
