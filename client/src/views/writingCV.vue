@@ -1,7 +1,6 @@
 <script>
 import { ref,reactive } from 'vue';
 import { useRouter } from 'vue-router';
-import * as api from "../API/ServerApi.js";
 import { generateCV } from '@/API/GptAPI.js'; 
 
   export default {
@@ -36,15 +35,13 @@ import { generateCV } from '@/API/GptAPI.js';
     router.push("/home");
     }; 
     
-    const generateCV = () => {
-      console.log("CV generated");
-    };
 
 
       return {
         logout,
         routeHome,
         getCV,
+        cvText,
 
       };
     },
@@ -62,10 +59,9 @@ import { generateCV } from '@/API/GptAPI.js';
       <v-btn @click="logout" size="large" variant="outlined" color="red" text>Logout</v-btn>
     </v-col>
   </v-row>
-
   <v-row>
-  <v-container  class="justify-center align-center">
-    <v-card class="rounded-lg mx-auto"  color="grey-darken-3"  width="75vw" style="overflow: auto;">
+  <v-container  class="d-flex justify-center">
+    <v-card class="rounded-lg mx-auto"  color="grey-darken-3"  width="75vw" >
       <v-card-title class="text-white ">
         <h2>Fill Data to Generate CV</h2>
       </v-card-title>
@@ -97,7 +93,7 @@ import { generateCV } from '@/API/GptAPI.js';
         rounded
         auto-grow
         variant="outlined"
-        class="mx-5  text-white"
+        class="mx-5 text-white"
         ></v-textarea>
     </v-col>
   </v-row>
@@ -111,7 +107,7 @@ import { generateCV } from '@/API/GptAPI.js';
         auto-grow
         rounded
         variant="outlined"
-        class="mx-5  text-white"
+        class=" mx-5 text-white"
       ></v-textarea>
     </v-col>
   </v-row>
@@ -125,7 +121,7 @@ import { generateCV } from '@/API/GptAPI.js';
     </v-card-actions> 
     <v-card-text v-if="cvText">
           <pre>{{ cvText }}</pre> <!-- Wyświetl wygenerowany tekst CV -->
-        </v-card-text>  
+      </v-card-text>  
   </v-card>
 </v-container>
 </v-row>
