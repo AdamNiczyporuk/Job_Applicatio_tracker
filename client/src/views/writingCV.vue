@@ -11,13 +11,12 @@ import { generateCV } from '@/API/GptAPI.js';
       const cvText = ref('');
       const PromptData = reactive({
         name: '',
-        lastname: '',
+        surname: '',
         email: '',
         jobTitle: '',
         company: '',
         reqExperience: '',
         jobDescription: '',
-        keyValues: '',
       })
       
       const getCV = async() =>
@@ -114,20 +113,6 @@ import { generateCV } from '@/API/GptAPI.js';
         variant="outlined"
         class="mx-5  text-white"
       ></v-textarea>
-    </v-col>
-  </v-row>
-  <v-row>
-    <v-col cols="12" md="12">
-    <v-textarea
-      label="Key Values of the Company"
-      maxlength="200"
-      rows="2"
-      counter
-      auto-grow
-      rounded
-      variant="outlined"
-      class="mx-4 mt-2 text-white"
-    ></v-textarea>
     </v-col>
   </v-row>
     <v-card-actions>
