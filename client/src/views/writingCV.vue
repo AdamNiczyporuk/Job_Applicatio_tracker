@@ -120,7 +120,7 @@ import { generateCV } from '@/API/GptAPI.js';
       >Generate CV</v-btn>
     </v-card-actions> 
     <v-card-text v-if="cvText">
-          <pre>{{ cvText }}</pre> <!-- Wyświetl wygenerowany tekst CV -->
+          <pre>{{ cvText }}</pre>  <!--Naprawa wyświetlania Cv-->
       </v-card-text>  
   </v-card>
 </v-container>
