@@ -22,7 +22,7 @@ import { generateCV } from '@/API/GptAPI.js';
       { 
         const cvText = await generateCV(PromptData);
         console.log("Generated CV:\n",cvText);
-      }
+      }//Naprawa wyświetlania Cv
        
   
 
