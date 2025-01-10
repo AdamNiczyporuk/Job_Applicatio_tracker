@@ -67,7 +67,8 @@ import { generateCV } from '@/API/GptAPI.js';
       </v-card-title>
       <v-row>
         <v-col cols="12" md="6">
-          <v-text-field 
+          <v-text-field
+          v-model="PromptData.name"
             label="Name" 
             variant="outlined" 
             rounded    
@@ -76,6 +77,7 @@ import { generateCV } from '@/API/GptAPI.js';
         </v-col>
         <v-col cols="12" md="6">
           <v-text-field 
+          v-model="PromptData.surname"
             label="Surname" 
             variant="outlined" 
             rounded
@@ -86,6 +88,7 @@ import { generateCV } from '@/API/GptAPI.js';
       <v-row>
         <v-col cols="12" md="6">
           <v-text-field 
+          v-model="PromptData.jobTitle"
             label="Job Title" 
             variant="outlined" 
             rounded    
@@ -94,6 +97,7 @@ import { generateCV } from '@/API/GptAPI.js';
         </v-col>
         <v-col cols="12" md="6">
           <v-text-field 
+          v-model="PromptData.company"
             label="Company name" 
             variant="outlined" 
             rounded
@@ -104,6 +108,7 @@ import { generateCV } from '@/API/GptAPI.js';
     <v-row>
       <v-col cols="12" md="12">
         <v-textarea 
+        v-model="PromptData.jobDescription"
         label="Job description"
         rows="3"
         maxlength="700"
@@ -118,6 +123,7 @@ import { generateCV } from '@/API/GptAPI.js';
   <v-row> 
     <v-col cols="12" md="12">
         <v-textarea
+        v-model="PromptData.reqExperience"
         label="Required Experience"
         rows="2"
         maxlength="500"
