@@ -8,6 +8,7 @@ import { generateCV } from '@/API/GptAPI.js';
     setup() {
       const router = useRouter();
       const cvText = ref('');
+      const showForm = ref(true);
       const PromptData = reactive({
         name: '',
         surname: '',
@@ -20,7 +21,7 @@ import { generateCV } from '@/API/GptAPI.js';
       
       const getCV = async() =>
       { 
-        const cvText = await generateCV(PromptData);
+        cvText.value = await generateCV(PromptData);
         console.log("Generated CV:\n",cvText);
       }//Naprawa wyświetlania Cv 
        
@@ -67,7 +68,7 @@ import { generateCV } from '@/API/GptAPI.js';
         <h2>Fill Data to Generate CV</h2>
       </v-card-title>
       <v-row>
-        <v-col cols="12" md="=4">
+        <v-col cols="12" md="4">
           <v-text-field
           v-model="PromptData.name"
             label="Name" 
