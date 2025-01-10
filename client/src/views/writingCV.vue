@@ -22,7 +22,7 @@ import { generateCV } from '@/API/GptAPI.js';
       { 
         const cvText = await generateCV(PromptData);
         console.log("Generated CV:\n",cvText);
-      }//Naprawa wyświetlania Cv
+      }//Naprawa wyświetlania Cv 
        
   
 
@@ -65,6 +65,24 @@ import { generateCV } from '@/API/GptAPI.js';
       <v-card-title class="text-white ">
         <h2>Fill Data to Generate CV</h2>
       </v-card-title>
+      <v-row>
+        <v-col cols="12" md="6">
+          <v-text-field 
+            label="Name" 
+            variant="outlined" 
+            rounded    
+            class="text-white ml-5" >
+          </v-text-field>
+        </v-col>
+        <v-col cols="12" md="6">
+          <v-text-field 
+            label="Surname" 
+            variant="outlined" 
+            rounded
+            class="mr-5  text-white">
+          </v-text-field>
+        </v-col>
+    </v-row>
       <v-row>
         <v-col cols="12" md="6">
           <v-text-field 
