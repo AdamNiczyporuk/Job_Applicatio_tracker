@@ -42,6 +42,7 @@ import { generateCV } from '@/API/GptAPI.js';
         routeHome,
         getCV,
         cvText,
+        PromptData
 
       };
     },
