@@ -67,7 +67,7 @@ import { generateCV } from '@/API/GptAPI.js';
         <h2>Fill Data to Generate CV</h2>
       </v-card-title>
       <v-row>
-        <v-col cols="12" md="6">
+        <v-col cols="12" md="=4">
           <v-text-field
           v-model="PromptData.name"
             label="Name" 
@@ -76,10 +76,19 @@ import { generateCV } from '@/API/GptAPI.js';
             class="text-white ml-5" >
           </v-text-field>
         </v-col>
-        <v-col cols="12" md="6">
+        <v-col cols="12" md="4">
           <v-text-field 
           v-model="PromptData.surname"
             label="Surname" 
+            variant="outlined" 
+            rounded
+            class="mr-5  text-white">
+          </v-text-field>
+        </v-col>
+        <v-col cols="12" md="4">
+          <v-text-field 
+          v-model="PromptData.email"
+            label="Mail" 
             variant="outlined" 
             rounded
             class="mr-5  text-white">
