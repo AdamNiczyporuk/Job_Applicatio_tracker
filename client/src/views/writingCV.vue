@@ -22,11 +22,11 @@ import { generateCV } from '@/API/GptAPI.js';
       
       const getCV = async() =>
       {
+        showForm.value = false;
         isLoading.value = true;
         try
         {
           cvText.value = await generateCV(PromptData);
-          showForm.value = false;
           console.log("Generated CV:\n",cvText);
         } 
         catch (error) 
@@ -172,7 +172,13 @@ import { generateCV } from '@/API/GptAPI.js';
     </v-card-actions> 
     <v-card-text v-if="!showForm">
           <pre>{{ cvText }}</pre>  
-      </v-card-text>  
+    </v-card-text>  
+    <v-row v-if="isLoading" class="justify-center align-center"> <!-- Fix Loading-->
+      <v-progress-circular
+      indeterminate
+      color="green"
+      ></v-progress-circular>
+    </v-row>
   </v-card>
 </v-container>
 </v-row>
