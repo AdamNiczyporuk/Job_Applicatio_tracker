@@ -22,8 +22,9 @@ import { generateCV } from '@/API/GptAPI.js';
       const getCV = async() =>
       { 
         cvText.value = await generateCV(PromptData);
+        showForm.value = false;
         console.log("Generated CV:\n",cvText);
-      }//Naprawa wyświetlania Cv 
+      }
        
   
 
@@ -64,7 +65,7 @@ import { generateCV } from '@/API/GptAPI.js';
   <v-row>
   <v-container  class="d-flex justify-center">
     <v-card class="rounded-lg mx-auto"  color="grey-darken-3"  width="75vw" >
-      <v-card-title class="text-white ">
+      <v-card-title v-if="showForm" class="text-white ">
         <h2>Fill Data to Generate CV</h2>
       </v-card-title>
       <v-row>
@@ -155,7 +156,7 @@ import { generateCV } from '@/API/GptAPI.js';
       >Generate CV</v-btn>
     </v-card-actions> 
     <v-card-text v-if="cvText">
-          <pre>{{ cvText }}</pre>  <!--Naprawa wyświetlania Cv-->
+          <pre>{{ cvText }}</pre>  
       </v-card-text>  
   </v-card>
 </v-container>
