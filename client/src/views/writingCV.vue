@@ -44,7 +44,8 @@ import { generateCV } from '@/API/GptAPI.js';
         routeHome,
         getCV,
         cvText,
-        PromptData
+        PromptData,
+        showForm
 
       };
     },
@@ -68,7 +69,7 @@ import { generateCV } from '@/API/GptAPI.js';
       <v-card-title v-if="showForm" class="text-white ">
         <h2>Fill Data to Generate CV</h2>
       </v-card-title>
-      <v-row>
+      <v-row v-if="showForm">
         <v-col cols="12" md="4">
           <v-text-field
           v-model="PromptData.name"
@@ -97,7 +98,7 @@ import { generateCV } from '@/API/GptAPI.js';
           </v-text-field>
         </v-col>
     </v-row>
-      <v-row>
+      <v-row v-if="showForm">
         <v-col cols="12" md="6">
           <v-text-field 
           v-model="PromptData.jobTitle"
@@ -117,7 +118,7 @@ import { generateCV } from '@/API/GptAPI.js';
           </v-text-field>
         </v-col>
     </v-row>
-    <v-row>
+    <v-row v-if="showForm">
       <v-col cols="12" md="12">
         <v-textarea 
         v-model="PromptData.jobDescription"
@@ -132,7 +133,7 @@ import { generateCV } from '@/API/GptAPI.js';
         ></v-textarea>
     </v-col>
   </v-row>
-  <v-row> 
+  <v-row v-if="showForm"> 
     <v-col cols="12" md="12">
         <v-textarea
         v-model="PromptData.reqExperience"
@@ -147,7 +148,7 @@ import { generateCV } from '@/API/GptAPI.js';
       ></v-textarea>
     </v-col>
   </v-row>
-    <v-card-actions>
+    <v-card-actions v-if="showForm">
       <v-btn 
       color="green" 
       variant="outlined"
@@ -155,7 +156,7 @@ import { generateCV } from '@/API/GptAPI.js';
       @click="getCV"
       >Generate CV</v-btn>
     </v-card-actions> 
-    <v-card-text v-if="cvText">
+    <v-card-text v-if="!showForm">
           <pre>{{ cvText }}</pre>  
       </v-card-text>  
   </v-card>
