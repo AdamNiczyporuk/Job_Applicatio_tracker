@@ -8,6 +8,7 @@ import { generateCV } from '@/API/GptAPI.js';
     setup() {
       const router = useRouter();
       const cvText = ref('');
+      const isLoading = ref(false);
       const showForm = ref(true);
       const PromptData = reactive({
         name: '',
@@ -20,11 +21,23 @@ import { generateCV } from '@/API/GptAPI.js';
       })
       
       const getCV = async() =>
-      { 
-        cvText.value = await generateCV(PromptData);
-        showForm.value = false;
-        console.log("Generated CV:\n",cvText);
-      }
+      {
+        isLoading.value = true;
+        try
+        {
+          cvText.value = await generateCV(PromptData);
+          showForm.value = false;
+          console.log("Generated CV:\n",cvText);
+        } 
+        catch (error) 
+        {
+          console.log(error)
+        }
+        finally 
+        {
+          isLoading.value = false;
+        }
+    };
        
   
 
@@ -45,7 +58,8 @@ import { generateCV } from '@/API/GptAPI.js';
         getCV,
         cvText,
         PromptData,
-        showForm
+        showForm,
+        isLoading
 
       };
     },
