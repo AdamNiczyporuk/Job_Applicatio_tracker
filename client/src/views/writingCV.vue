@@ -95,6 +95,7 @@ import { generateCV } from '@/API/GptAPI.js';
       <v-row v-if="showForm">
         <v-col cols="12" md="4">
           <v-text-field
+          id="name-input"
           v-model="PromptData.name"
             label="Name" 
             variant="outlined" 
@@ -104,6 +105,7 @@ import { generateCV } from '@/API/GptAPI.js';
         </v-col>
         <v-col cols="12" md="4">
           <v-text-field 
+            id="surname-input"
           v-model="PromptData.surname"
             label="Surname" 
             variant="outlined" 
@@ -113,6 +115,7 @@ import { generateCV } from '@/API/GptAPI.js';
         </v-col>
         <v-col cols="12" md="4">
           <v-text-field 
+            id="mail-input"
           v-model="PromptData.email"
             label="Mail" 
             variant="outlined" 
@@ -124,6 +127,7 @@ import { generateCV } from '@/API/GptAPI.js';
       <v-row v-if="showForm">
         <v-col cols="12" md="6">
           <v-text-field 
+            id="job-tiitle-input"
           v-model="PromptData.jobTitle"
             label="Job Title" 
             variant="outlined" 
@@ -133,6 +137,7 @@ import { generateCV } from '@/API/GptAPI.js';
         </v-col>
         <v-col cols="12" md="6">
           <v-text-field 
+            id="company-name-input"
           v-model="PromptData.company"
             label="Company name" 
             variant="outlined" 
