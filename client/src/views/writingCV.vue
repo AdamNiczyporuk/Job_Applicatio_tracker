@@ -78,8 +78,15 @@ import { generateCV } from '@/API/GptAPI.js';
     </v-col>
   </v-row>
   <v-row>
-  <v-container  class="d-flex justify-center">
-    <v-card class="rounded-lg mx-auto"  color="grey-darken-3"  width="75vw" >
+  <v-container  class="justify-center">
+    <v-card class="rounded-lg"  color="grey-darken-3"  width="75vw" min-height="400px" >
+      <v-progress-circular
+      v-if="isLoading"
+      class="justify-center align-center"
+      indeterminate
+      color="green"
+      :size="50"
+      ></v-progress-circular>
       <v-card-title v-if="showForm" class="text-white ">
         <h2>Fill Data to Generate CV</h2>
       </v-card-title>
@@ -173,12 +180,6 @@ import { generateCV } from '@/API/GptAPI.js';
     <v-card-text v-if="!showForm">
           <pre>{{ cvText }}</pre>  
     </v-card-text>  
-    <v-row v-if="isLoading" class="justify-center align-center"> <!-- Fix Loading-->
-      <v-progress-circular
-      indeterminate
-      color="green"
-      ></v-progress-circular>
-    </v-row>
   </v-card>
 </v-container>
 </v-row>
