@@ -148,7 +148,8 @@ import { generateCV } from '@/API/GptAPI.js';
     </v-row>
     <v-row v-if="showForm">
       <v-col cols="12" md="12">
-        <v-textarea 
+        <v-textarea
+        id="job-description-input" 
         v-model="PromptData.jobDescription"
         label="Job description"
         rows="3"
@@ -164,6 +165,7 @@ import { generateCV } from '@/API/GptAPI.js';
   <v-row v-if="showForm"> 
     <v-col cols="12" md="12">
         <v-textarea
+        id="req-experience-input"
         v-model="PromptData.reqExperience"
         label="Required Experience"
         rows="2"
