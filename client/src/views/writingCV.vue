@@ -22,6 +22,10 @@ import { generateCV } from '@/API/GptAPI.js';
       
       const getCV = async() =>
       {
+        if (!PromptData.name || !PromptData.surname || !PromptData.email || !PromptData.jobTitle || !PromptData.company || !PromptData.jobDescription || !PromptData.reqExperience) {
+        ttoast.error("Please fill in all required fields.");
+        return;
+        }
         showForm.value = false;
         isLoading.value = true;
         try
