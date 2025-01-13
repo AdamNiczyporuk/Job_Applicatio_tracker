@@ -99,7 +99,8 @@ import { generateCV } from '@/API/GptAPI.js';
           v-model="PromptData.name"
             label="Name" 
             variant="outlined" 
-            rounded    
+            rounded
+            required    
             class="text-white ml-5" >
           </v-text-field>
         </v-col>
@@ -108,7 +109,8 @@ import { generateCV } from '@/API/GptAPI.js';
             id="surname-input"
           v-model="PromptData.surname"
             label="Surname" 
-            variant="outlined" 
+            variant="outlined"
+            required 
             rounded
             class="mr-5  text-white">
           </v-text-field>
@@ -118,6 +120,7 @@ import { generateCV } from '@/API/GptAPI.js';
             id="mail-input"
           v-model="PromptData.email"
             label="Mail" 
+            required
             variant="outlined" 
             rounded
             class="mr-5  text-white">
@@ -128,6 +131,7 @@ import { generateCV } from '@/API/GptAPI.js';
         <v-col cols="12" md="6">
           <v-text-field 
             id="job-tiitle-input"
+            required
           v-model="PromptData.jobTitle"
             label="Job Title" 
             variant="outlined" 
@@ -142,6 +146,7 @@ import { generateCV } from '@/API/GptAPI.js';
             label="Company name" 
             variant="outlined" 
             rounded
+            required
             class="mr-5  text-white">
           </v-text-field>
         </v-col>
@@ -153,6 +158,7 @@ import { generateCV } from '@/API/GptAPI.js';
         v-model="PromptData.jobDescription"
         label="Job description"
         rows="3"
+        required
         maxlength="700"
         counter
         rounded
@@ -172,6 +178,7 @@ import { generateCV } from '@/API/GptAPI.js';
         maxlength="500"
         counter
         auto-grow
+        required
         rounded
         variant="outlined"
         class=" mx-5 text-white"
