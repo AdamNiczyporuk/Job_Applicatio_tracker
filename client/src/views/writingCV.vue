@@ -2,10 +2,11 @@
 import { ref,reactive } from 'vue';
 import { useRouter } from 'vue-router';
 import { generateCV } from '@/API/GptAPI.js'; 
-
+import { useToast } from "vue-toastification";
   export default {
     name: 'WritingCV',
     setup() {
+      const toast = useToast();
       const router = useRouter();
       const cvText = ref('');
       const isLoading = ref(false);
