@@ -2,11 +2,9 @@
 import { ref,reactive } from 'vue';
 import { useRouter } from 'vue-router';
 import { generateCV } from '@/API/GptAPI.js'; 
-import { useToast } from "vue-toastification";
   export default {
     name: 'WritingCV',
     setup() {
-      const toast = useToast();
       const router = useRouter();
       const cvText = ref('');
       const isLoading = ref(false);
@@ -24,9 +22,10 @@ import { useToast } from "vue-toastification";
       
       const getCV = async() =>
       {
-        if (!PromptData.name || !PromptData.surname || !PromptData.email || !PromptData.jobTitle || !PromptData.company || !PromptData.jobDescription || !PromptData.reqExperience) {
-        toast.error("Please fill in all required fields.");
-        return;
+        if(!PromptData.name)
+        {
+          errorMessage.value = "Name is required";
+          return;
         }
         showForm.value = false;
         isLoading.value = true;
@@ -98,6 +97,9 @@ import { useToast } from "vue-toastification";
       <v-card-title v-if="showForm" class="text-white ">
         <h2>Fill Data to Generate CV</h2>
       </v-card-title>
+      <v-alert  v-if="errorMessage" type="error" class="mx-5" dismissible>
+        {{ errorMessage }}
+      </v-alert>
       <v-row v-if="showForm">
         <v-col cols="12" md="4">
           <v-text-field
