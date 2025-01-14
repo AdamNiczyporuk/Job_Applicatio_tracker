@@ -72,11 +72,12 @@ import { generateCV } from '@/API/GptAPI.js';
         if (!validateFields()) {
           return;
         }
-        showForm.value = false;
+        
         isLoading.value = true;
         try
         {
           cvText.value = await generateCV(PromptData);
+          showForm.value = false;
           console.log("Generated CV:\n",cvText);
         } 
         catch (error) 
@@ -133,7 +134,7 @@ import { generateCV } from '@/API/GptAPI.js';
   <v-row>
   <v-container  class="justify-center">
     <v-card class="rounded-lg"  color="grey-darken-3"  width="75vw" min-height="400px" >
-      <div v-if="isLoading" class="d-flex justify-center align-center" height="100px">
+      <div v-if="isLoading" class="d-flex mt-10 justify-center align-center" style="height: 100%;">
         <v-progress-circular
           indeterminate
           color="green"
