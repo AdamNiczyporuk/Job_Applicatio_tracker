@@ -11,6 +11,7 @@ import { useToast } from "vue-toastification";
       const cvText = ref('');
       const isLoading = ref(false);
       const showForm = ref(true);
+      const errorMessage= ref('');
       const PromptData = reactive({
         name: '',
         surname: '',
