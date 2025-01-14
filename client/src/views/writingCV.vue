@@ -9,7 +9,17 @@ import { generateCV } from '@/API/GptAPI.js';
       const cvText = ref('');
       const isLoading = ref(false);
       const showForm = ref(true);
-      const errorMessage= ref('');
+      const errorMessage = ref('');
+      const errors = reactive({
+        name: '',
+        surname: '',
+        email: '',
+        jobTitle: '',
+        company: '',
+        reqExperience: '',
+        jobDescription: '',
+      })
+
       const PromptData = reactive({
         name: '',
         surname: '',
@@ -19,12 +29,47 @@ import { generateCV } from '@/API/GptAPI.js';
         reqExperience: '',
         jobDescription: '',
       })
+
+      const validateFields = () => {
+        let isValid = true;
+        Object.keys(errors).forEach((key) => {
+          errors[key] = '';
+        });
+
+        if (!PromptData.name) {
+        errors.name = "Name is required";
+        isValid = false;
+      }
+      if (!PromptData.surname) {
+        errors.surname = "Surname is required";
+        isValid = false;
+      }
+      if (!PromptData.email) {
+        errors.email = "Email is required";
+        isValid = false;
+      }
+      if (!PromptData.jobTitle) {
+        errors.jobTitle = "Job Title is required";
+        isValid = false;
+      }
+      if (!PromptData.company) {
+        errors.company = "Company name is required";
+        isValid = false;
+      }
+      if (!PromptData.jobDescription) {
+        errors.jobDescription = "Job Description is required";
+        isValid = false;
+      }
+      if (!PromptData.reqExperience) {
+        errors.reqExperience = "Required Experience is required";
+        isValid = false;
+      }
+      return isValid;
+      }
       
-      const getCV = async() =>
-      {
-        if(!PromptData.name)
-        {
-          errorMessage.value = "Name is required";
+     async function getCV(){
+      
+        if (!validateFields()) {
           return;
         }
         showForm.value = false;
@@ -42,7 +87,7 @@ import { generateCV } from '@/API/GptAPI.js';
         {
           isLoading.value = false;
         }
-    };
+    }
        
   
 
@@ -64,7 +109,9 @@ import { generateCV } from '@/API/GptAPI.js';
         cvText,
         PromptData,
         showForm,
-        isLoading
+        isLoading,
+        errorMessage,
+        errors
 
       };
     },
@@ -97,9 +144,6 @@ import { generateCV } from '@/API/GptAPI.js';
       <v-card-title v-if="showForm" class="text-white ">
         <h2>Fill Data to Generate CV</h2>
       </v-card-title>
-      <v-alert  v-if="errorMessage" type="error" class="mx-5" dismissible>
-        {{ errorMessage }}
-      </v-alert>
       <v-row v-if="showForm">
         <v-col cols="12" md="4">
           <v-text-field
@@ -108,8 +152,9 @@ import { generateCV } from '@/API/GptAPI.js';
             label="Name" 
             variant="outlined" 
             rounded
-            required    
-            class="text-white ml-5" >
+            required
+            :error-messages="errors.name"
+            class="text-white ml-5">
           </v-text-field>
         </v-col>
         <v-col cols="12" md="4">
@@ -120,6 +165,7 @@ import { generateCV } from '@/API/GptAPI.js';
             variant="outlined"
             required 
             rounded
+            :error-messages="errors.surname"
             class="mr-5  text-white">
           </v-text-field>
         </v-col>
@@ -131,6 +177,7 @@ import { generateCV } from '@/API/GptAPI.js';
             required
             variant="outlined" 
             rounded
+            :error-messages="errors.email"
             class="mr-5  text-white">
           </v-text-field>
         </v-col>
@@ -143,7 +190,8 @@ import { generateCV } from '@/API/GptAPI.js';
           v-model="PromptData.jobTitle"
             label="Job Title" 
             variant="outlined" 
-            rounded    
+            rounded 
+            :error-messages="errors.jobTitle"   
             class="text-white ml-5" >
           </v-text-field>
         </v-col>
@@ -155,6 +203,7 @@ import { generateCV } from '@/API/GptAPI.js';
             variant="outlined" 
             rounded
             required
+            :error-messages="errors.company"
             class="mr-5  text-white">
           </v-text-field>
         </v-col>
@@ -171,6 +220,7 @@ import { generateCV } from '@/API/GptAPI.js';
         counter
         rounded
         auto-grow
+        :error-messages="errors.jobDescription"
         variant="outlined"
         class="mx-5 text-white"
         ></v-textarea>
@@ -188,6 +238,7 @@ import { generateCV } from '@/API/GptAPI.js';
         auto-grow
         required
         rounded
+        :error-messages="errors.reqExperience"
         variant="outlined"
         class=" mx-5 text-white"
       ></v-textarea>
