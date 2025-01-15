@@ -134,7 +134,7 @@ import { generateCV } from '@/API/GptAPI.js';
   <v-row>
   <v-container  class="justify-center">
     <v-card class="rounded-lg"  color="grey-darken-3"  width="75vw" min-height="400px" >
-      <div v-if="isLoading" class="d-flex mt-10 justify-center align-center" style="height: 100%;">
+      <div v-if="isLoading" class="d-flex justify-center align-center" style="height: 100%; position: absolute; top: 0; left: 0; right: 0; bottom: 0;">
         <v-progress-circular
           indeterminate
           color="green"
