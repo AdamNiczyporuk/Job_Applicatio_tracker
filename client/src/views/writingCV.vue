@@ -140,6 +140,7 @@ import { generateCV } from '@/API/GptAPI.js';
           color="green"
           :size="50"
         ></v-progress-circular>
+        <span class="mt-3 text-white">Generating CV ... </span>
       </div>
       <template v-else>
       <v-card-title v-if="showForm" class="text-white ">
