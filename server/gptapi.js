@@ -1,5 +1,6 @@
 import OpenAI from "openai";
 const openai = new OpenAI({ apiKey: process.env.VUE_APP_API_KEY,dangerouslyAllowBrowser: true});
+console.log("API Key:", process.env.VUE_APP_API_KEY);
 // Hide this in server side
 export async function generateCV(userData) {
   try { 
