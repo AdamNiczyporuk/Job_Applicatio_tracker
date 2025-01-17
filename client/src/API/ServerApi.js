@@ -75,3 +75,19 @@ export const verifyToken = () => {
     headers: { Authorization: `Bearer ${token}` },
   });
 }
+
+
+export async function generateCV(userData) {
+  try {
+    const token = localStorage.getItem('token');
+    const response = await axios.post('http://localhost:5000/generate-cv', userData, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+    return response.data.cvText;
+  } catch (error) {
+    console.error("Error generating CV:", error);
+    throw error;
+  }
+}
