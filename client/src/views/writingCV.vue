@@ -1,6 +1,7 @@
 <script>
 import { ref,reactive } from 'vue';
 import { useRouter } from 'vue-router';
+import * as api from "../API/ServerApi.js";
 import { generateCV } from '@/API/GptAPI.js'; 
   export default {
     name: 'WritingCV',
@@ -76,7 +77,7 @@ import { generateCV } from '@/API/GptAPI.js';
         isLoading.value = true;
         try
         {
-          cvText.value = await generateCV(PromptData);
+          cvText.value = await api.generateCV(PromptData);
           showForm.value = false;
           console.log("Generated CV:\n",cvText);
         } 
