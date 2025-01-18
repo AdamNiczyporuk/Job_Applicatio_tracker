@@ -77,7 +77,7 @@ import { generateCV } from '@/API/GptAPI.js';
         isLoading.value = true;
         try
         {
-          cvText.value = await api.generateCV(PromptData);
+          cvText.value = await api.generateCV(PromptData);// I need to add env to the server
           showForm.value = false;
           console.log("Generated CV:\n",cvText);
         } 
