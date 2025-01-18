@@ -12,7 +12,6 @@ export const fetchApplicationById = (id) => {
   return axios.get(`http://localhost:5000/applications/${id}`);
 }
 
-
 export const addApplication = (name, link,phoneNumber, token) => {
   return axios.post('http://localhost:5000/applications', { name, link,phoneNumber}, {
     headers:
@@ -64,7 +63,6 @@ export const GetUserByID = (token) => {
   });
 };
 
-
 export const verifyToken = () => {
   const token = localStorage.getItem('token');
   if (!token) {
@@ -75,7 +73,6 @@ export const verifyToken = () => {
     headers: { Authorization: `Bearer ${token}` },
   });
 }
-
 
 export async function generateCV(userData) {
   try {
