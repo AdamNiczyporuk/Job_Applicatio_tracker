@@ -5,7 +5,7 @@ const server = jsonServer.create();
 const jwt = require('jsonwebtoken');
 const router = jsonServer.router('db.json');
 const middlewares = jsonServer.defaults();
-
+const { generateCV } = require('./gptapi.js');
 
 const WebSocket = require('ws');
 const http = require('http');

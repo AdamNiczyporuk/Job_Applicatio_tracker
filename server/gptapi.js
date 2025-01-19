@@ -1,8 +1,14 @@
-import OpenAI from "openai";
+const OpenAI = require("openai-api");
+const dotenv = require("dotenv");
+
+dotenv.config()
+
 const openai = new OpenAI({ apiKey: process.env.VUE_APP_API_KEY,dangerouslyAllowBrowser: true});
+
 console.log("API Key:", process.env.VUE_APP_API_KEY);
+
 // Hide this in server side
-export async function generateCV(userData) {
+async function generateCV(userData) {
   try { 
     const prompt = 
     `Create a text for a CV based on the following user data.
