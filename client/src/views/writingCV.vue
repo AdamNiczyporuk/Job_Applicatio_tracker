@@ -2,7 +2,6 @@
 import { ref,reactive } from 'vue';
 import { useRouter } from 'vue-router';
 import * as api from "../API/ServerApi.js";
-import { generateCV } from '@/API/GptAPI.js'; 
   export default {
     name: 'WritingCV',
     setup() {
