@@ -1,12 +1,10 @@
-const { Configuration, OpenAIApi } = require("openai");
+const { OpenAI } = require("openai");
 const dotenv = require("dotenv");
 
 dotenv.config();
 
-const configuration = new Configuration({
-  apiKey: process.env.VUE_APP_API_KEY,
-});
-const openai = new OpenAIApi(configuration);
+
+const openai = new OpenAI('apiKey: process.env.VUE_APP_API_KEY');
 
 console.log("API Key:", process.env.VUE_APP_API_KEY);
 
@@ -25,7 +23,7 @@ async function generateCV(userData) {
     - Job Description: ${userData.jobDescription}
     Format the response clearly for a professional CV. `;
 
-    const completion = await openai.createChatCompletion({
+    const completion = await openai.chat.completions.create({
       model: "gpt-4",
       messages: [
         { role: "system", content: "You are a professional CV writer." },
@@ -33,7 +31,7 @@ async function generateCV(userData) {
       ],
     });
 
-    return completion.data.choices[0].message.content;
+    return completion.choices[0].message.content;
   } catch (error) {
     console.error("Error generating CV:", error);
     throw error;
