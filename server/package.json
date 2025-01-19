@@ -16,6 +16,7 @@
     "json-server": "^0.16.3",
     "jsonwebtoken": "^9.0.2",
     "nodemon": "^3.1.9",
+    "openai": "^4.79.1",
     "ws": "^8.18.0"
   }
 }
