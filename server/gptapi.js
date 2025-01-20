@@ -29,6 +29,8 @@ async function generateCV(userData) {
         { role: "system", content: "You are a professional CV writer." },
         { role: "user", content: prompt },
       ],
+      max_tokens: 5000,
+      temperature : 0.8,
     });
 
     return completion.choices[0].message.content;
