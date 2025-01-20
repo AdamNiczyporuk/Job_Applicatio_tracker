@@ -24,7 +24,7 @@ async function generateCV(userData) {
     Format the response clearly for a professional CV. `;
 
     const completion = await openai.chat.completions.create({
-      model: "gpt-4",
+      model: "gpt-3.5-turbo",
       messages: [
         { role: "system", content: "You are a professional CV writer." },
         { role: "user", content: prompt },
