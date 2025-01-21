@@ -6,7 +6,7 @@ import * as api from "../API/ServerApi.js";
     name: 'WritingCV',
     setup() {
       const router = useRouter();
-      const cvText = ref('');
+      let cvText = ref('');
       const isLoading = ref(false);
       const showForm = ref(true);
       const errorMessage = ref('');
@@ -76,7 +76,7 @@ import * as api from "../API/ServerApi.js";
         isLoading.value = true;
         try
         {
-          cvText.value = await api.generateCV(PromptData);// I need to add env to the server
+          cvText = await api.generateCV(PromptData);// I need to add env to the server
           showForm.value = false;
           console.log("Generated CV:\n",cvText);
         } 

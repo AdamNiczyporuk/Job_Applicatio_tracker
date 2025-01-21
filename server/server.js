@@ -207,7 +207,8 @@ server.put('/applications/:id',authenticateToken, (req, res) => {
 server.post('/generate-cv', authenticateToken, async (req, res) => {
   try {
     const cvText = await generateCV(req.body);
-    res.status(200).json({ cvText });
+    console.log('Generated CV:', cvText);
+    res.status(200).json(cvText);
   } catch (error) {
     res.status(500).json({ message: 'Failed to generate CV' });
   }
