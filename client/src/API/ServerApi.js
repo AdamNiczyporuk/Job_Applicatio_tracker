@@ -82,7 +82,7 @@ export async function generateCV(userData) {
         Authorization: `Bearer ${token}`
       }
     });
-    return response.data.cvText;
+    return response.data;
   } catch (error) {
     console.error("Error generating CV:", error);
     throw error;
