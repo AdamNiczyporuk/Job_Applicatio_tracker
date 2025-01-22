@@ -21,7 +21,7 @@ async function generateCV(userData) {
     - Job title: ${userData.jobTitle} 
     - Required Experience: ${userData.reqExperience} 
     - Job Description: ${userData.jobDescription}
-    Format the response clearly for a professional CV. `;
+    Format the response in JSON. `;
 
     const completion = await openai.chat.completions.create({
       model: "gpt-3.5-turbo",
