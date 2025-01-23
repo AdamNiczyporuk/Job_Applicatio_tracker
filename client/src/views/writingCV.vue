@@ -2,7 +2,7 @@
 import { ref,reactive } from 'vue';
 import { useRouter } from 'vue-router';
 import * as api from "../API/ServerApi.js";
-import {validateFields} from "../utils/validateFields.js";
+import {validateFields} from "../Functions/writingCV/validateFields.js";
   export default {
     name: 'WritingCV',
     setup() {
@@ -70,7 +70,7 @@ import {validateFields} from "../utils/validateFields.js";
       
      async function getCV(){
       
-        if (!validateFields()) {
+        if (!validateFields(PromptData, errors)) {
           return;
         }
         
