@@ -2,6 +2,18 @@ export function validateFields(PromptData, errors) {
     let isValid = true;
     errors.value = {};
   
+    if (!PromptData.name) {
+      errors.value.name = "Name is required";
+      isValid = false;
+    }
+    if (!PromptData.surname) {
+      errors.value.surname = "Surname is required";
+      isValid = false;
+    }
+    if (!PromptData.email) {
+      errors.value.email = "Email is required";
+      isValid = false;
+    }
     if (!PromptData.jobTitle) {
       errors.value.jobTitle = "Job Title is required";
       isValid = false;
