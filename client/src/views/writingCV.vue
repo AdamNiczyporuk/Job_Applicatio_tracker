@@ -2,6 +2,7 @@
 import { ref,reactive } from 'vue';
 import { useRouter } from 'vue-router';
 import * as api from "../API/ServerApi.js";
+import {validateFields} from "../utils/validateFields.js";
   export default {
     name: 'WritingCV',
     setup() {
