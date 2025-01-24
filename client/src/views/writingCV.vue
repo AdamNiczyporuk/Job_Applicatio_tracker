@@ -3,6 +3,7 @@ import { ref,reactive } from 'vue';
 import { useRouter } from 'vue-router';
 import * as api from "../API/ServerApi.js";
 import {validateFields} from "../Functions/writingCV/validateFields.js";
+import { generatePdf } from "../Functions/writingCV/pdfGenrate.js";
   export default {
     name: 'WritingCV',
     setup() {
@@ -10,6 +11,7 @@ import {validateFields} from "../Functions/writingCV/validateFields.js";
       const cvText = ref(null);
       const isLoading = ref(false);
       const showForm = ref(true);
+      const pdfUrl = ref(null);
       const errorMessage = ref('');
       const errors = reactive({
         name: '',
@@ -80,6 +82,7 @@ import {validateFields} from "../Functions/writingCV/validateFields.js";
           cvText.value = await api.generateCV(PromptData);// I need to add env to the server
           showForm.value = false;
           console.log("Generated CV:\n",cvText.value);
+          await displayPdf();
         } 
         catch (error) 
         {
@@ -90,6 +93,13 @@ import {validateFields} from "../Functions/writingCV/validateFields.js";
           isLoading.value = false;
         }
     }
+
+    const displayPdf = async () => {
+      if (!cvText.value) return;
+
+      const blob = await generatePdf(cvText.value);
+      pdfUrl.value = URL.createObjectURL(blob);
+    };
        
   
 
