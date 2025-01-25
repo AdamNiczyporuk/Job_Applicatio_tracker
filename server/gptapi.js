@@ -21,7 +21,7 @@ async function generateCV(userData) {
     - Job title: ${userData.jobTitle} 
     - Required Experience: ${userData.reqExperience} 
     - Job Description: ${userData.jobDescription}
-    Format the response in JSON. `;
+    Format the response in JSON.Always give me the same Shema for cv. `;
 
     const completion = await openai.chat.completions.create({
       model: "gpt-3.5-turbo",
@@ -30,7 +30,6 @@ async function generateCV(userData) {
         { role: "user", content: prompt },
       ],
       max_tokens: 3000,
-      temperature: 0.8,
     });
 
     return completion.choices[0].message.content;
