@@ -13,8 +13,7 @@ async function generateCV(userData) {
   try {
     const prompt = 
     `Create a text for a CV based on the following user data.
-    This is must be a personalized CV that will give user a job.
-    Format the output as bullet points so that it is ready to use in a document.  
+    This is must be a personalized CV that will give user a job.  
     User data:  
     - Full name: ${userData.name} ${userData.surname} 
     - Email: ${userData.email}   
