@@ -21,7 +21,7 @@ async function generateCV(userData) {
     - Full name: ${userData.name} ${userData.surname} 
     - Email: ${userData.email}   
     - Job title: ${userData.jobTitle} 
-    - Required Experience: ${userData.reqExperience} marek
+    - Required Experience: ${userData.reqExperience} marek franek
     - Job Description: ${userData.jobDescription}
     Format the response in JSON.Always give me the same Shema for cv. `;
 
