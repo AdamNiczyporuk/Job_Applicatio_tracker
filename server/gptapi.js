@@ -12,7 +12,7 @@ console.log("API Key:", process.env.VUE_APP_API_KEY);
 async function generateCV(userData) {
   try {
     const prompt = 
-    `Create a text for a CV based on the following user data.
+    `Create a text for a CV based on the following user data.AAAAA
     This is must be a personalized CV that will give user a job.
     Required Experience is data that user has to have to get the job.
     Job Description is a description of the job that user is applying for.
