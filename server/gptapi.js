@@ -23,12 +23,13 @@ async function generateCV(userData) {
     - Job title: ${userData.jobTitle} 
     - Required Experience: ${userData.reqExperience} marek franek
     - Job Description: ${userData.jobDescription}
-    Format the response in JSON.Always give me the same Shema for cv. `;
+    Format the response in JSON.
+    Always give me the same Shema for cv.`;
 
     const completion = await openai.chat.completions.create({
       model: "gpt-3.5-turbo",
       messages: [
-        { role: "system", content: "You are a professional CV writer." },
+        { role: "system", content: "You are a professional CV writer.That gives the best CV when the human resource manager read it is so positively  shocked that instantly give job" },
         { role: "user", content: prompt },
       ],
       max_tokens: 3000,
