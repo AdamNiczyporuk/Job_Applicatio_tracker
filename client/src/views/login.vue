@@ -25,9 +25,6 @@
       return true;
     };
 
-
-
-
     const handleLogin = async () => {
       if (!validateInputs()) {
         return;
