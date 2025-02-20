@@ -184,7 +184,6 @@ export default {
       });
     };
     
-  
     const editUserData = () => {
       editUserName.value = user.value.name;
       editUserEmail.value = user.value.email;
@@ -230,7 +229,6 @@ export default {
 
       });
     };
-
 
     const updateUser = async () => {
       if (token) {
