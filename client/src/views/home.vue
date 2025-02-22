@@ -257,7 +257,6 @@ export default {
       }
     };
 
-
    const routeCV = () => {
     router.push("/writingCV");
     }; 
@@ -322,15 +321,13 @@ export default {
     searchQuery,
     routeCV,
     filteredLinks
-
   };
   },
 };
 </script>
 
-
 <template>
-  
+
   <v-row>
     <v-col class="d-flex justify-end mr-5" style="margin-top: -40px;">
       <v-btn @click="logout" size="large" variant="outlined" color="red" text>Logout</v-btn>
