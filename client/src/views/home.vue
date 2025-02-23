@@ -67,7 +67,6 @@ export default {
       );
     });
    
-
     const checkLoginDate = () => {
       const lastLoginDate = localStorage.getItem('lastLoginDate');
       const today = new Date().toISOString().split('T')[0];
@@ -149,7 +148,7 @@ export default {
       toast.error("Invalid application ID or token.");
     }
   };
-    
+  
     const editLink = (id) => {
       const application = links.value.find(link => link.id === id);
       if (application) {
@@ -185,8 +184,7 @@ export default {
       });
     };
     
-   
-
+  
     const editUserData = () => {
       editUserName.value = user.value.name;
       editUserEmail.value = user.value.email;
