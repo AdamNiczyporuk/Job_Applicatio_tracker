@@ -4,7 +4,7 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 
-const openai = new OpenAI('apiKey: process.env.VUE_APP_API_KEY');
+const openai = new OpenAI({apiKey: process.env.VUE_APP_API_KEY});
 
 console.log("API Key:", process.env.VUE_APP_API_KEY);
 
